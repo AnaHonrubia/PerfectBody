@@ -29,12 +29,13 @@
       color: white;
       
       .nombre {
-        font-size: 0.7rem;
-        font-weight: bold;
-        white-space: nowrap;
+        font-size: 0.75rem; // Un poco más grande
+        white-space: normal; // Permite salto de línea
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // Máximo 2 líneas antes de poner puntos
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 50px;
+        line-height: 1.1;
       }
       
       .calorias {

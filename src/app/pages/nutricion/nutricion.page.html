@@ -13,7 +13,7 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6" size-md="2" *ngFor="let alimento of alimentos">
+      <ion-col size="4" size-md="2" *ngFor="let alimento of alimentos">
         <app-tarjeta-alimentos 
           [nombre]="alimento.nombre"
           [kcal]="alimento.kcal"
@@ -23,5 +23,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
 </ion-content>
