@@ -1,21 +1,21 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons'; 
+import { trash } from 'ionicons/icons'; 
 
 @Component({
   selector: 'app-lista-consumo',
   templateUrl: './lista-consumo.component.html',
-  styleUrls: ['./lista-consumo.component.scss'],
   standalone: true,
-  imports: [ IonicModule, CommonModule ]
+  imports: [IonicModule, CommonModule]
 })
-export class ListaConsumoComponent  {
-
-  // Declarar que recibe la lista
+export class ListaConsumoComponent {
   @Input() comidas: any[] = [];
-  
-  // Declarar el evento de eliminar
   @Output() onEliminar = new EventEmitter<string>();
 
-  constructor() {}
+  constructor() {
+    // Registramos el icono para que Ionic sepa dibujarlo
+    addIcons({ trash });
+  }
 }

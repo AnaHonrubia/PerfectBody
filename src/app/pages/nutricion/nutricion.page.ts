@@ -73,8 +73,13 @@ export class NutricionPage implements OnInit {
   }
 
   eliminarComida(id: string) {
+    // Borramos del servicio
     this.fitService.eliminarComida(id, this.fechaSeleccionada);
+    
+    // Refrescamos la vista para que el array se actualice
     this.actualizarVista();
+    
+    console.log('Alimento eliminado:', id);
   }
 
   actualizarVista() {
