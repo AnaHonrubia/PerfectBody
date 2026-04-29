@@ -6,13 +6,15 @@ import { ResumenNutricionalComponent } from '../../componentes/organismos/resume
 import { TarjetaAlimentosComponent } from '../../componentes/moleculas/tarjeta-alimentos/tarjeta-alimentos.component';
 import { SelectorFechaComponent } from '../../componentes/moleculas/selector-fecha/selector-fecha.component';
 import { ListaConsumoComponent } from '../../componentes/organismos/lista-consumo/lista-consumo.component';
+import { BotonOscuroComponent } from 'src/app/componentes/atomos/boton-oscuro/boton-oscuro.component';
 
 @Component({
   selector: 'app-nutricion',
   templateUrl: './nutricion.page.html',
   styleUrls: ['./nutricion.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, ResumenNutricionalComponent, TarjetaAlimentosComponent, ListaConsumoComponent, SelectorFechaComponent]
+  imports: [IonicModule, CommonModule, ResumenNutricionalComponent, TarjetaAlimentosComponent, 
+    ListaConsumoComponent, SelectorFechaComponent, BotonOscuroComponent]
 })
 
 export class NutricionPage implements OnInit {
