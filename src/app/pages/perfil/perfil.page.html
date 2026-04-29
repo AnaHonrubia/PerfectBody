@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Mi Perfil</ion-title>
+  <ion-toolbar color="dark"> <ion-title>Mi Perfil</ion-title>
+    <ion-buttons slot="end">
+      <app-boton-oscuro></app-boton-oscuro>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <app-calculadora-metabolica (onCalcular)="manejarCalculo($event)"></app-calculadora-metabolica>
+
+  <ion-card *ngIf="resultadoTMB" class="resultado-card">
+    <ion-card-content>
+      <h2 class="ion-text-center">Tu Metabolismo Basal</h2>
+      <h1 class="ion-text-center color-success">{{ resultadoTMB }} kcal</h1>
+      <p class="ion-text-center">Estas son las calorías que tu cuerpo quema en reposo absoluto.</p>
+    </ion-card-content>
+  </ion-card>
+  
 </ion-content>
