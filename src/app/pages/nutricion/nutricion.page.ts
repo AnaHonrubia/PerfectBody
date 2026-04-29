@@ -54,18 +54,21 @@ export class NutricionPage implements OnInit {
   agregarComida(alimento: any) {
     if (!alimento) return;
 
-    // Creamos un objeto limpio para evitar errores de propiedades faltantes
-    const comidaParaAñadir = {
-      nombre: alimento.nombre || 'Sin nombre',
-      imagen: alimento.imagen || '',
-      kcal: alimento.kcal || alimento.calorias || 0,
-      protes: alimento.protes || alimento.proteinas || 0,
-      carbos: alimento.carbos || alimento.carbohidratos || 0,
+    // Creamos el objeto para que el servicio no reciba nada 'undefined'
+    const nuevaEntrada = {
+      nombre: alimento.nombre,
+      imagen: alimento.imagen,
+      kcal: alimento.kcal || 0,
+      protes: alimento.protes || 0,
+      carbos: alimento.carbos || 0,
       grasas: alimento.grasas || 0
     };
 
-    this.fitService.agregarAlDiario(comidaParaAñadir, this.fechaSeleccionada);
-    this.actualizarVista(); // Esto refresca la lista y los totales inmediatamente
+    // 1. Guardamos en el servicio pasando la FECHA seleccionada
+    this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
+    
+    // 2. Refrescamos la pantalla
+    this.actualizarVista();
   }
 
   eliminarComida(id: string) {
@@ -74,10 +77,13 @@ export class NutricionPage implements OnInit {
   }
 
   actualizarVista() {
+    // Pedimos al servicio solo lo de la fecha que marca el calendario
     this.comidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
+    
+    // Pedimos los totales de esa misma fecha
     this.totales = this.fitService.getTotalesPorFecha(this.fechaSeleccionada);
 
-    //Pedimos al servicio el objetivo calculado en el perfil
+    // Actualizamos el objetivo
     this.objetivoDiario = this.fitService.getObjetivoKcal();
   }
 }
