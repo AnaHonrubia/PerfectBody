@@ -11,9 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ResumenNutricionalComponent implements OnInit {
 
-  // ESTO ES LO QUE FALTA: Declarar las entradas de datos
   @Input() consumidas: number = 0;
-  @Input() objetivo: number = 2000;
+  @Input() objetivoKcal: number = 2000; 
   @Input() proteinas: number = 0;
   @Input() grasas: number = 0;
   @Input() carbohidratos: number = 0;
@@ -24,6 +23,6 @@ export class ResumenNutricionalComponent implements OnInit {
 
   // Cálculo para la barra de progreso
   get porcentaje(): number {
-    return (this.consumidas / this.objetivo) || 0;
+    return (this.consumidas / this.objetivoKcal) || 0;
   }
 }

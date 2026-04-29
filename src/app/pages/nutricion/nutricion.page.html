@@ -5,15 +5,28 @@
 </ion-header>
 
 <ion-content>
-  <app-resumen-nutricional [consumidas]="0" [objetivo]="2000"></app-resumen-nutricional>
+  <app-selector-fecha (fechaCambiante)="cambiarFecha($event)"></app-selector-fecha>
+
+  <app-resumen-nutricional 
+    [consumidas]="totales.kcal" 
+    [objetivoKcal]="objetivoDiario"
+    [proteinas]="totales.protes"
+    [grasas]="totales.grasas"
+    [carbohidratos]="totales.carbos">
+  </app-resumen-nutricional>
+
+  <app-lista-consumo 
+    [comidas]="comidasDelDia" 
+    (onEliminar)="eliminarComida($any($event))">
+  </app-lista-consumo>
 
   <ion-list-header>
-    <ion-label>Selecciona tus alimentos</ion-label>
+    <ion-label>Añadir nuevos alimentos</ion-label>
   </ion-list-header>
 
   <ion-grid>
     <ion-row>
-      <ion-col size="4" size-md="2" *ngFor="let alimento of alimentos">
+      <ion-col size="2" *ngFor="let alimento of alimentos">
         <app-tarjeta-alimentos 
           [nombre]="alimento.nombre"
           [kcal]="alimento.kcal"
@@ -23,5 +36,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>

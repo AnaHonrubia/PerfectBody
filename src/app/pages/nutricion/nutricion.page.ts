@@ -4,34 +4,68 @@ import { IonicModule } from '@ionic/angular';
 import { FitAtomic } from '../../services/fit-atomic';
 import { ResumenNutricionalComponent } from '../../componentes/organismos/resumen-nutricional/resumen-nutricional.component';
 import { TarjetaAlimentosComponent } from '../../componentes/moleculas/tarjeta-alimentos/tarjeta-alimentos.component';
+import { SelectorFechaComponent } from '../../componentes/moleculas/selector-fecha/selector-fecha.component';
+import { ListaConsumoComponent } from '../../componentes/organismos/lista-consumo/lista-consumo.component';
 
 @Component({
   selector: 'app-nutricion',
   templateUrl: './nutricion.page.html',
   styleUrls: ['./nutricion.page.scss'],
   standalone: true,
-  // IMPORTANTE: Asegúrate de que IonicModule esté aquí para que reconozca ion-grid, ion-col, etc.
-  imports: [IonicModule, CommonModule, ResumenNutricionalComponent, TarjetaAlimentosComponent]
+  imports: [IonicModule, CommonModule, ResumenNutricionalComponent, TarjetaAlimentosComponent, ListaConsumoComponent, SelectorFechaComponent]
 })
-export class NutricionPage implements OnInit {
-  
-  // Declaramos la variable que le falta al HTML
-  alimentos: any[] = [];
-  fechaActual: string = new Date().toLocaleDateString();
 
-  constructor(private fitService: FitAtomic) { }
+export class NutricionPage implements OnInit {
+  alimentos: any[] = [];
+  comidasDelDia: any[] = [];
+  fechaSeleccionada: string = new Date().toLocaleDateString();
+  totales = { kcal: 0, protes: 0, carbos: 0, grasas: 0 };
+  objetivoDiario: number = 0;
+
+  constructor(private fitService: FitAtomic) {}
 
   async ngOnInit() {
-    // Esperamos a que el servicio tenga los datos listos
-    this.alimentos = await this.fitService.getAlimentosAsync();
+    console.log('Iniciando carga de nutrición...');
     
-    // Forzamos una actualización por si acaso
-    console.log('Alimentos cargados:', this.alimentos.length);
+    // Cargamos el objetivo primero (es instantáneo)
+    this.objetivoDiario = this.fitService.getObjetivoKcal();
+    
+    // Intentamos traer los alimentos
+    try {
+      const res = await this.fitService.getAlimentosAsync();
+      if (res) {
+        this.alimentos = res;
+        console.log('Alimentos cargados con éxito:', this.alimentos.length);
+      }
+    } catch (error) {
+      console.error('Error al cargar alimentos:', error);
+      // Carga de emergencia por si falla el internet
+      this.alimentos = this.fitService.getAlimentos(); 
+    }
+
+    this.actualizarVista();
   }
 
-  // Cambiamos 'añadirComida' por 'agregarComida' para evitar el error de la 'ñ'
+  cambiarFecha(nuevaFecha: string) {
+    this.fechaSeleccionada = nuevaFecha;
+    this.actualizarVista();
+  }
+
   agregarComida(alimento: any) {
-    this.fitService.agregarAlDiario(alimento, this.fechaActual);
-    console.log('Alimento agregado:', alimento.nombre);
+    this.fitService.agregarAlDiario(alimento, this.fechaSeleccionada);
+    this.actualizarVista();
+  }
+
+  eliminarComida(id: string) {
+    this.fitService.eliminarComida(id, this.fechaSeleccionada);
+    this.actualizarVista();
+  }
+
+  actualizarVista() {
+    this.comidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
+    this.totales = this.fitService.getTotalesPorFecha(this.fechaSeleccionada);
+
+    //Pedimos al servicio el objetivo calculado en el perfil
+    this.objetivoDiario = this.fitService.getObjetivoKcal();
   }
 }
