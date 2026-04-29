@@ -1,0 +1,7 @@
+{
+  "name": "PerfectBody",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
