@@ -1,2 +1,20 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+:root {
+  /** Colores PerfectBody **/
+  --ion-color-primary: #2d3436; /* Gris profundo */
+  --ion-color-primary-rgb: 45, 52, 54;
+  
+  --ion-color-success: #2ecc71; /* Verde éxito */
+  --ion-color-success-rgb: 46, 204, 113;
+
+  /* Fondo de la app */
+  --ion-background-color: #f5f6fa;
+}
+
+/* Colores para el Modo Oscuro */
+body.dark {
+  --ion-background-color: #121212;
+  --ion-text-color: #ffffff;
+  --ion-toolbar-background: #1e1e1e;
+  --ion-item-background: #1e1e1e;
+  --ion-card-background: #1e1e1e;
+}
