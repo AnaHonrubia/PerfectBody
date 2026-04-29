@@ -17,10 +17,10 @@ export class PerfilPage {
   resultadoTMB: number | null = null;
 
   constructor(private fitService: FitAtomic) {
-    // Al cargar la página, intentamos recuperar datos guardados
-    const guardado = this.fitService.obtenerPerfil();
-    if (guardado) {
-      this.manejarCalculo(guardado);
+    // Ahora fitService ya tiene el método obtenerPerfil()
+    const datosGuardados = this.fitService.obtenerPerfil();
+    if (datosGuardados) {
+      this.manejarCalculo(datosGuardados);
     }
   }
 

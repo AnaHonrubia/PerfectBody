@@ -1,40 +1,55 @@
-:host {
-  display: block;
-  // Calculamos el ancho para que quepan 6 (100% / 6 = 16.6%)
-  width: calc((100% / 6) - 30px) !important; 
-  min-width: 140px; 
-}
+.contenedor-alimento {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; // Cuadrado perfecto
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 5px;
 
-.tarjeta-comida {
-  width: 100% !important;
-  background: var(--ion-card-background, #ffffff);
-  border-radius: 15px;
-  overflow: hidden; // Evita que el contenido sobresalga
-  border: 1px solid rgba(0,0,0,0.05);
-
-  img {
-    width: 100%;
-    /* Subimos la altura para que deje de ser panorámica y sea CUADRADA */
-    height: 200px !important; 
-    object-fit: cover !important;
-    border-radius: 15px; // Imagen con bordes redondeados
+  .imagen-alimento {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
   }
 
-  .info {
-    text-align: center;
-    padding: 20px 5px;
-    flex-grow: 1;
+  .overlay-datos {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 4px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 
-    h4 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #ffffff !important;
-      margin-bottom: 8px;
+    .info {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      
+      .nombre {
+        font-size: 0.7rem;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50px;
+      }
+      
+      .calorias {
+        font-size: 0.6rem;
+        opacity: 0.8;
+      }
     }
 
+    .boton-add {
+      --padding-start: 0;
+      --padding-end: 0;
+      margin: 0;
+      height: 24px;
+      ion-icon { font-size: 20px; }
+    }
   }
-
-  app-boton-accion {
-    margin-top: auto;
-  }
+  
 }

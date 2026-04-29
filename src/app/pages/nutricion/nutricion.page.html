@@ -1,24 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="success">
-    <ion-title>Nutrición Diaria</ion-title>
+    <ion-title>Nutrición</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <app-resumen-nutricional 
-    [consumidas]="1450" 
-    [objetivo]="2100"
-    [proteinas]="120"
-    [grasas]="55"
-    [carbohidratos]="180">
-  </app-resumen-nutricional>
+<ion-content>
+  <app-resumen-nutricional [consumidas]="0" [objetivo]="2000"></app-resumen-nutricional>
 
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Comidas de hoy</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-label>Aún no has añadido comidas</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-list-header>
+    <ion-label>Selecciona tus alimentos</ion-label>
+  </ion-list-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" size-md="2" *ngFor="let alimento of alimentos">
+        <app-tarjeta-alimentos 
+          [nombre]="alimento.nombre"
+          [kcal]="alimento.kcal"
+          [imagen]="alimento.imagen"
+          (onAdd)="agregarComida(alimento)">
+        </app-tarjeta-alimentos>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 </ion-content>

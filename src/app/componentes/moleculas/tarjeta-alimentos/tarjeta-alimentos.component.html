@@ -1,14 +1,14 @@
-<div class="tarjeta-comida">
-  <img [src]="imagen" alt="comida">
-  <div class="info">
-    <h4>{{ nombre }}</h4>
-    <app-etiqueta-caloria [valor]="calorias"></app-etiqueta-caloria>
+<div class="contenedor-alimento">
+  <img [src]="imagen" [alt]="nombre" class="imagen-alimento">
+  
+  <div class="overlay-datos">
+    <div class="info">
+      <span class="nombre">{{ nombre }}</span>
+      <span class="calorias">{{ kcal }} kcal</span>
+    </div>
+    <ion-button fill="clear" (click)="onAdd.emit()" class="boton-add">
+      <ion-icon slot="icon-only" name="add-circle" color="success"></ion-icon>
+    </ion-button>
   </div>
   
-  <div class="contenedor-boton">
-    <app-boton-accion 
-      texto="Añadir" 
-      (clickBoton)="puedoAnadir()">
-    </app-boton-accion>
-  </div>
 </div>

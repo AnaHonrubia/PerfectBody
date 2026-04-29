@@ -1,21 +1,24 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { BotonAccionComponent } from '../../atomos/boton-accion/boton-accion.component';
-import { EtiquetaCaloriaComponent } from '../../atomos/etiqueta-caloria/etiqueta-caloria.component';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { addCircle } from 'ionicons/icons';
 
 @Component({
-  selector: 'app-tarjeta-alimento',
-  templateUrl: './tarjeta-alimento.component.html',
-  styleUrls: ['./tarjeta-alimento.component.scss'],
+  selector: 'app-tarjeta-alimentos',
+  templateUrl: './tarjeta-alimentos.component.html',
+  styleUrls: ['./tarjeta-alimentos.component.scss'],
   standalone: true,
-  imports: [BotonAccionComponent, EtiquetaCaloriaComponent]
+  imports: [IonicModule, CommonModule]
 })
-
-export class TarjetaAlimentoComponent {
+export class TarjetaAlimentosComponent {
   @Input() nombre: string = '';
-  @Input() calorias: number = 0;
+  @Input() kcal: number = 0;
   @Input() imagen: string = '';
-  @Output() onAnadir = new EventEmitter<void>();
-  puedoAnadir() { 
-    this.onAnadir.emit(); 
+
+  @Output() onAdd = new EventEmitter<void>();
+
+  constructor() {
+    addIcons({ addCircle });
   }
 }
