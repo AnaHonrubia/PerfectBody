@@ -52,8 +52,20 @@ export class NutricionPage implements OnInit {
   }
 
   agregarComida(alimento: any) {
-    this.fitService.agregarAlDiario(alimento, this.fechaSeleccionada);
-    this.actualizarVista();
+    if (!alimento) return;
+
+    // Creamos un objeto limpio para evitar errores de propiedades faltantes
+    const comidaParaAñadir = {
+      nombre: alimento.nombre || 'Sin nombre',
+      imagen: alimento.imagen || '',
+      kcal: alimento.kcal || alimento.calorias || 0,
+      protes: alimento.protes || alimento.proteinas || 0,
+      carbos: alimento.carbos || alimento.carbohidratos || 0,
+      grasas: alimento.grasas || 0
+    };
+
+    this.fitService.agregarAlDiario(comidaParaAñadir, this.fechaSeleccionada);
+    this.actualizarVista(); // Esto refresca la lista y los totales inmediatamente
   }
 
   eliminarComida(id: string) {
