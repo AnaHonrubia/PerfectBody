@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: './lista-consumo.component.html',
   styleUrls: ['./lista-consumo.component.scss'],
   standalone: true,
-  imports: [ IonicModule ]
+  imports: [ IonicModule, CommonModule ]
 })
 export class ListaConsumoComponent  {
 

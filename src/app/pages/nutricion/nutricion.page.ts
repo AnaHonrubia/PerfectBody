@@ -48,6 +48,7 @@ export class NutricionPage implements OnInit {
 
   cambiarFecha(nuevaFecha: string) {
     this.fechaSeleccionada = nuevaFecha;
+    console.log('Cambiando a fecha:', this.fechaSeleccionada);
     this.actualizarVista();
   }
 
@@ -77,13 +78,10 @@ export class NutricionPage implements OnInit {
   }
 
   actualizarVista() {
-    // Pedimos al servicio solo lo de la fecha que marca el calendario
+    // Al cambiar esta variable, la lista-consumo se limpia y se rellena sola
     this.comidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
     
-    // Pedimos los totales de esa misma fecha
     this.totales = this.fitService.getTotalesPorFecha(this.fechaSeleccionada);
-
-    // Actualizamos el objetivo
     this.objetivoDiario = this.fitService.getObjetivoKcal();
   }
 }
