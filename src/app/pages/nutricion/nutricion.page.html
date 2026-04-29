@@ -1,13 +1,24 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>nutricion</ion-title>
+  <ion-toolbar color="success">
+    <ion-title>Nutrición Diaria</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">nutricion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-resumen-nutricional 
+    [consumidas]="1450" 
+    [objetivo]="2100"
+    [proteinas]="120"
+    [grasas]="55"
+    [carbohidratos]="180">
+  </app-resumen-nutricional>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Comidas de hoy</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Aún no has añadido comidas</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

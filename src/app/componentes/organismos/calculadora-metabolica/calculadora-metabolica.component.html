@@ -1,0 +1,13 @@
+<div class="form-metabolico">
+
+  <h3>Datos de Usuario</h3>
+  <app-input-dato etiqueta="Peso (kg)" tipo="number" [(valor)]="peso"></app-input-dato>
+  <app-input-dato etiqueta="Altura (cm)" tipo="number" [(valor)]="altura"></app-input-dato>
+  <app-input-dato etiqueta="Edad" tipo="number" [(valor)]="edad"></app-input-dato>
+
+  <app-boton-accion 
+    [texto]="'Calcular Metabolismo'" 
+    (clickBoton)="enviarDatos()">
+  </app-boton-accion>
+  
+</div>

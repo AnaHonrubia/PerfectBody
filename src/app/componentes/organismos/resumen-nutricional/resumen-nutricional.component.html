@@ -1,0 +1,14 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Calorías</ion-card-title>
+    <ion-card-subtitle>{{ consumidas }} de {{ objetivo }} kcal</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-progress-bar [value]="porcentaje" color="success"></ion-progress-bar>
+    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+      <small>P: {{ proteinas }}g</small>
+      <small>G: {{ grasas }}g</small>
+      <small>CH: {{ carbohidratos }}g</small>
+    </div>
+  </ion-card-content>
+</ion-card>

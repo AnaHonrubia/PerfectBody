@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ResumenCaloriasComponent } from './resumen-calorias.component';
+import { BotonAccionComponent } from './boton-accion.component';
 
-describe('ResumenCaloriasComponent', () => {
-  let component: ResumenCaloriasComponent;
-  let fixture: ComponentFixture<ResumenCaloriasComponent>;
+describe('BotonAccionComponent', () => {
+  let component: BotonAccionComponent;
+  let fixture: ComponentFixture<BotonAccionComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ResumenCaloriasComponent],
+      imports: [BotonAccionComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ResumenCaloriasComponent);
+    fixture = TestBed.createComponent(BotonAccionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

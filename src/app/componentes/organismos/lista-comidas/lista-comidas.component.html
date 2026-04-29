@@ -1,0 +1,16 @@
+<div class="organismo-lista">
+  <h3>Diario del día</h3>
+
+  <div *ngIf="comidas.length === 0" class="vacio">
+    No hay registros para este día 🍎
+  </div>
+
+  <app-item-diario 
+    *ngFor="let item of comidas" 
+    [nombre]="item.nombre" 
+    [caloriasTotales]="item.kcal"  
+    [puedeBorrar]="mostrarBorrar" 
+    (onBorrar)="eliminar(item.id)">
+  </app-item-diario>
+  
+</div>

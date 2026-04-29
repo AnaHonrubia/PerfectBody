@@ -1,0 +1,14 @@
+<div class="tarjeta-comida">
+  <img [src]="imagen" alt="comida">
+  <div class="info">
+    <h4>{{ nombre }}</h4>
+    <app-etiqueta-caloria [valor]="calorias"></app-etiqueta-caloria>
+  </div>
+  
+  <div class="contenedor-boton">
+    <app-boton-accion 
+      texto="Añadir" 
+      (clickBoton)="puedoAnadir()">
+    </app-boton-accion>
+  </div>
+</div>

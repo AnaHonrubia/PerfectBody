@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  // Calculamos el ancho para que quepan 6 (100% / 6 = 16.6%)
+  width: calc((100% / 6) - 30px) !important; 
+  min-width: 140px; 
+}
+
+.tarjeta-comida {
+  width: 100% !important;
+  background: var(--ion-card-background, #ffffff);
+  border-radius: 15px;
+  overflow: hidden; // Evita que el contenido sobresalga
+  border: 1px solid rgba(0,0,0,0.05);
+
+  img {
+    width: 100%;
+    /* Subimos la altura para que deje de ser panorámica y sea CUADRADA */
+    height: 200px !important; 
+    object-fit: cover !important;
+    border-radius: 15px; // Imagen con bordes redondeados
+  }
+
+  .info {
+    text-align: center;
+    padding: 20px 5px;
+    flex-grow: 1;
+
+    h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff !important;
+      margin-bottom: 8px;
+    }
+
+  }
+
+  app-boton-accion {
+    margin-top: auto;
+  }
+}

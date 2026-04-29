@@ -1,0 +1,11 @@
+<div class="item-diario">
+
+  <span class="nombre">{{ nombre }}</span>
+
+  <span class="kcal-centro">{{ caloriasTotales }} kcal</span>
+
+  <button *ngIf="puedeBorrar" (click)="onBorrar.emit()" class="boton-eliminar">
+    <span>🗑️</span>
+  </button>
+
+</div>

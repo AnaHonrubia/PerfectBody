@@ -1,0 +1,23 @@
+.contenedor-input {
+  margin-bottom: 16px;
+
+  .etiqueta-personalizada {
+    display: block;
+    margin-left: 8px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ion-color-medium);
+  }
+
+  .item-redondeado {
+    --background: var(--ion-color-light);
+    --border-radius: 12px;
+    --padding-start: 12px;
+    border: 1px solid #e0e0e0;
+    
+    .input-custom {
+      font-weight: 500;
+    }
+  }
+}

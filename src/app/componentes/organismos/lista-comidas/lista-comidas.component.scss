@@ -1,0 +1,13 @@
+.organismo-lista {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important; // Apila los ítems uno debajo de otro
+  padding: 15px;
+  background-color: #f9f9f9; // Un gris muy suave para que resalten las tarjetas blancas
+
+  app-item-diario {
+    display: block !important;
+    width: 100% !important; // Obligatorio para que la tarjeta sepa que tiene espacio
+    margin-bottom: 10px;
+  }
+}

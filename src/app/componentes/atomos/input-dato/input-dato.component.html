@@ -1,0 +1,16 @@
+<div class="contenedor-input">
+  <ion-label *ngIf="etiqueta" class="etiqueta-personalizada">
+    {{ etiqueta }}
+  </ion-label>
+  
+  <ion-item lines="none" class="item-redondeado">
+    <ion-input 
+      [type]="tipo" 
+      [placeholder]="placeholder"
+      [(ngModel)]="valor"
+      (ionInput)="alCambiarValor($event)"
+      class="input-custom">
+    </ion-input>
+    <ion-note slot="end" *ngIf="unidad">{{ unidad }}</ion-note>
+  </ion-item>
+</div>

@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+// Importamos la calculadora
+import { CalculadoraMetabolicaComponent } from '../../componentes/organismos/calculadora-metabolica/calculadora-metabolica.component';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, CalculadoraMetabolicaComponent] // <--- IMPORTANTE
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
+  manejarCalculo(datos: any) {
+    console.log('Datos recibidos de la calculadora:', datos);
+    // Aquí iría la fórmula de Harris-Benedict que mencionabas en el txt
   }
-
 }
