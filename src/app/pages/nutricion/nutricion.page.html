@@ -18,6 +18,15 @@
     [carbohidratos]="totales.carbos">
   </app-resumen-nutricional>
 
+  <div class="momentos-container">
+    <ion-segment [value]="momentoActual" (ionChange)="cambiarMomento($event)" #momentoSegment>
+      <ion-segment-button value="Desayuno"><ion-label>Desayuno</ion-label></ion-segment-button>
+      <ion-segment-button value="Comida"><ion-label>Comida</ion-label></ion-segment-button>
+      <ion-segment-button value="Merienda"><ion-label>Merienda</ion-label></ion-segment-button>
+      <ion-segment-button value="Cena"><ion-label>Cena</ion-label></ion-segment-button>
+    </ion-segment>
+  </div>
+
   <app-lista-consumo 
     [comidas]="comidasDelDia" 
     [momentoActual]="momentoActual"
@@ -28,13 +37,6 @@
     <ion-list-header>
       <ion-label>Añadir nuevos alimentos</ion-label>
     </ion-list-header>
-
-    <ion-segment [value]="momentoActual" (ionChange)="cambiarMomento($event)" #momentoSegment>
-      <ion-segment-button value="Desayuno"><ion-label>Desayuno</ion-label></ion-segment-button>
-      <ion-segment-button value="Comida"><ion-label>Comida</ion-label></ion-segment-button>
-      <ion-segment-button value="Merienda"><ion-label>Merienda</ion-label></ion-segment-button>
-      <ion-segment-button value="Cena"><ion-label>Cena</ion-label></ion-segment-button>
-    </ion-segment>
 
     <ion-grid>
       <ion-row>
@@ -48,10 +50,9 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </div>
 
   <div *ngIf="!esHoy" class="ion-padding ion-text-center">
-    <ion-note>No se pueden añadir alimentos a fechas pasadas.</ion-note>
+    <ion-note>No se pueden añadir alimentos a fechas pasadas, pero puedes ver tus registros arriba.</ion-note>
   </div>
 </ion-content>
