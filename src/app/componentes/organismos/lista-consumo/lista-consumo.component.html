@@ -1,10 +1,10 @@
 <ion-list lines="full">
   <ion-list-header>
-    <ion-label>Consumo del día</ion-label>
+    <ion-label class="titulo-seccion">Consumo del día</ion-label>
   </ion-list-header>
 
-  <ion-item *ngIf="comidas.length === 0">
-    <ion-label class="ion-text-center" color="medium">
+  <ion-item *ngIf="comidas.length === 0" lines="none">
+    <ion-label class="ion-text-center mensaje-vacio">
       No has añadido alimentos hoy
     </ion-label>
   </ion-item>
@@ -15,12 +15,16 @@
     </ion-thumbnail>
     
     <ion-label>
-      <h2 style="font-weight: bold;">{{ item.nombre }}</h2>
-      <p>{{ item.kcal }} kcal | P: {{ item.protes }}g | C: {{ item.carbos }}g</p>
+      <h2>{{ item.nombre }}</h2>
+      <p class="info-macros">
+        {{ item.kcal }} kcal | Proteinas: {{ item.protes }}g | Carbohidratos: {{ item.carbos }}g
+      </p>
     </ion-label>
 
     <ion-button slot="end" fill="clear" color="danger" (click)="onEliminar.emit(item.id)">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
+
   </ion-item>
+  
 </ion-list>

@@ -7,13 +7,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './selector-fecha.component.html',
   styleUrls: ['./selector-fecha.component.scss'],
   standalone: true,
-  imports : [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule]
 })
-
 export class SelectorFechaComponent {
   @Output() fechaCambiante = new EventEmitter<string>();
 
-  onDateChange(event: any) {
+  onFechaCambiada(event: any) { // Nombre corregido
     const fecha = new Date(event.detail.value).toLocaleDateString();
     this.fechaCambiante.emit(fecha);
   }

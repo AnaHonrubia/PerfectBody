@@ -11,8 +11,8 @@
   <app-selector-fecha (fechaCambiante)="cambiarFecha($event)"></app-selector-fecha>
 
   <app-resumen-nutricional 
-    [consumidas]="totales.kcal" 
-    [objetivoKcal]="objetivoDiario"
+    [caloriasConsumidas]="totales.kcal" 
+    [objetivoCalorico]="objetivoDiario"
     [proteinas]="totales.protes"
     [grasas]="totales.grasas"
     [carbohidratos]="totales.carbos">

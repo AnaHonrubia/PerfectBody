@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FitAtomic } from '../../services/fit-atomic';
@@ -13,11 +13,12 @@ import { BotonOscuroComponent } from 'src/app/componentes/atomos/boton-oscuro/bo
   templateUrl: './nutricion.page.html',
   styleUrls: ['./nutricion.page.scss'],
   standalone: true,
+  encapsulation: ViewEncapsulation.None,
   imports: [IonicModule, CommonModule, ResumenNutricionalComponent, TarjetaAlimentosComponent, 
     ListaConsumoComponent, SelectorFechaComponent, BotonOscuroComponent]
 })
 
-export class NutricionPage implements OnInit {
+export class NutricionPage {
   alimentos: any[] = [];
   comidasDelDia: any[] = [];
   fechaSeleccionada: string = new Date().toLocaleDateString();

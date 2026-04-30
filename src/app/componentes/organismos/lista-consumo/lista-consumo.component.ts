@@ -7,8 +7,9 @@ import { trash } from 'ionicons/icons';
 @Component({
   selector: 'app-lista-consumo',
   templateUrl: './lista-consumo.component.html',
+  styleUrls: ['./lista-consumo.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [IonicModule, CommonModule] 
 })
 export class ListaConsumoComponent {
   @Input() comidas: any[] = [];

@@ -1,12 +1,15 @@
-<div class="flex-center ion-padding">
+<div class="contenedor-fecha">
+  
   <ion-datetime-button datetime="datetime"></ion-datetime-button>
-    <ion-modal [keepContentsMounted]="true">
-      <ng-template>
-        <ion-datetime 
-          id="datetime" 
-          presentation="date" 
-          (ionChange)="onDateChange($event)">
-        </ion-datetime>
-      </ng-template>
-    </ion-modal>
+
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime 
+        id="datetime" 
+        presentation="date" 
+        (ionChange)="onFechaCambiada($event)">
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+
 </div>

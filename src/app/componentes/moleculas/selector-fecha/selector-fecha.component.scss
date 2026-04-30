@@ -1,0 +1,22 @@
+.contenedor-fecha {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+
+  ion-datetime-button::part(native) {
+    background: var(--ion-color-success) !important;
+    color: #000000 !important; /* Texto del botón siempre negro para que resalte en verde */
+    font-weight: bold;
+  }
+}
+
+/* ESTO ARREGLA LOS NÚMEROS DENTRO DEL CALENDARIO */
+ion-datetime {
+  --background: var(--ion-item-background, #fff);
+  --color: var(--ion-text-color, #000000); /* Esta variable cambia sola: blanco en dark, negro en light */
+  
+  /* Forzamos por si el Shadow DOM bloquea el cambio */
+  &::part(calendar-day), &::part(month-year-button) {
+    color: var(--ion-text-color) !important;
+  }
+}

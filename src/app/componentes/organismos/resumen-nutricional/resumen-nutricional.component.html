@@ -1,14 +1,28 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Calorías</ion-card-title>
-    <ion-card-subtitle>{{ consumidas }} de {{ objetivoKcal }} kcal</ion-card-subtitle>
-  </ion-card-header>
-  <ion-card-content>
-    <ion-progress-bar [value]="porcentaje" color="success"></ion-progress-bar>
-    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-      <small>P: {{ proteinas }}g</small>
-      <small>G: {{ grasas }}g</small>
-      <small>CH: {{ carbohidratos }}g</small>
-    </div>
-  </ion-card-content>
-</ion-card>
+<div class="card-nutricion">
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="7">
+        <p class="label-principal">Calorías Diarias</p>
+        <h1 class="valor-principal">{{ caloriasConsumidas }} / {{ objetivoCalorico }} <small>kcal</small></h1>
+      </ion-col>
+      <ion-col size="5" class="ion-text-right">
+        <div class="indicador-restante">
+          <p>Restan</p>
+          <span class="numero-verde">{{ objetivoCalorico - caloriasConsumidas }}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="macros-row">
+      <ion-col size="4">
+        <p class="macro-label">Proteínas: <span>{{ proteinas }}g</span></p>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <p class="macro-label">Grasas: <span>{{ grasas }}g</span></p>
+      </ion-col>
+      <ion-col size="4" class="ion-text-right">
+        <p class="macro-label">Carbohidratos: <span>{{ carbohidratos }}g</span></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

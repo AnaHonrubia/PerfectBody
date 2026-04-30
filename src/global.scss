@@ -1,14 +1,3 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -25,13 +14,65 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* --- IMPORTANTE: Eliminamos el import de system.css para que tu botón mande --- */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* ANIMACIÓN Y COLOR PARA TABS SELECCIONADOS */
+ion-tab-button {
+  transition: transform 0.3s ease; 
+  /* Usamos el color de texto dinámico con transparencia para los NO seleccionados */
+  --color: var(--ion-text-color);
+  opacity: 0.6; 
+}
+
+ion-tab-button.tab-selected {
+  transform: scale(1.1); /* Crece un 10% (más equilibrado) */
+  opacity: 1; /* Sin transparencia al estar seleccionado */
+  --color-selected: var(--ion-color-success); 
+  
+  ion-label {
+    font-weight: bold; 
+    color: var(--ion-color-success) !important; /* Forzamos el verde en el texto */
+  }
+  
+  ion-icon {
+    color: var(--ion-color-success) !important; /* Forzamos el verde en el icono */
+  }
+}
+
+/* Forzamos que los nombres de los alimentos en la lista sigan la variable de texto */
+app-lista-consumo h2 {
+  color: var(--ion-text-color) !important;
+}
+
+/* --- SOLUCIÓN PARA LETRAS INVISIBLES --- */
+
+/* 1. Cuando NO hay modo oscuro (Fondo blanco) */
+body:not(.ion-palette-dark):not(.dark) {
+  /* Fuerza el título "Consumo del día" a negro */
+  ion-list-header ion-label, 
+  ion-list-header,
+  .titulo-seccion {
+    color: #000000 !important;
+    --color: #000000 !important;
+    opacity: 1 !important;
+  }
+  app-lista-consumo h2 {
+    color: #000000 !important; /* Nombre en negro puro */
+  }
+  app-lista-consumo .info-macros {
+    color: #444444 !important; /* Macros en gris oscuro */
+  }
+  app-resumen-nutricional .label-principal {
+    color: #666666 !important;
+  }
+}
+
+/* 2. Cuando SÍ hay modo oscuro (Fondo negro) */
+body.ion-palette-dark, body.dark {
+  app-lista-consumo h2 {
+    color: #ffffff !important; /* Todo en blanco */
+  }
+  app-lista-consumo .info-macros {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+}

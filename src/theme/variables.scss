@@ -1,20 +1,47 @@
 :root {
   /** Colores PerfectBody **/
-  --ion-color-primary: #2d3436; /* Gris profundo */
+  --ion-color-primary: #2d3436; 
   --ion-color-primary-rgb: 45, 52, 54;
   
-  --ion-color-success: #2ecc71; /* Verde éxito */
+  --ion-color-success: #2ecc71; 
   --ion-color-success-rgb: 46, 204, 113;
 
-  /* Fondo de la app */
+  /* MODO CLARO: Forzamos fondos claros y textos oscuros */
   --ion-background-color: #f5f6fa;
+  --ion-text-color: #000000; // Texto en negro para modo claro
+  --ion-item-background: #ffffff;
+  --ion-card-background: #ffffff;
+
+  /* Tabs en modo claro */
+  --ion-tab-bar-background: #ffffff;
+  --ion-tab-bar-color: #666666; /* Gris para que se vea bien */
+  --ion-tab-bar-color-activated: #2ecc71; /* Verde al estar seleccionado */
 }
 
-/* Colores para el Modo Oscuro */
-body.dark {
+/* EL BOTÓN USA ESTA CLASE (.ion-palette-dark o .dark) */
+body.ion-palette-dark, body.dark {
+  /* MODO OSCURO: Forzamos fondos oscuros y textos blancos */
   --ion-background-color: #121212;
-  --ion-text-color: #ffffff;
-  --ion-toolbar-background: #1e1e1e;
+  --ion-text-color: #ffffff; // Texto en blanco para modo oscuro
+  --ion-text-color-rgb: 255, 255, 255;
   --ion-item-background: #1e1e1e;
   --ion-card-background: #1e1e1e;
+
+  /* --- FIX CALENDARIO --- */
+  ion-datetime {
+    --background: #1e1e1e !important;    /* Fondo oscuro para el calendario */
+    --color: #ffffff !important;         /* Números blancos */
+    border-radius: 16px;
+  }
+
+  /* El botón que abre el calendario: Letras en negro sobre fondo verde */
+  ion-datetime-button::part(native) {
+    color: #000000 !important;           
+    background: var(--ion-color-success);
+  }
+
+  /* --- TABS MODO OSCURO --- */
+  --ion-tab-bar-background: #1e1e1e;
+  --ion-tab-bar-color: #ffffff;           /* Iconos en blanco */
+  --ion-tab-bar-color-activated: #2ecc71; /* Seleccionado en verde */
 }
