@@ -12,6 +12,7 @@
 
     <ng-container *ngFor="let item of comidas">
       <ion-item *ngIf="item.momento === m">
+        
         <ion-thumbnail slot="start">
           <img [src]="item.imagen" />
         </ion-thumbnail>

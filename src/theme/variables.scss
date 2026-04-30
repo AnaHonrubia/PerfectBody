@@ -44,4 +44,35 @@ body.ion-palette-dark, body.dark {
   --ion-tab-bar-background: #1e1e1e;
   --ion-tab-bar-color: #ffffff;           /* Iconos en blanco */
   --ion-tab-bar-color-activated: #2ecc71; /* Seleccionado en verde */
+
+  /* --- ESTILOS PARA LOS SEGMENTOS (Momentos del día) --- */
+  ion-segment {
+    --background: transparent !important; // Fondo transparente
+    background: transparent !important;
+    border-radius: 12px;
+    margin: 10px 0;
+  }
+
+  ion-segment-button {
+    /* Estado por defecto (No seleccionado) */
+    --color: #ffffff !important;           // Letras blancas
+    --color-checked: #ffffff !important;   // Letras blancas al seleccionar
+    --background: transparent !important; // Fondo transparente
+    opacity: 0.6;                         // Un poco transparente
+    
+    ion-label {
+      font-weight: normal;
+    }
+  }
+
+  /* Estado seleccionado (Checked) */
+  ion-segment-button.segment-button-checked {
+    opacity: 1;                            // Sin transparencia
+    --color: #a0f4ff !important;           // TEXTO EN AZUL CLARO
+    
+    ion-label {
+      font-weight: bold;                   // Negrita
+      color: #a0f4ff !important;           // Texto en azul claro
+    }
+  }
 }

@@ -65,21 +65,22 @@ export class NutricionPage {
 
     // Creamos el objeto limpio para el servicio
     const nuevaEntrada = {
-      id: Date.now().toString(), // Generamos ID único aquí
+      id: Date.now().toString(), // ID único
       nombre: alimento.nombre,
       imagen: alimento.imagen,
-      kcal: alimento.kcal || 0,
-      protes: alimento.protes || 0,
-      carbos: alimento.carbos || 0,
-      grasas: alimento.grasas || 0,
-      momento: momento // Guardamos si es Desayuno, Comida, etc.
+      // Aseguramos que los valores sean números, o 0 si no vienen
+      kcal: Number(alimento.kcal) || 0,
+      protes: Number(alimento.protes) || 0,
+      carbos: Number(alimento.carbos) || 0,
+      grasas: Number(alimento.grasas) || 0,
+      momento: momento // Guardamos 'Desayuno', 'Comida', etc.
     };
 
     // Guardamos en el servicio pasando la FECHA seleccionada
-    this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
-    
-    // Refrescamos la pantalla para que aparezca la lista
-    this.actualizarVista();
+  this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
+  
+  // Refrescamos la pantalla 
+  this.actualizarVista();
   }
 
   eliminarComida(id: string) {
