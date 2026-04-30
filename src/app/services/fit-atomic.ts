@@ -63,13 +63,15 @@ export class FitAtomic {
       this.historialDiario[fecha] = [];
     }
     const entrada = {
-      id: Date.now().toString(),
+      id: alimento.id || Date.now().toString(),
       nombre: alimento.nombre,
       imagen: alimento.imagen,
-      kcal: alimento.calorias || alimento.kcal, // Adaptamos por si la API usa 'calorias'
-      protes: alimento.proteinas || alimento.protes,
-      carbos: alimento.carbohidratos || alimento.carbos,
-      grasas: alimento.grasas
+      // Priorizamos kcal, si no existe usamos calorias
+      kcal: Number(alimento.kcal || alimento.calorias) || 0,
+      protes: Number(alimento.protes || alimento.proteinas) || 0,
+      carbos: Number(alimento.carbos || alimento.carbohidratos) || 0,
+      grasas: Number(alimento.grasas) || 0,
+      momento: alimento.momento
     };
     this.historialDiario[fecha].push(entrada);
     this.guardarEnMemoria();

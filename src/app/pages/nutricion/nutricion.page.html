@@ -20,6 +20,7 @@
 
   <app-lista-consumo 
     [comidas]="comidasDelDia" 
+    [momentoActual]="momentoActual"
     (onEliminar)="eliminarComida($any($event))">
   </app-lista-consumo>
 
@@ -47,6 +48,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
   </div>
 
   <div *ngIf="!esHoy" class="ion-padding ion-text-center">

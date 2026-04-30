@@ -12,8 +12,10 @@ import { trash } from 'ionicons/icons';
   imports: [IonicModule, CommonModule] 
 })
 export class ListaConsumoComponent {
+  
   @Input() comidas: any[] = [];
   @Output() onEliminar = new EventEmitter<string>();
+  @Input() momentoActual: string = '';
 
   constructor() {
     // Registramos el icono para que Ionic sepa dibujarlo

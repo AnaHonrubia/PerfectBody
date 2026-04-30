@@ -59,29 +59,31 @@ export class NutricionPage {
   }
 
   agregarComida(alimento: any, momento: string) {
-    // Validaciones de seguridad
-    if (!alimento || !this.esHoy) {
+    // Verificamo si estamos en el dia de hoy (en el calendario) 
+    if (!this.esHoy) {
+      console.warn('No puedes añadir comida en días pasados');
       return;
-    } 
+    }
 
-    // Creamos el objeto limpio para el servicio
+    // Creamos el objeto asegurando que el momento sea el correcto
     const nuevaEntrada = {
-      id: Date.now().toString(), // ID único
+      id: Date.now().toString(),
       nombre: alimento.nombre,
       imagen: alimento.imagen,
-      // Aseguramos que los valores sean números, o 0 si no vienen
-      kcal: Number(alimento.kcal) || 0,
-      protes: Number(alimento.protes) || 0,
-      carbos: Number(alimento.carbos) || 0,
-      grasas: Number(alimento.grasas) || 0,
-      momento: momento // Guardamos 'Desayuno', 'Comida', etc.
+      // Mapeamos los nombres de tu API (calorias, proteinas...) a los de tu App (kcal, protes...)
+      kcal: alimento.kcal || alimento.calorias || 0,
+      protes: alimento.protes || alimento.proteinas || 0,
+      carbos: alimento.carbos || alimento.carbohidratos || 0,
+      grasas: alimento.grasas || 0,
+      momento: momento 
     };
 
-    // Guardamos en el servicio pasando la FECHA seleccionada
-  this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
-  
-  // Refrescamos la pantalla 
-  this.actualizarVista();
+    // 3. Guardamos en el servicio
+    this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
+    
+    // 4. FORZAMOS EL REFRESCO: Volvemos a llamar a la lógica de filtrado
+    this.actualizarVista();
+
   }
 
   eliminarComida(id: string) {
@@ -96,14 +98,14 @@ export class NutricionPage {
 
   actualizarVista() {
     // Obtenemos TODO desde la API 
-    const todasLasComidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
+    const todasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
 
     // Solo se envia al componente de la lista que coincide con el boton azul
-    this.comidasDelDia = todasLasComidasDelDia.filter ( c =>
-      this.fechaSeleccionada
+    this.comidasDelDia = todasDelDia.filter(c =>
+      c.momento === this.momentoActual
     );
 
-    // Actualizamos totales y objetivo
+    // Actualizamos el resumen de arriba
     this.totales = this.fitService.getTotalesPorFecha(this.fechaSeleccionada);
     this.objetivoDiario = this.fitService.getObjetivoKcal();
 
@@ -113,10 +115,10 @@ export class NutricionPage {
 
   }
 
-  // Función para cuando se cambia el segmento que no se vea los alimentos de otros segmentos
-  cambiarMomento(event: any){
-    this.momentoActual = event.detail.value;
-    this.actualizarVista(); // Refrescamos para filtrar la lista
+  // Esta función se dispara cuando haces clic en Comida, Merienda, etc.
+  cambiarMomento(event: any) {
+    this.momentoActual = event.detail.value; // Actualizamos el momento
+    this.actualizarVista(); // Refrescamos la lista para que solo salgan los de ese momento
   }
 
 }
