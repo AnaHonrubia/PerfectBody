@@ -1,40 +1,34 @@
 <ion-list lines="full">
-  
+
   <ion-list-header>
-    <ion-label class="titulo-seccion">Consumo por grupos</ion-label>
+    <ion-label class="titulo-seccion">Registros actuales</ion-label>
   </ion-list-header>
 
   <div *ngFor="let m of ['Desayuno', 'Comida', 'Merienda', 'Cena']">
+
+    <ion-item *ngFor="let item of comidas">
+      <ion-thumbnail slot="start">
+        <img [src]="item.imagen" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2>{{ item.nombre }}</h2>
+        <p class="info-macros">
+          {{ item.kcal }} kcal | Proteinas: {{ item.protes }}g | Carbohidratos: {{ item.carbos }}g
+        </p>
+      </ion-label>
+
+      <ion-button slot="end" fill="clear" color="danger" (click)="onEliminar.emit(item.id)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
     
-    <ion-item-divider mode="ios" color="light" *ngIf="contarComidasEn(m) > 0">
-      <ion-label style="font-weight: bold; color: var(--ion-color-primary);">{{ m }}</ion-label>
-    </ion-item-divider>
-
-    <ng-container *ngFor="let item of comidas">
-      <ion-item *ngIf="item.momento === m">
-        
-        <ion-thumbnail slot="start">
-          <img [src]="item.imagen" />
-        </ion-thumbnail>
-        
-        <ion-label>
-          <h2>{{ item.nombre }}</h2>
-          <p class="info-macros">
-            {{ item.kcal }} kcal | P: {{ item.protes }}g | CH: {{ item.carbos }}g
-          </p>
-        </ion-label>
-
-        <ion-button slot="end" fill="clear" color="danger" (click)="onEliminar.emit(item.id)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ng-container>
   </div>
 
   <ion-item *ngIf="comidas.length === 0" lines="none">
     <ion-label class="ion-text-center mensaje-vacio">
-      No hay registros para este día
+      No hay alimentos en este momento
     </ion-label>
   </ion-item>
-  
+
 </ion-list>

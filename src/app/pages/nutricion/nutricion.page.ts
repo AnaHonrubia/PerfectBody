@@ -26,6 +26,7 @@ export class NutricionPage {
   objetivoDiario: number = 0;
 
   esHoy: boolean = true; // Controla si mostramos la galeria de añadir
+  momentoActual: string = 'Desayuno'; // Saber que momento del día está seleccionado
 
   constructor(private fitService: FitAtomic) {}
 
@@ -94,8 +95,15 @@ export class NutricionPage {
   }
 
   actualizarVista() {
-    // Al cambiar esta variable, la lista-consumo se limpia y se rellena sola
-    this.comidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
+    // Obtenemos TODO desde la API 
+    const todasLasComidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
+
+    // Solo se envia al componente de la lista que coincide con el boton azul
+    this.comidasDelDia = todasLasComidasDelDia.filter ( c =>
+      this.fechaSeleccionada
+    );
+
+    // Actualizamos totales y objetivo
     this.totales = this.fitService.getTotalesPorFecha(this.fechaSeleccionada);
     this.objetivoDiario = this.fitService.getObjetivoKcal();
 
@@ -103,6 +111,12 @@ export class NutricionPage {
     const hoyStr = new Date().toLocaleDateString();
     this.esHoy = (this.fechaSeleccionada === hoyStr);
 
+  }
+
+  // Función para cuando se cambia el segmento que no se vea los alimentos de otros segmentos
+  cambiarMomento(event: any){
+    this.momentoActual = event.detail.value;
+    this.actualizarVista(); // Refrescamos para filtrar la lista
   }
 
 }

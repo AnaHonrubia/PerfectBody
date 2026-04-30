@@ -28,14 +28,12 @@
       <ion-label>Añadir nuevos alimentos</ion-label>
     </ion-list-header>
 
-    <div class="momentos-container">
-      <ion-segment value="Desayuno" #momentoSegment>
-        <ion-segment-button value="Desayuno"><ion-label>Desayuno</ion-label></ion-segment-button>
-        <ion-segment-button value="Comida"><ion-label>Comida</ion-label></ion-segment-button>
-        <ion-segment-button value="Merienda"><ion-label>Merienda</ion-label></ion-segment-button>
-        <ion-segment-button value="Cena"><ion-label>Cena</ion-label></ion-segment-button>
-      </ion-segment>
-    </div>
+    <ion-segment [value]="momentoActual" (ionChange)="cambiarMomento($event)" #momentoSegment>
+      <ion-segment-button value="Desayuno"><ion-label>Desayuno</ion-label></ion-segment-button>
+      <ion-segment-button value="Comida"><ion-label>Comida</ion-label></ion-segment-button>
+      <ion-segment-button value="Merienda"><ion-label>Merienda</ion-label></ion-segment-button>
+      <ion-segment-button value="Cena"><ion-label>Cena</ion-label></ion-segment-button>
+    </ion-segment>
 
     <ion-grid>
       <ion-row>
