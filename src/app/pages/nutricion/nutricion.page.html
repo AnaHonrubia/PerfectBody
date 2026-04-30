@@ -23,20 +23,35 @@
     (onEliminar)="eliminarComida($any($event))">
   </app-lista-consumo>
 
-  <ion-list-header>
-    <ion-label>Añadir nuevos alimentos</ion-label>
-  </ion-list-header>
+  <div *ngIf="esHoy">
+    <ion-list-header>
+      <ion-label>Añadir nuevos alimentos</ion-label>
+    </ion-list-header>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="2" *ngFor="let alimento of alimentos">
-        <app-tarjeta-alimentos 
-          [nombre]="alimento.nombre"
-          [kcal]="alimento.kcal"
-          [imagen]="alimento.imagen"
-          (onAdd)="agregarComida(alimento)">
-        </app-tarjeta-alimentos>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <div class="momentos-container">
+      <ion-segment value="Desayuno" #momentoSegment>
+        <ion-segment-button value="Desayuno"><ion-label>Desayuno</ion-label></ion-segment-button>
+        <ion-segment-button value="Comida"><ion-label>Comida</ion-label></ion-segment-button>
+        <ion-segment-button value="Merienda"><ion-label>Merienda</ion-label></ion-segment-button>
+        <ion-segment-button value="Cena"><ion-label>Cena</ion-label></ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2" *ngFor="let alimento of alimentos">
+          <app-tarjeta-alimentos 
+            [nombre]="alimento.nombre"
+            [kcal]="alimento.kcal"
+            [imagen]="alimento.imagen"
+            (onAdd)="agregarComida(alimento, $any(momentoSegment.value))">
+          </app-tarjeta-alimentos>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="!esHoy" class="ion-padding ion-text-center">
+    <ion-note>No se pueden añadir alimentos a fechas pasadas.</ion-note>
+  </div>
 </ion-content>

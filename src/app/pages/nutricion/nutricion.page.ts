@@ -25,6 +25,8 @@ export class NutricionPage {
   totales = { kcal: 0, protes: 0, carbos: 0, grasas: 0 };
   objetivoDiario: number = 0;
 
+  esHoy: boolean = true; // Controla si mostramos la galeria de añadir
+
   constructor(private fitService: FitAtomic) {}
 
   async ngOnInit() {
@@ -55,23 +57,28 @@ export class NutricionPage {
     this.actualizarVista();
   }
 
-  agregarComida(alimento: any) {
-    if (!alimento) return;
+  agregarComida(alimento: any, momento: string) {
+    // Validaciones de seguridad
+    if (!alimento || !this.esHoy) {
+      return;
+    } 
 
-    // Creamos el objeto para que el servicio no reciba nada 'undefined'
+    // Creamos el objeto limpio para el servicio
     const nuevaEntrada = {
+      id: Date.now().toString(), // Generamos ID único aquí
       nombre: alimento.nombre,
       imagen: alimento.imagen,
       kcal: alimento.kcal || 0,
       protes: alimento.protes || 0,
       carbos: alimento.carbos || 0,
-      grasas: alimento.grasas || 0
+      grasas: alimento.grasas || 0,
+      momento: momento // Guardamos si es Desayuno, Comida, etc.
     };
 
-    // 1. Guardamos en el servicio pasando la FECHA seleccionada
+    // Guardamos en el servicio pasando la FECHA seleccionada
     this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
     
-    // 2. Refrescamos la pantalla
+    // Refrescamos la pantalla para que aparezca la lista
     this.actualizarVista();
   }
 
@@ -88,8 +95,13 @@ export class NutricionPage {
   actualizarVista() {
     // Al cambiar esta variable, la lista-consumo se limpia y se rellena sola
     this.comidasDelDia = this.fitService.getDiarioPorFecha(this.fechaSeleccionada);
-    
     this.totales = this.fitService.getTotalesPorFecha(this.fechaSeleccionada);
     this.objetivoDiario = this.fitService.getObjetivoKcal();
+
+    // Lógica de bloqueo: Comparamos la fecha seleccionada con la de hoy 
+    const hoyStr = new Date().toLocaleDateString();
+    this.esHoy = (this.fechaSeleccionada === hoyStr);
+
   }
+
 }

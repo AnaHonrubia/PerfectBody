@@ -19,4 +19,9 @@ export class ListaConsumoComponent {
     // Registramos el icono para que Ionic sepa dibujarlo
     addIcons({ trash });
   }
+
+  contarComidasEn(momento: string): number {
+    return this.comidas.filter(c => c.momento === momento).length;
+  }
+
 }
