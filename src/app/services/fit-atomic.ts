@@ -91,13 +91,23 @@ export class FitAtomic {
   getTotalesPorFecha(fecha: string) {
     let totales = { kcal: 0, protes: 0, carbos: 0, grasas: 0 };
     const comidas = this.getDiarioPorFecha(fecha);
+
     comidas.forEach(alim => {
       totales.kcal += alim.kcal || 0;
       totales.protes += alim.protes || 0;
       totales.carbos += alim.carbos || 0;
       totales.grasas += alim.grasas || 0;
     });
-    return totales;
+    
+    // REDONDEO A 2 DECIMALES:
+    // He usado el Math.round(valor * 100) / 100 para que siga siendo un número
+    return {
+      kcal: Math.round(totales.kcal), // Las calorías mejor sin decimales
+      protes: Math.round(totales.protes * 100) / 100,
+      carbos: Math.round(totales.carbos * 100) / 100,
+      grasas: Math.round(totales.grasas * 100) / 100
+    };
+
   }
 
   // --- PERFIL Y OBJETIVOS ---
