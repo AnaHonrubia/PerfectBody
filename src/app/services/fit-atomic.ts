@@ -142,15 +142,6 @@ export class FitAtomic {
     return datos ? JSON.parse(datos) : [];
   }
 
-  guardarCierreSemanal(datosSemana: any){
-    const semanas = this.getSemanas();
-    semanas.unshift({
-      fechaCierre: new Date().toLocaleDateString(),
-      resumen: datosSemana
-    });
-    localStorage.setItem('perfectBody_semanas', JSON.stringify(semanas));
-  }
-
   borrarSemana(index: number) {
     const semanas = this.getSemanas();
     semanas.splice(index, 1);
@@ -175,4 +166,54 @@ export class FitAtomic {
     }
     return this.listaAlimentos;
   }
+
+  // Función que detecta si hay una semana que se deba cerrar
+  verificarCierreSemanal() {
+    const ultimaFechaCierre = localStorage.getItem('fecha_ultimo_cierre');
+    const hoy = new Date();
+    
+    // Si hoy es lunes y no se cerró la semana ayer (domingo)
+    if (hoy.getDay() === 1 && ultimaFechaCierre !== hoy.toLocaleDateString()) {
+      this.ejecutarCierreDeSemana();
+      localStorage.setItem('fecha_ultimo_cierre', hoy.toLocaleDateString());
+    }
+  }
+
+  private ejecutarCierreDeSemana() {
+    const resumenSemanal = { kcal: 0, protes: 0, grasas: 0, carbos: 0 };
+    const hoy = new Date();
+    
+    // Recorremos los últimos 7 días (de lunes a domingo pasado)
+    for (let i = 1; i <= 7; i++) {
+      const fecha = new Date();
+      fecha.setDate(hoy.getDate() - i);
+      const fechaStr = fecha.toLocaleDateString();
+      
+      const totalesDia = this.getTotalesPorFecha(fechaStr);
+      resumenSemanal.kcal += totalesDia.kcal;
+      resumenSemanal.protes += totalesDia.protes;
+      resumenSemanal.grasas += totalesDia.grasas;
+      resumenSemanal.carbos += totalesDia.carbos;
+    }
+
+    // Guardamos el historial con todos los macros redondeados
+    this.guardarCierreSemanal(resumenSemanal);
+  }
+
+  guardarCierreSemanal(datos: any) {
+    const semanas = this.getSemanas();
+    const nuevaSemana = {
+      id: Date.now(),
+      fechaCierre: new Date().toLocaleDateString(),
+      kcal: Math.round(datos.kcal),
+      protes: Math.round(datos.protes * 10) / 10,
+      grasas: Math.round(datos.grasas * 10) / 10,
+      carbos: Math.round(datos.carbos * 10) / 10
+    };
+    
+    semanas.unshift(nuevaSemana);
+    localStorage.setItem('perfectBody_semanas', JSON.stringify(semanas));
+  }
+
+  
 }

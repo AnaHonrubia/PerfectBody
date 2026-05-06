@@ -29,4 +29,8 @@ export const routes: Routes = [
     redirectTo: '/nutricion',
     pathMatch: 'full',
   },
+  {
+    path: 'historial-semanal',
+    loadComponent: () => import('./pages/historial-semanal/historial-semanal.page').then( m => m.HistorialSemanalPage)
+  },
 ];

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/nutricion"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Historial Semanal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="semanas.length === 0" class="ion-text-center ion-padding">
+    <ion-icon name="archive-outline" style="font-size: 64px; color: gray;"></ion-icon>
+    <p>Aún no tienes semanas cerradas.</p>
+  </div>
+
+  <ion-card *ngFor="let semana of semanas">
+    <ion-card-header>
+      <ion-card-subtitle>Semana finalizada el {{ semana.fechaCierre }}</ion-card-subtitle>
+      <ion-card-title color="primary">{{ semana.kcal }} Total kcal</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            <small>Proteínas</small>
+            <div class="dato-macro">{{ semana.protes }}g</div>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <small>Grasas</small>
+            <div class="dato-macro">{{ semana.grasas }}g</div>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <small>Carbohidratos</small>
+            <div class="dato-macro">{{ semana.carbos }}g</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
