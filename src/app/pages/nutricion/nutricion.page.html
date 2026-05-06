@@ -1,11 +1,16 @@
 <ion-header>
   <ion-toolbar color="success">
     <ion-title>Nutrición</ion-title>
+    
     <ion-buttons slot="end">
-      <app-boton-oscuro></app-boton-oscuro>
+      <!-- BOTÓN DEL HISTORIAL -->
       <ion-button routerLink="/historial-semanal">
         <ion-icon slot="icon-only" name="list-outline"></ion-icon>
       </ion-button>
+
+      <!-- BOTÓN DE MODO OSCURO -->
+      <app-boton-oscuro></app-boton-oscuro>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -35,6 +40,17 @@
     [momentoActual]="momentoActual"
     (onEliminar)="eliminarComida($any($event))">
   </app-lista-consumo>
+
+  <!-- Botón de Cierre Semanal -->
+  <div *ngIf="puedeCerrarSemana()" class="ion-padding">
+    <ion-button expand="block" color="tertiary" (click)="cerrarSemanaManual()" mode="ios">
+      <ion-icon name="ribbon-outline" slot="start"></ion-icon>
+      Finalizar y Cerrar Semana
+    </ion-button>
+    <p class="ion-text-center" style="font-size: 0.8em; color: var(--ion-color-medium);">
+      Solo disponible los domingos tras registrar la cena.
+    </p>
+  </div>
 
   <div *ngIf="esHoy">
     <ion-list-header>

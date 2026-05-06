@@ -1,0 +1,18 @@
+.dato-macro {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--ion-color-success); // Verde para que combine
+  margin-top: 5px;
+}
+
+small {
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+ion-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}

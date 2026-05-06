@@ -8,6 +8,10 @@ import { SelectorFechaComponent } from '../../componentes/moleculas/selector-fec
 import { ListaConsumoComponent } from '../../componentes/organismos/lista-consumo/lista-consumo.component';
 import { BotonOscuroComponent } from 'src/app/componentes/atomos/boton-oscuro/boton-oscuro.component';
 
+import { addIcons } from 'ionicons';
+import { listOutline } from 'ionicons/icons';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-nutricion',
   templateUrl: './nutricion.page.html',
@@ -15,7 +19,7 @@ import { BotonOscuroComponent } from 'src/app/componentes/atomos/boton-oscuro/bo
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   imports: [IonicModule, CommonModule, ResumenNutricionalComponent, TarjetaAlimentosComponent, 
-    ListaConsumoComponent, SelectorFechaComponent, BotonOscuroComponent]
+    ListaConsumoComponent, SelectorFechaComponent, BotonOscuroComponent, RouterModule]
 })
 
 export class NutricionPage {
@@ -28,7 +32,9 @@ export class NutricionPage {
   esHoy: boolean = true; // Controla si mostramos la galeria de añadir
   momentoActual: string = 'Desayuno'; // Saber que momento del día está seleccionado
 
-  constructor(private fitService: FitAtomic) {}
+  constructor(private fitService: FitAtomic) {
+    addIcons({ listOutline });
+  }
 
   async ngOnInit() {
     console.log('Iniciando carga de nutrición...');
@@ -119,6 +125,40 @@ export class NutricionPage {
   cambiarMomento(event: any) {
     this.momentoActual = event.detail.value; // Actualizamos el momento
     this.actualizarVista(); // Refrescamos la lista para que solo salgan los de ese momento
+  }
+
+  // Función para saber si podemos mostrar el botón de cierre
+  puedeCerrarSemana(): boolean {
+    const hoy = new Date();
+    const esDomingo = hoy.getDay() === 0; // 0 = Domingo
+    
+    // Verificamos si hay algo en la cena hoy
+    const tieneCena = this.comidasDelDia.some(c => c.momento === 'Cena');
+
+    // Solo habilitamos si es domingo, es la fecha de hoy y tiene cena
+    return esDomingo && this.esHoy && tieneCena;
+  }
+
+  // Función que ejecuta el cierre manual
+  cerrarSemanaManual() {
+    // Calculamos los totales de los últimos 7 días
+    const resumenSemanal = { kcal: 0, protes: 0, grasas: 0, carbos: 0 };
+    const hoy = new Date();
+
+    for (let i = 0; i < 7; i++) {
+      const fecha = new Date();
+      fecha.setDate(hoy.getDate() - i);
+      const fechaStr = fecha.toLocaleDateString();
+      
+      const totalesDia = this.fitService.getTotalesPorFecha(fechaStr);
+      resumenSemanal.kcal += totalesDia.kcal;
+      resumenSemanal.protes += totalesDia.protes;
+      resumenSemanal.grasas += totalesDia.grasas;
+      resumenSemanal.carbos += totalesDia.carbos;
+    }
+
+    this.fitService.guardarCierreSemanal(resumenSemanal);
+    alert('¡Semana cerrada con éxito! Ya puedes verla en tu historial.');
   }
 
 }
