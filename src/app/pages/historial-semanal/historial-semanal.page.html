@@ -13,10 +13,24 @@
     <p>Aún no tienes semanas cerradas.</p>
   </div>
 
-  <ion-card *ngFor="let semana of semanas">
+  <ion-card class="grafica-card">
     <ion-card-header>
-      <ion-card-subtitle>Semana finalizada el {{ semana.fechaCierre }}</ion-card-subtitle>
-      <ion-card-title color="primary">{{ semana.kcal }} Total kcal</ion-card-title>
+      <ion-card-title>Evolución Calórica</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barChart></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let semana of semanas">
+  
+    <ion-card-header>
+      <ion-card-subtitle style="color: #af87ff !important; font-weight: bold;">
+        Semana finalizada el {{ semana.fechaCierre }}
+      </ion-card-subtitle>
+      <ion-card-title [style.color]="obtenerColorKcal(semana.kcal)" style="font-weight: bold;">
+        {{ semana.kcal }} Total kcal
+      </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
