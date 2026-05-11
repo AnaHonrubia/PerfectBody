@@ -20,6 +20,7 @@ export class FitAtomic {
     this.inicializarTema();
     this.cargarDesdeMemoria();
     this.cargarSemanasDesdeMemoria();
+    this.verificarCierreSemanalAutomatico();
   }
 
   // --- LÓGICA DE TEMA (MODO OSCURO) ---
@@ -100,7 +101,6 @@ export class FitAtomic {
     });
     
     // REDONDEO A 2 DECIMALES:
-    // He usado el Math.round(valor * 100) / 100 para que siga siendo un número
     return {
       kcal: Math.round(totales.kcal), // Las calorías mejor sin decimales
       protes: Math.round(totales.protes * 100) / 100,
@@ -174,7 +174,9 @@ export class FitAtomic {
     
     // Si hoy es lunes y no se cerró la semana ayer (domingo)
     if (hoy.getDay() === 1 && ultimaFechaCierre !== hoy.toLocaleDateString()) {
+      console.log("Detectado lunes: Procediendo al cierre automático de la semana pasada...");
       this.ejecutarCierreDeSemana();
+      // Guardamos la fecha de hoy para que no lo vuelva a intentar hasta el próximo lunes
       localStorage.setItem('fecha_ultimo_cierre', hoy.toLocaleDateString());
     }
   }
@@ -183,7 +185,7 @@ export class FitAtomic {
     const resumenSemanal = { kcal: 0, protes: 0, grasas: 0, carbos: 0 };
     const hoy = new Date();
     
-    // Recorremos los últimos 7 días (de lunes a domingo pasado)
+    // Suma los datos de los últimos 7 días (de lunes a domingo)
     for (let i = 1; i <= 7; i++) {
       const fecha = new Date();
       fecha.setDate(hoy.getDate() - i);
@@ -196,7 +198,7 @@ export class FitAtomic {
       resumenSemanal.carbos += totalesDia.carbos;
     }
 
-    // Guardamos el historial con todos los macros redondeados
+    // Se guarda el historial de todos los macros redondeados
     this.guardarCierreSemanal(resumenSemanal);
   }
 
@@ -215,5 +217,34 @@ export class FitAtomic {
     localStorage.setItem('perfectBody_semanas', JSON.stringify(semanas));
   }
 
+  verificarCierreSemanalAutomatico() {
+    const hoy = new Date();
+    const diaSemana = hoy.getDay(); 
+    const hoyStr = hoy.toLocaleDateString();
+    const ultimoCierre = localStorage.getItem('ultimo_cierre_auto');
+
+    // Si hoy es LUNES y NO se ha cerrado todavía...
+    if (hoy.getDay() === 1 && ultimoCierre !== hoyStr) {
+      
+      // Se marcas como cerrado para bloquear cualquier otra ejecución inmediata
+      localStorage.setItem('ultimo_cierre_auto', hoyStr);
+      
+      console.log('Ejecutando cierre semanal único...');
+
+      const ayer = new Date();
+      ayer.setDate(hoy.getDate() - 1);
+      const ayerStr = ayer.toLocaleDateString();
+      
+      // Solo se cierra si ayer hubo cena (nuestra regla de oro)
+      const diarioAyer = this.getDiarioPorFecha(ayerStr);
+      if (diarioAyer.some(c => c.momento === 'Cena')) {
+        this.ejecutarCierreDeSemana();
+      } else {
+        // Si no hubo cena, se borra la marca por si el usuario la apunta más tarde hoy
+        localStorage.removeItem('ultimo_cierre_auto');
+        console.log('Cierre cancelado: falta registro de cena ayer.');
+      }
+    }
+  }
   
 }

@@ -68,7 +68,7 @@ export class NutricionPage {
     // Verificamo si estamos en el dia de hoy (en el calendario) 
     if (!this.esHoy) {
       console.warn('No puedes añadir comida en días pasados');
-      return;
+      return; // Si no es hoy, se sale de la función y no guarda nada
     }
 
     // Creamos el objeto asegurando que el momento sea el correcto
@@ -84,10 +84,10 @@ export class NutricionPage {
       momento: momento 
     };
 
-    // 3. Guardamos en el servicio
+    // Guardamos en el servicio
     this.fitService.agregarAlDiario(nuevaEntrada, this.fechaSeleccionada);
     
-    // 4. FORZAMOS EL REFRESCO: Volvemos a llamar a la lógica de filtrado
+    // FORZAMOS EL REFRESCO: Volvemos a llamar a la lógica de filtrado
     this.actualizarVista();
 
   }
@@ -117,6 +117,8 @@ export class NutricionPage {
 
     // Lógica de bloqueo: Comparamos la fecha seleccionada con la de hoy 
     const hoyStr = new Date().toLocaleDateString();
+    
+    // ESTA ES LA LÍNEA QUE MANDA:
     this.esHoy = (this.fechaSeleccionada === hoyStr);
 
   }

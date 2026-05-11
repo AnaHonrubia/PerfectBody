@@ -48,6 +48,7 @@ export class HistorialSemanalPage implements OnInit {
 
   cargarHistorial() {
     const historialReal = this.fitService.getSemanas()
+    this.semanas = this.fitService.getSemanas();
   }
 
   obtenerColorKcal(kcal: number): string {
