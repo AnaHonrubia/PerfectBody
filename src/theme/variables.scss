@@ -75,4 +75,31 @@ body.ion-palette-dark, body.dark {
       color: #a0f4ff !important;           // Texto en azul claro
     }
   }
+
+  /* --- FIX TARJETAS ENTRENAMIENTO MODO OSCURO --- */
+  .ejercicio-card {
+    --background: #1e1e1e !important;
+    background: #1e1e1e !important;
+
+    ion-card-title {
+      --color: #ffffff !important;
+      color: #ffffff !important;
+    }
+
+    ion-card-subtitle {
+      --color: #7cf6f6 !important;
+      color: #7cf6f6 !important;
+    }
+
+    ion-card-content p {
+      --color: #c3a6ff !important;
+      color: #c3a6ff !important;
+    }
+
+    ion-button {
+      --color: #7cf6f6 !important;
+      --border-color: #7cf6f6 !important;
+    }
+  }
+
 }
