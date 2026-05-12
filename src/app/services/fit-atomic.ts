@@ -8,12 +8,14 @@ import { firstValueFrom } from 'rxjs';
 export class FitAtomic {
   private http = inject(HttpClient);
   private URL_ALIMENTOS = 'https://raw.githubusercontent.com/AnaHonrubia/APIs/refs/heads/main/alimentos.json';
+  private URL_EJERCICIOS = 'https://raw.githubusercontent.com/AnaHonrubia/APIs/refs/heads/main/ejercicios.json';
 
   private listaAlimentos: any[] = [];
   private historialDiario: { [fecha: string]: any[] } = {}; 
   private perfilUsuario = { peso: 0, altura: 0, edad: 0, tmb: 0 };
   private historialSemanas: any[] = [];
   darkMode: boolean = false;
+  private listaEjercicios: any[] = [];
 
   constructor() {
     this.cargarAlimentosRemote();
@@ -21,6 +23,7 @@ export class FitAtomic {
     this.cargarDesdeMemoria();
     this.cargarSemanasDesdeMemoria();
     this.verificarCierreSemanalAutomatico();
+    this.cargarEjerciciosRemote();
   }
 
   // --- LÓGICA DE TEMA (MODO OSCURO) ---
@@ -245,6 +248,21 @@ export class FitAtomic {
         console.log('Cierre cancelado: falta registro de cena ayer.');
       }
     }
+  }
+
+  // Función que descarga el JSON
+  async cargarEjerciciosRemote() {
+    try {
+      this.listaEjercicios = await firstValueFrom(this.http.get<any[]>(this.URL_EJERCICIOS));
+      console.log("Ejercicios cargados correctamente:", this.listaEjercicios.length);
+    } catch (error) {
+      console.error("Error descargando ejercicios", error);
+    }
+  }
+
+  // Función para que la página de entreno obtenga la lista
+  getEjercicios() {
+    return this.listaEjercicios;
   }
   
 }

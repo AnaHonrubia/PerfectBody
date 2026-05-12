@@ -1,0 +1,29 @@
+
+.ejercicio-card {
+  img {
+    height: 400px; /* Subimos de 100px a 140px para que se vean mejor */
+    object-fit: contain; 
+    width: 100%;
+    padding: 5px; /* Reducimos un poco el padding para ganar espacio de imagen */
+    background: #ffffff; 
+    display: block;
+    margin: 0 auto;
+  }
+
+  ion-card-header {
+    padding: 10px 12px;
+  }
+
+  ion-card-title {
+    font-size: 1.1rem; /* Un pelín más grande para acompañar la imagen */
+    font-weight: bold;
+  }
+
+  ion-card-content {
+    padding: 0 12px 12px 12px;
+    p {
+      font-size: 0.85rem;
+      height: 2.4em; /* Ajustamos para que quepan bien las dos líneas */
+    }
+  }
+}
