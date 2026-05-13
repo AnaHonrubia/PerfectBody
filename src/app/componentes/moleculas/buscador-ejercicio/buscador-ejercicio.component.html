@@ -1,7 +1,20 @@
-<div class="contenedor-buscador">
-  <ion-searchbar 
-    placeholder="Buscar ejercicio (ej: Pecho)" 
-    (ionInput)="alBuscar($event)"
-    class="buscador-custom">
-  </ion-searchbar>
+<div class="contenedor-filtros">
+  <ion-toolbar>
+    <ion-searchbar 
+      placeholder="Buscar ejercicio..." 
+      (ionInput)="alBuscar($event)"
+      class="buscador-custom">
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment (ionChange)="cambiarGrupo($event)" [value]="grupoActivo" scrollable>
+      <ion-segment-button value="Pecho"><ion-label>Pecho</ion-label></ion-segment-button>
+      <ion-segment-button value="Espalda"><ion-label>Espalda</ion-label></ion-segment-button>
+      <ion-segment-button value="Pierna"><ion-label>Pierna</ion-label></ion-segment-button>
+      <ion-segment-button value="Hombros"><ion-label>Hombros</ion-label></ion-segment-button>
+      <ion-segment-button value="Brazos"><ion-label>Brazos</ion-label></ion-segment-button>
+      <ion-segment-button value="Core"><ion-label>Core</ion-label></ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </div>

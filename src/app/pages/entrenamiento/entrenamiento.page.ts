@@ -115,5 +115,15 @@ export class EntrenamientoPage implements OnInit {
   quitarSerie(index: number) {
     this.seriesTemporales.splice(index, 1);
   }
+
+  aplicarFiltrosGlobales(event: {texto: string, grupo: string}) {
+    this.grupoSeleccionado = event.grupo;
+    
+    this.ejerciciosFiltrados = this.ejercicios.filter(ej => {
+      const coincideGrupo = ej.grupo === event.grupo;
+      const coincideTexto = ej.nombre.toLowerCase().includes(event.texto);
+      return coincideGrupo && coincideTexto;
+    });
+  }
   
 }

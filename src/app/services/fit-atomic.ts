@@ -300,4 +300,10 @@ export class FitAtomic {
     return this.historialEntrenos;
   }
   
+  eliminarEntreno(id: number, fecha: string) {
+    if (this.historialEntrenos[fecha]) {
+      this.historialEntrenos[fecha] = this.historialEntrenos[fecha].filter(e => e.id !== id);
+      this.guardarEntrenosEnMemoria();
+    }
+  }
 }

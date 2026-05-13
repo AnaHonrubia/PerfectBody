@@ -3,14 +3,17 @@
     <ion-label>Resumen de hoy</ion-label>
   </ion-list-header>
 
-  <ion-item *ngFor="let entreno of entrenosHoy">
+  <ion-item *ngFor="let entreno of entrenosHoy; let i = index">
     <ion-icon name="checkmark-circle" slot="start" color="success"></ion-icon>
     <ion-label>
       <h2>{{ entreno.nombre }}</h2>
-      <p *ngFor="let s of entreno.series; let i = index">
-        Serie {{ i + 1 }}: {{ s.peso }}kg x {{ s.repeticiones }}
+      <p *ngFor="let s of entreno.series; let j = index">
+        S{{ j + 1 }}: {{ s.peso }}kg x {{ s.repeticiones }}
       </p>
     </ion-label>
+    <ion-button slot="end" fill="clear" color="danger" (click)="eliminar(entreno.id)">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
   </ion-item>
 
   <ion-item *ngIf="entrenosHoy.length === 0">
