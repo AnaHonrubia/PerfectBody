@@ -42,7 +42,7 @@
           </ion-card-header>
           <ion-card-content>
             <p>{{ ejercicio.descripcion }}</p>
-            <ion-button expand="block" fill="outline">
+            <ion-button expand="block" fill="outline" (click)="abrirModalEntreno(ejercicio)">
               CONFIGURAR SERIES
             </ion-button>
           </ion-card-content>
@@ -63,12 +63,31 @@
     </ion-header>
 
     <ion-content class="ion-padding">
-      <div class="info-ejercicio">
-        <p>Registra tus series para hoy:</p>
+      <div class="header-modal">
+        <h3>Registro de hoy</h3>
+        <p>Anota el peso y las repeticiones logradas.</p>
       </div>
 
-      <ion-button expand="block" (click)="guardarEntreno()">
-        Guardar Entrenamiento
+      <ion-list lines="none">
+        <ion-item *ngFor="let serie of seriesTemporales; let i = index" class="serie-item">
+          <ion-label slot="start" class="numero-serie">{{ i + 1 }}</ion-label>
+          
+          <ion-input type="number" placeholder="Peso (kg)" [(ngModel)]="serie.peso" class="input-entreno"></ion-input>
+          <ion-input type="number" placeholder="Repes" [(ngModel)]="serie.repeticiones" class="input-entreno"></ion-input>
+          
+          <ion-button slot="end" fill="clear" color="danger" (click)="quitarSerie(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" fill="outline" color="medium" (click)="agregarSerie()" class="ion-margin-bottom">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Añadir Serie
+      </ion-button>
+
+      <ion-button expand="block" color="success" (click)="guardarEntreno()">
+        Finalizar Ejercicio
       </ion-button>
     </ion-content>
   </ng-template>

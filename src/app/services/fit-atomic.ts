@@ -16,6 +16,7 @@ export class FitAtomic {
   private historialSemanas: any[] = [];
   darkMode: boolean = false;
   private listaEjercicios: any[] = [];
+  private historialEntrenos: { [fecha: string]: any[] } = {};
 
   constructor() {
     this.cargarAlimentosRemote();
@@ -23,7 +24,7 @@ export class FitAtomic {
     this.cargarDesdeMemoria();
     this.cargarSemanasDesdeMemoria();
     this.verificarCierreSemanalAutomatico();
-    this.cargarEjerciciosRemote();
+    this.cargarEntrenosDesdeMemoria();
   }
 
   // --- LÓGICA DE TEMA (MODO OSCURO) ---
@@ -251,13 +252,24 @@ export class FitAtomic {
   }
 
   // Función que descarga el JSON
-  async cargarEjerciciosRemote() {
-    try {
-      this.listaEjercicios = await firstValueFrom(this.http.get<any[]>(this.URL_EJERCICIOS));
-      console.log("Ejercicios cargados correctamente:", this.listaEjercicios.length);
-    } catch (error) {
-      console.error("Error descargando ejercicios", error);
+  private guardarEntrenosEnMemoria() {
+    localStorage.setItem('perfectBody_entrenos', JSON.stringify(this.historialEntrenos));
+  }
+
+  private cargarEntrenosDesdeMemoria() {
+    const datos = localStorage.getItem('perfectBody_entrenos');
+    if (datos) this.historialEntrenos = JSON.parse(datos);
+  }
+
+  // Guardar una sesión
+  guardarSesionEntreno(sesion: any) {
+    const fecha = sesion.fecha;
+    if (!this.historialEntrenos[fecha]) {
+      this.historialEntrenos[fecha] = [];
     }
+    this.historialEntrenos[fecha].push(sesion);
+    this.guardarEntrenosEnMemoria();
+    console.log('Entrenamiento guardado con éxito para:', fecha);
   }
 
   // Función para que la página de entreno obtenga la lista
