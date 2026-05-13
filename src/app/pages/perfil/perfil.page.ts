@@ -29,9 +29,13 @@ export class PerfilPage {
     const a = Number(datos.altura);
     const e = Number(datos.edad);
 
+    // Fórmula de Harris-Benedict corregida
     this.resultadoTMB = Math.round(88.362 + (13.397 * p) + (4.799 * a) - (5.677 * e));
     
-    // GUARDAMOS EN LOCALSTORAGE
-    this.fitService.guardarPerfil(datos);
-  }
+    // Se pasa el TMB al servicio para que lo use Nutrición
+    this.fitService.guardarPerfil({
+      ...datos,
+      tmb: this.resultadoTMB
+    });
+}
 }

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 // Revisa que estas rutas sean correctas según tu carpeta
 import { InputDatoComponent } from '../../atomos/input-dato/input-dato.component';
 import { BotonAccionComponent } from '../../atomos/boton-accion/boton-accion.component';
+
+import { FitAtomic } from 'src/app/services/fit-atomic';
 
 @Component({
   selector: 'app-calculadora-metabolica',
@@ -19,13 +21,25 @@ import { BotonAccionComponent } from '../../atomos/boton-accion/boton-accion.com
     BotonAccionComponent
   ]
 })
-export class CalculadoraMetabolicaComponent {
-  // Asegúrate de que estos nombres existan para que el HTML no de error
-  peso: number = 0;
-  altura: number = 0;
-  edad: number = 0;
+
+export class CalculadoraMetabolicaComponent implements OnInit {
+  peso: number | null = null;
+  altura: number | null = null;
+  edad: number | null = null;
 
   @Output() onCalcular = new EventEmitter<any>();
+
+  constructor(private fitService: FitAtomic) {}
+
+  ngOnInit() {
+    // Cargar datos previos si existen
+    const datos = this.fitService.obtenerPerfil();
+    if (datos) {
+      this.peso = datos.peso;
+      this.altura = datos.altura;
+      this.edad = datos.edad;
+    }
+  }
 
   enviarDatos() {
     this.onCalcular.emit({

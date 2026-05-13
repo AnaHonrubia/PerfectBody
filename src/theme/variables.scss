@@ -143,4 +143,43 @@ body.ion-palette-dark, body.dark {
     }
   }
 
+  /* --- ESTILOS PARA LOS INPUTS (Átomos) --- */
+  app-input-dato {
+    /* Color de la etiqueta de arriba (Peso, Altura...) */
+    .etiqueta-personalizada {
+      color: #7cf6f6 !important; /* Azul aqua para seguir la estética del Gym */
+      font-weight: bold;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    /* Fondo del hueco donde se escribe */
+    ion-item.item-redondeado {
+      --background: #1e1e1e !important; /* Gris oscuro para que resalte el texto */
+      --color: #ffffff !important;      /* Texto que escribes en BLANCO */
+      --placeholder-color: #666666 !important;
+      border: 1px solid rgba(124, 246, 246, 0.3); /* Borde sutil aqua */
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    /* Color del texto dentro del input */
+    ion-input {
+      color: #ffffff !important;
+      --color: #ffffff !important;
+    }
+
+    /* Color de la unidad (kg, cm...) */
+    ion-note {
+      color: #7cf6f6 !important;
+      font-weight: bold;
+    }
+  }
+
+  /* Ajuste para que el título "Datos de Usuario" se vea blanco */
+  .form-metabolico h3 {
+    color: #ffffff !important;
+    margin-bottom: 20px;
+  }
+
 }
