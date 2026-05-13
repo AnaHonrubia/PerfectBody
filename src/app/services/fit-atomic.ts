@@ -295,5 +295,9 @@ export class FitAtomic {
   getEjercicios() {
     return this.listaEjercicios;
   }
+
+  getHistorialEntrenos() {
+    return this.historialEntrenos;
+  }
   
 }

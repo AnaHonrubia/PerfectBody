@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons,
@@ -6,8 +6,11 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons,
          IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle,
          IonCardContent, IonButton, IonModal, IonList, IonItem, IonIcon, IonInput
  } from '@ionic/angular/standalone';
+
 import { BotonOscuroComponent } from '../../componentes/atomos/boton-oscuro/boton-oscuro.component';
 import { FitAtomic } from 'src/app/services/fit-atomic';
+import { TarjetaEjercicioComponent } from 'src/app/componentes/moleculas/tarjeta-ejercicio/tarjeta-ejercicio.component';
+import { ListaEntrenosHoyComponent } from 'src/app/componentes/organismos/lista-entrenos-hoy/lista-entrenos-hoy.component';
 
 import { addIcons } from 'ionicons';
 import { trashOutline, addOutline } from 'ionicons/icons';
@@ -20,7 +23,8 @@ import { trashOutline, addOutline } from 'ionicons/icons';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
     BotonOscuroComponent, IonButtons, IonSegment, IonSegmentButton, IonLabel, IonGrid,
     IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonButton, IonModal, IonList, IonItem, IonInput, IonIcon
+    IonButton, IonModal, IonList, IonItem, IonInput, IonIcon, TarjetaEjercicioComponent,
+    ListaEntrenosHoyComponent
   ]
 })
 export class EntrenamientoPage implements OnInit {
@@ -32,6 +36,8 @@ export class EntrenamientoPage implements OnInit {
   ejercicioSeleccionado: any = null;
 
   seriesTemporales: any[] = []; // Se guarda las series antes de enviarlas al servicio
+
+  @ViewChild('listaHoy') listaHoy!: ListaEntrenosHoyComponent;
 
   constructor(private fitService: FitAtomic) {
     addIcons ({
@@ -94,12 +100,12 @@ export class EntrenamientoPage implements OnInit {
       fecha: new Date().toLocaleDateString()
     };
 
-    // LLama al servicio para guardar
     this.fitService.guardarSesionEntreno(datosFinales);
-    
-    // Cierra y feedback
-    this.cerrarModal();
-    console.log('¡Ejercicio registrado!');
+  
+    // Refrescamos el organismo
+    this.listaHoy.cargarEntrenos(); 
+    this.cerrarModal()
+
   }
 
   agregarSerie() {

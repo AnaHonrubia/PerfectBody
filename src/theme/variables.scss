@@ -102,4 +102,45 @@ body.ion-palette-dark, body.dark {
     }
   }
 
+  /* --- ESTILOS PARA EL RESUMEN DE SERIES (Amarillo) --- */
+  app-lista-entrenos-hoy {
+    ion-label h2 {
+      color: #ffffff !important; /* Nombre del ejercicio en blanco */
+    }
+    ion-label p {
+      color: #f6ff00 !important; /* Series en Amarillo (Gold) */
+      font-weight: 500;
+    }
+    ion-icon {
+      color: #2ecc71 !important; /* Check verde */
+    }
+  }
+
+  /* --- ESTILOS PARA EL MODAL DE REGISTRO --- */
+  ion-modal {
+    --background: #121212 !important;
+
+    /* Títulos y textos descriptivos */
+    .header-modal h3 { color: #ffffff !important; }
+    .header-modal p { color: #c3a6ff !important; } /* Lila como en las tarjetas */
+
+    /* Inputs de registro */
+    ion-item {
+      --background: #1e1e1e !important;
+      --color: #ffffff !important;
+    }
+
+    /* BOTÓN AÑADIR SERIE (Letras blancas) */
+    .button-outline {
+      --color: #ffffff !important;
+      --border-color: #ffffff !important;
+      color: #ffffff !important;
+    }
+    
+    /* Icono de papelera en rojo */
+    ion-icon[name="trash-outline"] {
+      color: #e74c3c !important;
+    }
+  }
+
 }
