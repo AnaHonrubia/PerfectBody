@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons,
          IonSegment, IonSegmentButton, IonLabel, IonGrid, IonRow,
          IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle,
-         IonCardContent, IonButton
+         IonCardContent, IonButton, IonModal
  } from '@ionic/angular/standalone';
 import { BotonOscuroComponent } from '../../componentes/atomos/boton-oscuro/boton-oscuro.component';
 import { FitAtomic } from 'src/app/services/fit-atomic';
@@ -17,13 +17,16 @@ import { FitAtomic } from 'src/app/services/fit-atomic';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
     BotonOscuroComponent, IonButtons, IonSegment, IonSegmentButton, IonLabel, IonGrid,
     IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonButton
+    IonButton, IonModal
   ]
 })
 export class EntrenamientoPage implements OnInit {
   ejercicios: any[] = [];
   ejerciciosFiltrados: any[] = [];
   grupoSeleccionado: string = 'Pecho'; // Grupo por defecto
+
+  isModalOpen = false;
+  ejercicioSeleccionado: any = null;
 
   constructor(private fitService: FitAtomic) {}
 
@@ -47,9 +50,22 @@ export class EntrenamientoPage implements OnInit {
     );
   }
 
+  // Modifica la función que creamos ayer
   abrirModalEntreno(ejercicio: any) {
-    console.log('Abriendo modal para:', ejercicio.nombre);
-    // Aquí es donde más adelante pondremos la lógica del modal
+    this.ejercicioSeleccionado = ejercicio;
+    this.isModalOpen = true;
   }
+
+  cerrarModal() {
+    this.isModalOpen = false;
+  }
+
+  guardarEntreno() {
+    // Aquí conectaremos con el servicio FitAtomic
+    console.log('Guardando series de:', this.ejercicioSeleccionado.nombre);
+    this.cerrarModal();
+  }
+
+  
   
 }
