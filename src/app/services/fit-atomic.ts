@@ -24,6 +24,7 @@ export class FitAtomic {
     this.cargarDesdeMemoria();
     this.cargarSemanasDesdeMemoria();
     this.verificarCierreSemanalAutomatico();
+    this.cargarEjerciciosRemote();
     this.cargarEntrenosDesdeMemoria();
   }
 
@@ -252,6 +253,24 @@ export class FitAtomic {
   }
 
   // Función que descarga el JSON
+  async cargarEjerciciosRemote() {
+    try {
+      this.listaEjercicios = await firstValueFrom(this.http.get<any[]>(this.URL_EJERCICIOS));
+      console.log("Ejercicios cargados desde GitHub:", this.listaEjercicios.length);
+    } catch (error) {
+      console.error("Error descargando ejercicios", error);
+    }
+  }
+
+  // Crea la versión Async para la página 
+  async getEjerciciosAsync() {
+    if (this.listaEjercicios.length === 0) {
+      await this.cargarEjerciciosRemote();
+    }
+    return this.listaEjercicios;
+  }
+
+
   private guardarEntrenosEnMemoria() {
     localStorage.setItem('perfectBody_entrenos', JSON.stringify(this.historialEntrenos));
   }

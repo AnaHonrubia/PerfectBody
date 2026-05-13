@@ -44,7 +44,12 @@ export class EntrenamientoPage implements OnInit {
   }
 
   async cargarDatos() {
-    this.ejercicios = await this.fitService.getEjercicios();
+    // Se llama a getEjerciciosAsync
+    const res = await this.fitService.getEjerciciosAsync(); 
+    this.ejercicios = res;
+    
+    console.log('Ejercicios recibidos en página:', this.ejercicios.length);
+    
     this.filtrarPorGrupo();
   }
 
@@ -104,7 +109,5 @@ export class EntrenamientoPage implements OnInit {
   quitarSerie(index: number) {
     this.seriesTemporales.splice(index, 1);
   }
-
-  
   
 }
