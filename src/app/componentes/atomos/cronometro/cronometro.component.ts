@@ -34,6 +34,9 @@ export class CronometroComponent {
         this.reproducirSonido();
       }
     }, 1000);
+    if (navigator.vibrate) {
+      navigator.vibrate(500); // Vibra medio segundo
+    }
   }
 
   detener() {
@@ -48,6 +51,7 @@ export class CronometroComponent {
 
   reproducirSonido() {
     const audio = new Audio('assets/sounds/beep.mp3');
-    audio.play();
+    audio.load(); // Lo preparamos
+    audio.play().catch(error => console.log("Error al reproducir sonido:", error));
   }
 }
