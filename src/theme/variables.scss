@@ -182,4 +182,25 @@ body.ion-palette-dark, body.dark {
     margin-bottom: 20px;
   }
 
+  /* --- ESTILOS PARA EL BUSCADOR (Molécula) --- */
+  app-buscador-ejercicio {
+    /* Color de la lupa y el icono de borrar */
+    ion-searchbar {
+      --icon-color: #ffffff !important;
+      --clear-button-color: #ffffff !important;
+      --color: #ffffff !important; /* Color del texto que escribes */
+      --placeholder-color: #bbbbbb !important; /* Color del texto "Buscar ejercicio..." */
+      
+      /* Fondo del buscador para que no sea negro total */
+      --background: #1e1e1e !important; 
+      border-radius: 16px;
+    }
+
+    /* Si quieres que la lupa brille un poco como el resto de la app */
+    .searchbar-search-icon {
+      color: #ffffff !important;
+      opacity: 1 !important;
+    }
+  }
+
 }

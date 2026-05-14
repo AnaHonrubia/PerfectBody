@@ -1,0 +1,15 @@
+
+<div class="timer-container">
+  <div class="tiempo-display">{{ tiempo }}s</div>
+  <div class="botones-timer">
+    <ion-button (click)="iniciar()" *ngIf="!corriendo" color="success" fill="clear">
+      <ion-icon name="play-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="detener()" *ngIf="corriendo" color="warning" fill="clear">
+      <ion-icon name="pause-outline"></ion-icon>
+    </ion-button>
+    <ion-button (click)="reiniciar()" color="medium" fill="clear">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-button>
+  </div>
+</div>

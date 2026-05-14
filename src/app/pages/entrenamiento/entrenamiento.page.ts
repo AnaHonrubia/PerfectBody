@@ -11,6 +11,8 @@ import { BotonOscuroComponent } from '../../componentes/atomos/boton-oscuro/boto
 import { FitAtomic } from 'src/app/services/fit-atomic';
 import { TarjetaEjercicioComponent } from 'src/app/componentes/moleculas/tarjeta-ejercicio/tarjeta-ejercicio.component';
 import { ListaEntrenosHoyComponent } from 'src/app/componentes/organismos/lista-entrenos-hoy/lista-entrenos-hoy.component';
+import { CronometroComponent } from 'src/app/componentes/atomos/cronometro/cronometro.component';
+import { BuscadorEjercicioComponent } from 'src/app/componentes/moleculas/buscador-ejercicio/buscador-ejercicio.component';
 
 import { addIcons } from 'ionicons';
 import { trashOutline, addOutline } from 'ionicons/icons';
@@ -24,7 +26,7 @@ import { trashOutline, addOutline } from 'ionicons/icons';
     BotonOscuroComponent, IonButtons, IonSegment, IonSegmentButton, IonLabel, IonGrid,
     IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
     IonButton, IonModal, IonList, IonItem, IonInput, IonIcon, TarjetaEjercicioComponent,
-    ListaEntrenosHoyComponent
+    ListaEntrenosHoyComponent, CronometroComponent, BuscadorEjercicioComponent
   ]
 })
 export class EntrenamientoPage implements OnInit {

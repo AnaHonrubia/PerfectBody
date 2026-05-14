@@ -3,13 +3,13 @@ import { IonSearchbar, IonToolbar, IonSegment, IonSegmentButton, IonLabel } from
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-buscador-ejercicios',
-  templateUrl: './buscador-ejercicios.component.html',
-  styleUrls: ['./buscador-ejercicios.component.scss'],
+  selector: 'app-buscador-ejercicio',
+  templateUrl: './buscador-ejercicio.component.html',
+  styleUrls: ['./buscador-ejercicio.component.scss'],
   standalone: true,
   imports: [IonSearchbar, IonToolbar, IonSegment, IonSegmentButton, IonLabel, CommonModule]
 })
-export class BuscadorEjerciciosComponent {
+export class BuscadorEjercicioComponent {
   @Input() grupoActivo: string = 'Pecho';
   @Output() onFiltroCambio = new EventEmitter<{texto: string, grupo: string}>();
 
