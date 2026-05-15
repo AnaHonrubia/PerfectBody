@@ -1,0 +1,62 @@
+<ion-content [fullscreen]="true">
+  <div class="dark-mode-header">
+    <app-boton-oscuro></app-boton-oscuro>
+  </div>
+
+  <swiper-container [pagination]="true">
+    
+    <swiper-slide>
+      <div class="slide-content">
+        <div class="icon-circle success">
+          <ion-icon name="sparkles-outline"></ion-icon>
+        </div>
+        <h1>Bienvenida a <span>PerfectBody</span></h1>
+        <p>Tu asistente inteligente para nutrición y entrenamiento de alto rendimiento.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <div class="icon-circle nutrition">
+          <ion-icon name="restaurant-outline"></ion-icon>
+        </div>
+        <h2>Nutrición Pro</h2>
+        <p>Registra tus macros, controla calorías y deja que el sistema cierre tu semana cada lunes.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <div class="icon-circle gym">
+          <ion-icon name="barbell-outline"></ion-icon>
+        </div>
+        <h2>Entrena con Lógica</h2>
+        <p>Filtros por grupo muscular, registro de series y temporizador de descanso integrado.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <div class="icon-circle science">
+          <ion-icon name="analytics-outline"></ion-icon>
+        </div>
+        <h2>Ciencia Metabólica</h2>
+        <p>Calculamos tu TMB real mediante Harris-Benedict para que tus metas sean precisas.</p>
+      </div>
+    </swiper-slide>
+
+    <swiper-slide>
+      <div class="slide-content">
+        <div class="icon-circle final">
+          <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+        </div>
+        <h2>¿Lista para el cambio?</h2>
+        <p>Configura tu perfil ahora para empezar a transformar tu físico.</p>
+        <ion-button expand="block" color="success" (click)="irAPerfil()" class="btn-final">
+          EMPEZAR AHORA
+        </ion-button>
+      </div>
+    </swiper-slide>
+
+  </swiper-container>
+</ion-content>

@@ -3,6 +3,15 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'intro', // Lo primero que se ve al abrir la App
+    pathMatch: 'full',
+  },
+  {
+    path: 'intro',
+    loadComponent: () => import('./pages/intro/intro.page').then(m => m.IntroPage),
+  },
+  {
+    path: '', // Esta es la ruta que envuelve a los Tabs
     loadComponent: () => import('./pages/tabs/tabs.page').then((m) => m.TabsPage),
     children: [
       {
@@ -17,17 +26,7 @@ export const routes: Routes = [
         path: 'perfil',
         loadComponent: () => import('./pages/perfil/perfil.page').then((m) => m.PerfilPage),
       },
-      {
-        path: '',
-        redirectTo: '/nutricion',
-        pathMatch: 'full',
-      },
     ],
-  },
-  {
-    path: '',
-    redirectTo: '/nutricion',
-    pathMatch: 'full',
   },
   {
     path: 'historial-semanal',

@@ -1,0 +1,60 @@
+.dark-mode-header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+swiper-container {
+  width: 100%;
+  height: 100%;
+  --swiper-pagination-color: var(--ion-color-success);
+}
+
+.slide-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+
+  .icon-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size: 60px;
+    
+    &.success { background: rgba(var(--ion-color-success-rgb), 0.1); color: var(--ion-color-success); }
+    &.nutrition { background: rgba(var(--ion-color-warning-rgb), 0.1); color: var(--ion-color-warning); }
+    &.gym { background: rgba(var(--ion-color-primary-rgb), 0.1); color: var(--ion-color-primary); }
+    &.science { background: rgba(var(--ion-color-secondary-rgb), 0.1); color: var(--ion-color-secondary); }
+    &.final { background: rgba(var(--ion-color-tertiary-rgb), 0.1); color: var(--ion-color-tertiary); }
+  }
+
+  h1, h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0;
+    span { color: var(--ion-color-success); }
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: var(--ion-color-medium);
+    margin: 20px 0;
+    max-width: 300px;
+  }
+
+  .btn-final {
+    width: 100%;
+    margin-top: 20px;
+    --border-radius: 12px;
+    font-weight: bold;
+  }
+}
