@@ -23,25 +23,28 @@ swiper-container {
   .icon-circle {
     width: 120px;
     height: 120px;
-    border-radius: 50%;
+    border-radius: 35%; /* Un toque más cuadrado/moderno */
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 30px;
     font-size: 60px;
     
-    &.success { background: rgba(var(--ion-color-success-rgb), 0.1); color: var(--ion-color-success); }
-    &.nutrition { background: rgba(var(--ion-color-warning-rgb), 0.1); color: var(--ion-color-warning); }
-    &.gym { background: rgba(var(--ion-color-primary-rgb), 0.1); color: var(--ion-color-primary); }
-    &.science { background: rgba(var(--ion-color-secondary-rgb), 0.1); color: var(--ion-color-secondary); }
-    &.final { background: rgba(var(--ion-color-tertiary-rgb), 0.1); color: var(--ion-color-tertiary); }
+    // COLORES NO ESTÁNDAR
+    &.success { background: rgba(168, 85, 247, 0.15); color: #a855f7; } // Violeta Eléctrico
+    &.nutrition { background: rgba(249, 115, 22, 0.15); color: #f97316; } // Naranja Fuego
+    &.gym { background: rgba(236, 72, 153, 0.15); color: #ec4899; } // Rosa Intenso
+    &.science { background: rgba(20, 184, 166, 0.15); color: #14b8a6; } // Verde Teal / Turquesa
+    &.final { background: rgba(99, 102, 241, 0.15); color: #6366f1; } // Azul Índigo
   }
 
   h1, h2 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin: 0;
-    span { color: var(--ion-color-success); }
+    span { color: #a855f7; } // El color de énfasis ahora es el Violeta
+  }
+
+  .btn-final {
+    --background: #a855f7; // Botón violeta pro
+    --color: white;
   }
 
   p {
@@ -51,10 +54,6 @@ swiper-container {
     max-width: 300px;
   }
 
-  .btn-final {
-    width: 100%;
-    margin-top: 20px;
-    --border-radius: 12px;
-    font-weight: bold;
-  }
 }
+
+  

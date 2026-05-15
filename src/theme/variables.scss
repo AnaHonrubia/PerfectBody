@@ -1,10 +1,12 @@
 :root {
   /** Colores PerfectBody **/
-  --ion-color-primary: #2d3436; 
-  --ion-color-primary-rgb: 45, 52, 54;
+  /* Cambiado de Gris Oscuro a un tono más profundo y moderno */
+  --ion-color-primary: #a855f7; 
+  --ion-color-primary-rgb: 168, 85, 247;
   
-  --ion-color-success: #2ecc71; 
-  --ion-color-success-rgb: 46, 204, 113;
+  /* CAMBIADO: Sustituimos el verde estándar por Violeta Eléctrico */
+  --ion-color-success: #a855f7; 
+  --ion-color-success-rgb: 168, 85, 247;
 
   /* MODO CLARO: Forzamos fondos claros y textos oscuros */
   --ion-background-color: #f5f6fa;
@@ -15,17 +17,17 @@
   /* Tabs en modo claro */
   --ion-tab-bar-background: #ffffff;
   --ion-tab-bar-color: #666666; /* Gris para que se vea bien */
-  --ion-tab-bar-color-activated: #2ecc71; /* Verde al estar seleccionado */
+  --ion-tab-bar-color-activated: #a855f7; /* Violeta al estar seleccionado */
 }
 
 /* EL BOTÓN USA ESTA CLASE (.ion-palette-dark o .dark) */
 body.ion-palette-dark, body.dark {
   /* MODO OSCURO: Forzamos fondos oscuros y textos blancos */
-  --ion-background-color: #121212;
+  --ion-background-color: #0a0a0c;
   --ion-text-color: #ffffff; // Texto en blanco para modo oscuro
   --ion-text-color-rgb: 255, 255, 255;
-  --ion-item-background: #1e1e1e;
-  --ion-card-background: #1e1e1e;
+  --ion-item-background: #121214;
+  --ion-card-background: #121214;
 
   /* --- FIX CALENDARIO --- */
   ion-datetime {
@@ -34,16 +36,16 @@ body.ion-palette-dark, body.dark {
     border-radius: 16px;
   }
 
-  /* El botón que abre el calendario: Letras en negro sobre fondo verde */
+  /* El botón que abre el calendario: Letras en blanco sobre fondo violeta */
   ion-datetime-button::part(native) {
-    color: #000000 !important;           
+    color: #ffffff !important;           
     background: var(--ion-color-success);
   }
 
   /* --- TABS MODO OSCURO --- */
-  --ion-tab-bar-background: #1e1e1e;
+  --ion-tab-bar-background: #121214;
   --ion-tab-bar-color: #ffffff;           /* Iconos en blanco */
-  --ion-tab-bar-color-activated: #2ecc71; /* Seleccionado en verde */
+  --ion-tab-bar-color-activated: #a855f7; /* Seleccionado en Violeta */
 
   /* --- ESTILOS PARA LOS SEGMENTOS (Momentos del día) --- */
   ion-segment {
@@ -68,11 +70,11 @@ body.ion-palette-dark, body.dark {
   /* Estado seleccionado (Checked) */
   ion-segment-button.segment-button-checked {
     opacity: 1;                            // Sin transparencia
-    --color: #a0f4ff !important;           // TEXTO EN AZUL CLARO
+    --color: #7cf6f6 !important;           // TEXTO EN AZUL AQUA
     
     ion-label {
       font-weight: bold;                   // Negrita
-      color: #a0f4ff !important;           // Texto en azul claro
+      color: #7cf6f6 !important;           // Texto en azul aqua
     }
   }
 
@@ -112,13 +114,13 @@ body.ion-palette-dark, body.dark {
       font-weight: 500;
     }
     ion-icon {
-      color: #2ecc71 !important; /* Check verde */
+      color: #a855f7 !important; /* Check violeta */
     }
   }
 
   /* --- ESTILOS PARA EL MODAL DE REGISTRO --- */
   ion-modal {
-    --background: #121212 !important;
+    --background: #0a0a0c !important;
 
     /* Títulos y textos descriptivos */
     .header-modal h3 { color: #ffffff !important; }
