@@ -49,11 +49,20 @@ swiper-container {
 
   p {
     font-size: 1.1rem;
-    color: var(--ion-color-medium);
+    /* Por defecto usa el gris de Ionic para el modo claro */
+    color: var(--ion-text-color, #666666); 
     margin: 20px 0;
     max-width: 300px;
+    transition: color 0.3s ease; /* Para que el cambio de color sea suave */
   }
 
 }
+
+/* ESTO ES LO QUE CAMBIA LAS LETRAS A BLANCO EN MODO OSCURO */
+body.dark .slide-content p {
+  color: #ffffff !important;
+  opacity: 1; /* Aseguramos que no tenga transparencia */
+}
+
 
   
