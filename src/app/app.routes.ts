@@ -26,10 +26,15 @@ export const routes: Routes = [
         path: 'perfil',
         loadComponent: () => import('./pages/perfil/perfil.page').then((m) => m.PerfilPage),
       },
+      {
+        path: 'progreso',
+        loadComponent: () => import('./pages/progreso/progreso.page').then( m => m.ProgresoPage)
+      },
     ],
   },
   {
     path: 'historial-semanal',
     loadComponent: () => import('./pages/historial-semanal/historial-semanal.page').then( m => m.HistorialSemanalPage)
   },
+  
 ];

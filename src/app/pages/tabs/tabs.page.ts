@@ -1,7 +1,7 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { barbellOutline, restaurantOutline, personCircleOutline } from 'ionicons/icons';
+import { barbellOutline, restaurantOutline, personCircleOutline, analyticsOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
@@ -16,7 +16,8 @@ export class TabsPage {
     addIcons({ 
       'restaurant-outline': restaurantOutline, 
       'barbell-outline': barbellOutline, 
-      'person-circle-outline': personCircleOutline
+      'person-circle-outline': personCircleOutline,
+      'analytics-outline': analyticsOutline
     });
   }
 }

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mi Progreso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <ion-card class="ejercicio-card">
+    <ion-card-header>
+      <ion-card-title>Evolución del Peso</ion-card-title>
+      <ion-card-subtitle>Historial de tus últimos pesajes</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas #chartPeso></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="ejercicio-card">
+    <ion-card-header>
+      <ion-card-title>Balance Calórico</ion-card-title>
+      <ion-card-subtitle>Kcal consumidas vs Objetivo Diario</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container">
+        <canvas #chartCalorias></canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
