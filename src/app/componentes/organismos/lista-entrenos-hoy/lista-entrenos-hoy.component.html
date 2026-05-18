@@ -1,22 +1,39 @@
+<!-- Contenedor principal de la lista con líneas divisorias recortadas (estilo inset) -->
 <ion-list lines="inset">
+
+  <!-- Encabezado superior de la sección de resumen -->
   <ion-list-header>
     <ion-label>Resumen de hoy</ion-label>
   </ion-list-header>
 
+  <!-- Bucle Principal: Genera una fila por cada ejercicio en el arreglo 'entrenosHoy' -->
   <ion-item *ngFor="let entreno of entrenosHoy; let i = index">
+    
+    <!-- Icono de verificación verde posicionado a la izquierda (inicio) -->
     <ion-icon name="checkmark-circle" slot="start" color="success"></ion-icon>
+    
+    <!-- Bloque de textos central con los datos del ejercicio -->
     <ion-label>
+      <!-- Nombre del ejercicio (ej. "Peso Muerto") -->
       <h2>{{ entreno.nombre }}</h2>
+      
+      <!-- Sub-bucle Anidado: Renderiza una línea por cada serie dentro de este ejercicio específico -->
+      <!-- Imprime el formato dinámico -> S1: 80kg x 8 -->
       <p *ngFor="let s of entreno.series; let j = index">
         S{{ j + 1 }}: {{ s.peso }}kg x {{ s.repeticiones }}
       </p>
     </ion-label>
+    
+    <!-- Botón de acción posicionado a la derecha (final) para eliminar el ejercicio usando su ID -->
     <ion-button slot="end" fill="clear" color="danger" (click)="eliminar(entreno.id)">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
+    
   </ion-item>
 
+  <!-- Estado vacío: Se muestra centrado únicamente si el arreglo de entrenamientos no tiene elementos -->
   <ion-item *ngIf="entrenosHoy.length === 0">
     <ion-label class="ion-text-center">Aún no has registrado entrenos hoy</ion-label>
   </ion-item>
+  
 </ion-list>

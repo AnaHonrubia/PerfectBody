@@ -15,14 +15,18 @@ import {
     IonCardSubtitle, IonCardContent, IonButton
   ]
 })
+
 export class TarjetaEjercicioComponent {
-  // Recibe los datos del ejercicio desde el padre (entrenamiento.page)
+  
+  // Atributo de entrada que recibe todos los atributos del ejercicio
   @Input() ejercicio: any;
 
-  // Avisa al padre para que abra el modal
+  // Evento de salida encargado de modificar al controlador principal
   @Output() configurarSeries = new EventEmitter<any>();
 
+  // Método disparado de forma reactiva al interactuar con el control de configuración
   emitirConfiguracion() {
+    // Emite el objeto con toda la metadata del movimiento seleccionado
     this.configurarSeries.emit(this.ejercicio);
   }
 }

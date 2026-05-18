@@ -1,13 +1,27 @@
+<!-- Contenedor principal de la tarjeta del ejercicio -->
 <ion-card class="ejercicio-card">
+  
+  <!-- Imagen del ejercicio: Si falla al cargar (error), se reemplaza por una ruta por defecto -->
   <img [src]="ejercicio.imagen" (error)="ejercicio.imagen = 'assets/ejercicios/default.png'" />
+  
+  <!-- Encabezado de la tarjeta -->
   <ion-card-header>
+    <!-- Título principal: Nombre del ejercicio (ej. "Press de Banca") -->
     <ion-card-title>{{ ejercicio.nombre }}</ion-card-title>
+    
+    <!-- Subtítulo: Grupo muscular (ej. "Pecho") -->
     <ion-card-subtitle>{{ ejercicio.grupo }}</ion-card-subtitle>
   </ion-card-header>
+  
+  <!-- Contenido principal de la tarjeta -->
   <ion-card-content>
+    <!-- Breve descripción o instrucciones del ejercicio -->
     <p>{{ ejercicio.descripcion }}</p>
+    
+    <!-- Botón que ocupa todo el ancho (block) para configurar las series del ejercicio -->
     <ion-button expand="block" fill="outline" (click)="emitirConfiguracion()">
       CONFIGURAR SERIES
     </ion-button>
   </ion-card-content>
+  
 </ion-card>

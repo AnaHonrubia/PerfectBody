@@ -1,28 +1,47 @@
+<!-- Contenedor principal de la tarjeta de progreso nutricional -->
 <div class="card-nutricion">
+  <!-- Sistema de rejilla adaptativo de Ionic -->
   <ion-grid>
+    
+    <!-- Primera Fila: Centrada verticalmente para el balance general de calorías -->
     <ion-row class="ion-align-items-center">
+      
+      <!-- Columna para el conteo actual vs objetivo (Ocupa 7 de 12 columnas disponibles) -->
       <ion-col size="7">
         <p class="label-principal">Calorías Diarias</p>
+        <!-- Muestra dinámicamente el progreso (ej. "1500 / 2000 kcal") -->
         <h1 class="valor-principal">{{ caloriasConsumidas }} / {{ objetivoCalorico }} <small>kcal</small></h1>
       </ion-col>
+      
+      <!-- Columna para el cálculo de calorías restantes (Ocupa 5 de 12 columnas disponibles) -->
       <ion-col size="5" class="ion-text-right">
         <div class="indicador-restante">
           <p>Restan</p>
+          <!-- Realiza una operación matemática en vivo para mostrar el faltante -->
           <span class="numero-verde">{{ objetivoCalorico - caloriasConsumidas }}</span>
         </div>
       </ion-col>
+      
     </ion-row>
 
+    <!-- Segunda Fila: Distribución horizontal para los macronutrientes -->
     <ion-row class="macros-row">
+      
+      <!-- Columna Izquierda: Muestra las proteínas formateadas a máximo 2 decimales -->
       <ion-col size="4">
         <p class="macro-label">Proteínas: {{ proteinas | number:'1.0-2' }}g</p>
       </ion-col>
+      
+      <!-- Columna Central: Muestra las grasas centradas y formateadas a máximo 2 decimales -->
       <ion-col size="4" class="ion-text-center">
         <p class="macro-label">Grasas: {{ grasas | number:'1.0-2' }}g</p>
       </ion-col>
+      
+      <!-- Columna Derecha: Muestra los carbohidratos alineados a la derecha y formateados -->
       <ion-col size="4" class="ion-text-right">
         <p class="macro-label">Carbohidratos: {{ carbohidratos | number:'1.0-2' }}g</p>
       </ion-col>
+      
     </ion-row>
   </ion-grid>
 </div>

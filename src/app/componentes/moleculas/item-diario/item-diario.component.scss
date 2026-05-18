@@ -3,66 +3,72 @@
   width: 100%;
 }
 
+/* Maquetación de la tarjeta horizontal del registro alimenticio */
 .item-diario {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
+  display: flex !important; /* Activación de Flexbox para posicionar los elementos en una fila horizontal estricta */
+  justify-content: space-between !important; /* Distribución equilibrada que separa los bloques extremos de forma automática */
+  align-items: center !important; /* Alineación del eje vertical para centrar textos e iconos simétricamente */
   
-  width: 100% !important;
-  padding: 15px 20px;
-  background-color: white;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  box-sizing: border-box;
+  width: 100% !important; /* Obliga al componente a ocupar el ancho total útil de la pantalla */
+  padding: 15px 20px; /* Margen interno para expandir el área táctil y mejorar la estética de la celda */
+  background-color: white; /* Color base limpio para contrastar con las tipografías oscuras en modo claro */
+  border-radius: 12px; /* Radio de curvatura suavizado que mantiene la consistencia visual premium de la aplicación */
+  margin-bottom: 10px; /* Separación de seguridad vertical para evitar que las celdas consecutivas se solapen */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Sutil degradado de sombra inferior para simular elevación de tarjeta */
+  box-sizing: border-box; /* Fuerza al navegador a incluir el padding en el cálculo del ancho total, previniendo descuadres */
 
+  /* Estilización del bloque izquierdo de texto descriptivo */
   .nombre {
-    font-weight: bold;
-    color: #333;
-    flex: 1; // Toma su sitio a la izquierda
-    text-align: left;
+    font-weight: bold; /* Tipografía destacada en negrita para una identificación rápida del plato */
+    color: #333; /* Tono gris oscuro de alta accesibilidad de lectura */
+    flex: 1; /* Actúa como muelle flexible tomando todo el espacio disponible hacia el centro */
+    text-align: left; /* Alineación del texto estrictamente hacia la izquierda */
   }
 
+  /* Estilización del dato de calorías central */
   .kcal-centro {
-    flex: 1; // Toma el sitio central
-    text-align: center;
-    color: #666;
+    flex: 1; /* Reparte el espacio proporcionalmente con el bloque del nombre */
+    text-align: center; /* Centrado geométrico estricto del dato calórico */
+    color: #666; /* Gris intermedio para establecer una jerarquía secundaria con respecto al título */
   }
 
+  /* Control estructural avanzado sobre el botón de destrucción de la fila */
   .boton-eliminar {
-    // Que el botón no se estire a lo loco
+    /* flex: 0 0 auto. Bloquea las propiedades flex-grow y flex-shrink. 
+      Evita que el botón se estire o se deforme si el texto del alimento es excesivamente largo.
+    */
     flex: 0 0 auto !important;
 
-    // Creamos un area de click 
+    /* Establecemos dimensiones fijas estrictas que cumplen con las directivas internacionales de accesibilidad móvil (44x44px mínimos de toque) */
     width: 44px !important;
     height: 44px !important;
 
-    // Centramos el contenido dentro de ese cuadrado
+    /* Activamos Flexbox interno en el botón para centrar perfectamente el icono de la papelera dentro del cuadrado */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    // Estilos Visuales
+    /* Limpieza de la hoja de estilos nativa del navegador sobre elementos button */
     background: transparent;
     border: none;
-    font-size: 1.4rem;
+    font-size: 1.4rem; /* Escala del icono adaptada para una visualización nítida */
     cursor: pointer;
-    padding: 0; // Quitamos paddings que puedan desplazar el icono
+    padding: 0; /* Remueve márgenes que desplacen la simetría del vector */
     margin: 0;
 
-    // Un pequeño efecto visual al tocar
+    /* Gestión háptica visual mediante pseudo-clase de interacción */
     &:active {
-      background-color: rgba(235, 68, 90, 0.1); // Un circulo rojo muy suave al pulsar
-      border-radius: 50%;
+      background-color: rgba(235, 68, 90, 0.1); /* Inyecta un círculo translúcido rojo suave en el momento exacto del clic */
+      border-radius: 50%; /* Transforma el recuadro en una circunferencia perfecta durante el toque */
     }
   }
 
-  // Asegurar que el texto no empuje al botón
-  .kcal-centro{
+  /* Duplicidad de seguridad: Asegura la persistencia de las directivas Flexbox ante variaciones del renderizador del DOM de Ionic */
+  .kcal-centro {
     flex: 1 !important;
     text-align: center;
   }
-  .nombre{
+  .nombre {
     flex: 1 !important;
   }
 }

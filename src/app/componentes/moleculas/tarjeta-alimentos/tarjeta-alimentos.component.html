@@ -1,14 +1,26 @@
+<!-- Contenedor principal de la tarjeta del alimento -->
 <div class="contenedor-alimento">
+  
+  <!-- Imagen del alimento: URL y texto alternativo dinámicos desde el componente TypeScript -->
   <img [src]="imagen" [alt]="nombre" class="imagen-alimento">
   
+  <!-- Capa de información superpuesta (Overlay) sobre la imagen -->
   <div class="overlay-datos">
+    
+    <!-- Bloque de texto con los detalles esenciales -->
     <div class="info">
+      <!-- Muestra el nombre del alimento (ej. "Manzana manzana") -->
       <span class="nombre">{{ nombre }}</span>
+      <!-- Muestra la cantidad de calorías (ej. "95 kcal") -->
       <span class="calorias">{{ kcal }} kcal</span>
     </div>
+    
+    <!-- Botón interactivo: Emite el evento 'onAdd' al componente padre cuando se presiona -->
     <ion-button fill="clear" (click)="onAdd.emit()" class="boton-add">
+      <!-- Icono de Ionic: Un círculo con el signo '+' en color verde -->
       <ion-icon slot="icon-only" name="add-circle" color="success"></ion-icon>
     </ion-button>
+    
   </div>
   
 </div>

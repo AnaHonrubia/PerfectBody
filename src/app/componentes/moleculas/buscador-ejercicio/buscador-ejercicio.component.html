@@ -1,20 +1,46 @@
+<!-- Contenedor principal para toda la sección de filtrado de contenido -->
 <div class="contenedor-filtros">
+  
+  <!-- Primera barra: Contiene el campo de búsqueda de texto -->
   <ion-toolbar>
+    <!-- Buscador interactivo de Ionic -->
     <ion-searchbar 
       placeholder="Buscar ejercicio..." 
-      (ionInput)="alBuscar($event)"
-      class="buscador-custom">
+      (ionInput)="alBuscar($event)" 
+      class="buscador-custom"> 
     </ion-searchbar>
   </ion-toolbar>
 
+  <!-- Segunda barra: Contiene los filtros por categorías (Grupos musculares) -->
   <ion-toolbar>
+    <!-- Segmento de pestañas. 'scrollable' permite arrastrar horizontalmente si no caben en pantalla -->
     <ion-segment (ionChange)="cambiarGrupo($event)" [value]="grupoActivo" scrollable>
-      <ion-segment-button value="Pecho"><ion-label>Pecho</ion-label></ion-segment-button>
-      <ion-segment-button value="Espalda"><ion-label>Espalda</ion-label></ion-segment-button>
-      <ion-segment-button value="Pierna"><ion-label>Pierna</ion-label></ion-segment-button>
-      <ion-segment-button value="Hombros"><ion-label>Hombros</ion-label></ion-segment-button>
-      <ion-segment-button value="Brazos"><ion-label>Brazos</ion-label></ion-segment-button>
-      <ion-segment-button value="Core"><ion-label>Core</ion-label></ion-segment-button>
+      
+      <!-- Cada botón envía su respectivo 'value' al cambiar -->
+      <ion-segment-button value="Pecho">
+        <ion-label>Pecho</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="Espalda">
+        <ion-label>Espalda</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="Pierna">
+        <ion-label>Pierna</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="Hombros">
+        <ion-label>Hombros</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="Brazos">
+        <ion-label>Brazos</ion-label>
+      </ion-segment-button>
+      
+      <ion-segment-button value="Core">
+        <ion-label>Core</ion-label>
+      </ion-segment-button>
+      
     </ion-segment>
   </ion-toolbar>
 </div>

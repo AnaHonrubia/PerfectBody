@@ -13,7 +13,9 @@ import { IonicModule } from '@ionic/angular';
 })
 export class BotonAccionComponent {
 
+  // Propiedad de entrada para recibir el texto desde el componente padre
   @Input() texto: string = '';
+  // Propiedad de salida para notificar al padre cuando el usuario interactua con el botón
   @Output() clickBoton = new EventEmitter<void>();
   
 }

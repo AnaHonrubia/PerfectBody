@@ -1,11 +1,16 @@
+/* Estilos encapsulados para el botón atómico de acción */
 .boton-fit {
-  width: 100%;
-  padding: 15px;
-  border-radius: 12px;
-  border: none;
-  background: #2dd36f;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  &:active { opacity: 0.8; }
+  width: 100%; /* Ocupa el ancho completo del contenedor donde se aloje */
+  padding: 15px; /* Espaciado interno para mejorar la superficie de toque (UX móvil) */
+  border-radius: 12px; /* Esquinas redondeadas acordes a la línea premium de la app */
+  border: none; /* Eliminamos el borde por defecto del navegador */
+  background: #2dd36f; /* Color verde corporativo (Success tradicional de Ionic) */
+  color: white; /* Contraste de texto en blanco para legibilidad óptima */
+  font-weight: bold; /* Texto en negrita para jerarquía visual */
+  font-size: 1rem; /* Tamaño de fuente estándar y legible */
+
+  /* Pseudo-clase de Sass para gestionar la interacción táctil (Feedback visual) */
+  &:active { 
+    opacity: 0.8; /* Reduce la opacidad al pulsar simulando el comportamiento de una app nativa */
+  }
 }

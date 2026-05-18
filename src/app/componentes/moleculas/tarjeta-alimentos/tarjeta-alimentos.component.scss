@@ -1,39 +1,46 @@
+/* Maquetación del contenedor de la celda fotográfica */
 .contenedor-alimento {
-  position: relative;
-  width: 100%;
-  padding-top: 100%; // Cuadrado perfecto
-  overflow: hidden;
-  border-radius: 8px;
-  margin-bottom: 5px;
+  position: relative; /* Establece un eje de coordenadas local para posicionar los elementos internos absolutos */
+  width: 100%; /* Ocupa todo el espacio horizontal asignado por la rejilla (Grid CSS) */
 
+  padding-top: 100%; 
+  overflow: hidden; /* Corta y oculta cualquier desbordamiento de la imagen exterior */
+  border-radius: 8px; /* Redondeado suavizado unificado con la interfaz de la biblioteca */
+  margin-bottom: 5px; /* Margen de seguridad inferior */
+
+  /* Ajuste de la fotografía de fondo */
   .imagen-alimento {
-    position: absolute;
+    position: absolute; /* Se despega del flujo normal para ocupar el espacio del padding-top anterior */
     top: 0; left: 0;
     width: 100%; height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Recorta y escala la imagen de forma inteligente sin deformar sus proporciones reales */
   }
 
+  /* Máscara de degradado inferior para legibilidad tipográfica */
   .overlay-datos {
     position: absolute;
     bottom: 0;
     width: 100%;
     padding: 4px;
+    /* Gradiente lineal que va desde transparente en la parte superior hasta un negro del 80% en la base */
     background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    display: flex; /* Alineación horizontal de la información y el botón */
+    justify-content: space-between; /* Separa los textos del botón de suma de forma automática */
+    align-items: flex-end; /* Alinea los elementos en la línea base inferior del contenedor */
 
+    /* Subcontenedor de etiquetas textuales */
     .info {
       display: flex;
-      flex-direction: column;
-      color: white;
+      flex-direction: column; /* Apila el nombre sobre las calorías verticalmente */
+      color: white; /* Fuerza el texto a blanco para contrastar sobre el degradado oscuro */
       
       .nombre {
-        font-size: 0.65rem; // Un pelín más pequeño
+        font-size: 0.65rem; /* Escala tipográfica compacta óptima para interfaces densas de tipo grid */
         font-weight: bold;
-        line-height: 1;
+        line-height: 1; /* Reduce el interlineado al mínimo para evitar saltos de línea toscos */
+
         display: -webkit-box;
-        -webkit-line-clamp: 2; // Permite hasta 2 líneas antes de cortar
+        -webkit-line-clamp: 2; 
         -webkit-box-orient: vertical;
         overflow: hidden;
         margin-bottom: 2px;
@@ -41,17 +48,17 @@
       
       .calorias {
         font-size: 0.6rem;
-        opacity: 0.8;
+        opacity: 0.8; /* Atenúa sutilmente la unidad de medida para mantener la jerarquía con el título */
       }
     }
 
+    /* Estilización del control de inyección táctil */
     .boton-add {
-      --padding-start: 0;
+      --padding-start: 0; /* Remueve los márgenes internos de Ionic para evitar descentrados */
       --padding-end: 0;
       margin: 0;
       height: 24px;
-      ion-icon { font-size: 20px; }
+      ion-icon { font-size: 20px; } /* Ajuste de escala nítida para el vector */
     }
   }
-  
 }

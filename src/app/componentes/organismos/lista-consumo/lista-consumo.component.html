@@ -1,28 +1,38 @@
+<!-- Contenedor principal de la lista con líneas divisorias completas entre elementos -->
 <ion-list lines="full">
 
+  <!-- Encabezado de la lista: Muestra el momento actual transformado a MAYÚSCULAS mediante un pipe -->
   <ion-list-header>
     <ion-label class="titulo-seccion">Registros de {{ momentoActual | uppercase }}</ion-label>
   </ion-list-header>
 
+  <!-- Bucle iterable: Genera una fila por cada comida registrada en el arreglo 'comidas' -->
   <ion-item *ngFor="let item of comidas">
 
+    <!-- Miniatura o imagen del alimento posicionada al inicio de la fila (izquierda) -->
     <ion-thumbnail slot="start">
       <img [src]="item.imagen" />
     </ion-thumbnail>
 
+    <!-- Bloque de texto central con los datos del alimento -->
     <ion-label>
+      <!-- Nombre principal del alimento -->
       <h2>{{ item.nombre }}</h2>
+      <!-- Desglose detallado de macros: Calorías, Proteínas (P) y Carbohidratos (CH) -->
       <p class="info-macros">
         {{ item.kcal }} kcal | P: {{ item.protes }}g | CH: {{ item.carbos }}g
       </p>
     </ion-label>
 
+    <!-- Botón de acción posicionado al final de la fila (derecha): 
+         Al hacer clic, emite el evento 'onEliminar' enviando el ID único del alimento -->
     <ion-button slot="end" fill="clear" color="danger" (click)="onEliminar.emit(item.id)">
       <ion-icon slot="icon-only" name="trash"></ion-icon>
     </ion-button>
 
   </ion-item>
 
+  <!-- Fila condicional de estado vacío: Se muestra centrada y sin líneas solo si no hay comidas en la lista -->
   <ion-item *ngIf="comidas.length === 0" lines="none">
     <ion-label class="ion-text-center mensaje-vacio">No hay registros aquí</ion-label>
   </ion-item>

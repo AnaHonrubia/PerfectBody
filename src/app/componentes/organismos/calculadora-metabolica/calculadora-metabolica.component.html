@@ -1,13 +1,22 @@
+<!-- Contenedor principal del formulario metabólico -->
 <div class="form-metabolico">
 
+  <!-- Título de la sección del formulario -->
   <h3>Datos de Usuario</h3>
+  
+  <!-- Componente personalizado para capturar el peso en kilogramos -->
   <app-input-dato etiqueta="Peso (kg)" tipo="number" [(valor)]="peso"></app-input-dato>
+  
+  <!-- Componente personalizado para capturar la altura en centímetros -->
   <app-input-dato etiqueta="Altura (cm)" tipo="number" [(valor)]="altura"></app-input-dato>
+  
+  <!-- Componente personalizado para capturar la edad del usuario -->
   <app-input-dato etiqueta="Edad" tipo="number" [(valor)]="edad"></app-input-dato>
 
+  <!-- Componente personalizado de botón que ejecuta enviarDatos() al recibir el clic -->
   <app-boton-accion 
     [texto]="'Calcular Metabolismo'" 
-    (clickBoton)="enviarDatos()">
+    (clickBoton)="enviarDatos()"> 
   </app-boton-accion>
   
 </div>

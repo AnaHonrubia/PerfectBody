@@ -9,11 +9,18 @@ import { ItemDiarioComponent } from '../../moleculas/item-diario/item-diario.com
   imports: [CommonModule, ItemDiarioComponent]
 })
 export class ListaComidasComponent {
+  // Matriz reactiva de entrada que almacena los objetos de tipo alimento inyectados desde el LocalStorage
   @Input() comidas: any[] = [];
-  @Input() mostrarBorrar: boolean = true; // Permiso que viene de la página
+  
+  // Flag de control que habilita o bloquea el renderizado de los botones de borrado en cascada
+  @Input() mostrarBorrar: boolean = true; 
+  
+  // Evento de salida (@Output) que emite una cadena única con el identificador del ítem que se desea destruir
   @Output() onEliminarItem = new EventEmitter<string>();
 
+  // Método que recibe el identificador único de la molécula secundaria y lo manda a la pagina principal
   eliminar(id: string) {
-    this.onEliminarItem.emit(id); // LLamamos el ID hacia la página
+    // Lanza el ID hacia la capa superior encargada de mutar el LocalStorage y refrescar el estado de los macros
+    this.onEliminarItem.emit(id); 
   }
 }

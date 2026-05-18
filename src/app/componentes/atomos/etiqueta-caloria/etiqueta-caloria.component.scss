@@ -1,8 +1,9 @@
+/* Diseño de la píldora informativa de calorías (Estilo neutro adaptativo) */
 .badge-caloria {
-  background: #f4f4f4;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-weight: bold;
-  color: #666;
-  display: inline-block;
+  background: #f4f4f4; // Fondo gris claro limpio para resaltar el bloque en modo claro 
+  padding: 5px 10px; // Margen interno para dar aire al texto y mejorar la proporción visual 
+  border-radius: 20px; // Radio curvo alto para darle forma de píldora redondeada estilizada 
+  font-weight: bold; // Texto en negrita para asegurar que el dato numérico mantenga jerarquía visual 
+  color: #666; // Color de fuente gris medio para un contraste suave y elegante en modo claro 
+  display: inline-block; // Comportamiento de bloque en línea para que el contenedor se ajuste estrictamente al ancho del texto 
 }

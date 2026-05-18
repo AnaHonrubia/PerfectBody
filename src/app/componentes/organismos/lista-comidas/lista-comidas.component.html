@@ -1,16 +1,21 @@
+<!-- Contenedor principal de la lista del diario nutricional -->
 <div class="organismo-lista">
+  
+  <!-- Título de la sección -->
   <h3>Diario del día</h3>
 
+  <!-- Estado vacío: Se muestra solo si el arreglo de comidas no tiene ningún elemento registrado -->
   <div *ngIf="comidas.length === 0" class="vacio">
     No hay registros para este día 🍎
   </div>
 
+  <!-- Bucle para listar comidas: Genera un componente <app-item-diario> por cada elemento en el arreglo 'comidas' -->
   <app-item-diario 
     *ngFor="let item of comidas" 
-    [nombre]="item.nombre" 
-    [caloriasTotales]="item.kcal"  
+    [nombre]="item.nombre"
+    [caloriasTotales]="item.kcal" 
     [puedeBorrar]="mostrarBorrar" 
-    (onBorrar)="eliminar(item.id)">
+    (onBorrar)="eliminar(item.id)"> 
   </app-item-diario>
   
 </div>

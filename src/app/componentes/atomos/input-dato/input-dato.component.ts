@@ -10,17 +10,24 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [IonicModule, FormsModule, CommonModule]
 })
+
 export class InputDatoComponent {
-  @Input() etiqueta: string = '';
-  @Input() tipo: string = 'number';
-  @Input() placeholder: string = '';
-  @Input() unidad: string = '';
-  @Input() valor: any;
+  // Propiedades de entrada (@Input) para configurar el comportamiento del componente desde el Perfil
+  @Input() etiqueta: string = ''; // Texto que aparecerá arriba del campo (ej: 'Peso')
+  @Input() tipo: string = 'number'; // Restricción de entrada física (number, text, etc.)
+  @Input() placeholder: string = ''; // Mensaje guía flotante dentro del cajón
+  @Input() unidad: string = ''; // Sufijo de métrica deportiva (kg, cm, años)
+  @Input() valor: any; // El dato primitivo enlazado que viaja entre las vistas
   
+  // Nomenclatura Estricta "XChange": Requisito obligatorio en Angular para habilitar el Two-way Data Binding nativo con [(X)]
   @Output() valorChange = new EventEmitter<any>();
 
-  // Esta función sincroniza el cambio hacia el padre
+  /**
+   * Método disparado de forma reactiva cada vez que el usuario teclea un dígito en el móvil.
+   * Emite el nuevo estado del dato hacia el componente padre inmediatamente.
+   */
   alCambiarValor(event: any) {
+    // Captura el valor actual de la propiedad local y la lanza hacia el componente Perfil
     this.valorChange.emit(this.valor);
   }
 }

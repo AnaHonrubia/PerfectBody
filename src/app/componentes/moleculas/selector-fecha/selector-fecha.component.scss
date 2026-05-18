@@ -1,21 +1,21 @@
+/* Maquetación del contenedor estructural del selector cronológico */
 .contenedor-fecha {
-  display: flex;
-  justify-content: center;
-  padding: 15px;
+  display: flex; /* Activa el motor Flexbox para controlar la alineación del botón del calendario */
+  justify-content: center; /* Centrado geométrico horizontal estricto en la cabecera */
+  padding: 15px; /* Margen interno para dar aire y mejorar la superficie táctil de interacción */
 
   ion-datetime-button::part(native) {
-    background: var(--ion-color-success) !important;
-    color: #000000 !important; /* Texto del botón siempre negro para que resalte en verde */
-    font-weight: bold;
+    background: var(--ion-color-success) !important; /* Inyecta tu color corporativo verde éxito de fondo */
+    color: #000000 !important; /* Fuerza el color de fuente a negro absoluto para garantizar la máxima accesibilidad y contraste sobre el fondo verde */
+    font-weight: bold; /* Tipografía en negrita para destacar la visualización de la fecha actual */
   }
 }
 
-/* ESTO ARREGLA LOS NÚMEROS DENTRO DEL CALENDARIO */
+/* ESTRUCTURA ADAPTATIVA DEL CALENDARIO NATIVO */
 ion-datetime {
-  --background: var(--ion-item-background, #fff);
-  --color: var(--ion-text-color, #000000); /* Esta variable cambia sola: blanco en dark, negro en light */
-  
-  /* Forzamos por si el Shadow DOM bloquea el cambio */
+  --background: var(--ion-item-background, #fff); /* Fondo dinámico: cambia solo usando las variables globales de tu tema */
+  --color: var(--ion-text-color, #000000); /* Color del texto adaptativo del sistema (Blanco en dark mode, Negro en light mode) */
+
   &::part(calendar-day), &::part(month-year-button) {
     color: var(--ion-text-color) !important;
   }

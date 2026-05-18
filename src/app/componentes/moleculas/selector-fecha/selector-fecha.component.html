@@ -1,14 +1,21 @@
+<!-- Contenedor principal para el selector de fecha -->
 <div class="contenedor-fecha">
   
+  <!-- Botón visible que muestra la fecha seleccionada. Abre el modal mediante el ID 'datetime' -->
   <ion-datetime-button datetime="datetime"></ion-datetime-button>
 
+  <!-- Ventana emergente (Modal) que contiene el calendario. 
+       'keepContentsMounted' asegura que el componente esté disponible en el DOM desde el inicio -->
   <ion-modal [keepContentsMounted]="true">
     <ng-template>
+      
+      <!-- Componente del calendario de Ionic -->
       <ion-datetime 
         id="datetime" 
         presentation="date" 
         (ionChange)="onFechaCambiada($event)">
       </ion-datetime>
+      
     </ng-template>
   </ion-modal>
 

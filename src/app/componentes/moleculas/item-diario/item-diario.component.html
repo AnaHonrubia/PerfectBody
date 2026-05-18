@@ -1,9 +1,14 @@
+<!-- Contenedor principal para un elemento del registro diario -->
 <div class="item-diario">
 
+  <!-- Muestra el nombre del alimento, comida o actividad -->
   <span class="nombre">{{ nombre }}</span>
 
+  <!-- Muestra la cantidad total de calorías asociadas a este elemento -->
   <span class="kcal-centro">{{ caloriasTotales }} kcal</span>
 
+  <!-- Botón para eliminar: Solo se muestra si 'puedeBorrar' es verdadero.
+       Al hacer clic, emite el evento 'onBorrar' hacia el componente padre -->
   <button *ngIf="puedeBorrar" (click)="onBorrar.emit()" class="boton-eliminar">
     <span>🗑️</span>
   </button>

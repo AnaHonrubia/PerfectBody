@@ -1,15 +1,26 @@
-
+<!-- Contenedor principal del temporizador -->
 <div class="timer-container">
+  
+  <!-- Pantalla que muestra el tiempo actual. Usa interpolación de Angular -->
   <div class="tiempo-display">{{ tiempo }}s</div>
+  
+  <!-- Contenedor para los botones de control -->
   <div class="botones-timer">
+    
+    <!-- Botón Iniciar: Llama a iniciar() al hacer clic. Solo visible si '!corriendo' es verdadero -->
     <ion-button (click)="iniciar()" *ngIf="!corriendo" color="success" fill="clear">
       <ion-icon name="play-outline"></ion-icon>
     </ion-button>
+    
+    <!-- Botón Pausar: Llama a detener() al hacer clic. Solo visible si 'corriendo' es verdadero -->
     <ion-button (click)="detener()" *ngIf="corriendo" color="warning" fill="clear">
       <ion-icon name="pause-outline"></ion-icon>
     </ion-button>
+    
+    <!-- Botón Reiniciar: Llama a reiniciar() al hacer clic. Siempre está visible -->
     <ion-button (click)="reiniciar()" color="medium" fill="clear">
       <ion-icon name="refresh-outline"></ion-icon>
     </ion-button>
+    
   </div>
 </div>

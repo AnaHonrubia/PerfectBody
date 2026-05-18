@@ -10,12 +10,13 @@ import { CommonModule } from '@angular/common';
   imports: [IonicModule, CommonModule]
 })
 export class ResumenNutricionalComponent {
-  // Entradas para calorías
-  @Input() caloriasConsumidas: number = 0;
-  @Input() objetivoCalorico: number = 2000;
+  
+  // Puertos de entrada de datos (@Input) inyectados de forma asíncrona desde el estado global del diario de nutrición
+  @Input() caloriasConsumidas: number = 0; // Sumatorio de la energía total del día de hoy
+  @Input() objetivoCalorico: number = 2000; // Meta metabólica base calculada por Harris-Benedict
 
-  // Entradas para Macros (LAS QUE FALTABAN)
-  @Input() proteinas: number = 0;
-  @Input() grasas: number = 0;
-  @Input() carbohidratos: number = 0;
+  // Atributos de entrada específicos para el control de los tres macros principales del atleta
+  @Input() proteinas: number = 0; // Gramos totales de proteína acumulados
+  @Input() grasas: number = 0; // Gramos totales de lípidos/grasas acumulados
+  @Input() carbohidratos: number = 0; // Gramos totales de hidratos de carbono acumulados
 }

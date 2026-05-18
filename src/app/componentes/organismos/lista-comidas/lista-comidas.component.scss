@@ -1,13 +1,14 @@
 .organismo-lista {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important; // Apila los ítems uno debajo de otro
-  padding: 15px;
-  background-color: #f9f9f9; // Un gris muy suave para que resalten las tarjetas blancas
+  width: 100% !important; /* Fuerza al componente a abarcar la totalidad de la anchura útil */
+  display: flex !important; /* Activa el modelo Flexbox para gestionar la disposición estructural interna */
+  flex-direction: column !important; /* Apila los componentes hijos (<app-item-diario>) uno debajo de otro de forma vertical estricta */
+  padding: 15px; /* Espaciado interno perimetral de seguridad */
+  background-color: #f9f9f9; /* Tono de gris extra suave de soporte para hacer que las celdas blancas floten visualmente */
 
+  /* Estilización avanzada sobre el selector de etiqueta del componente secundario */
   app-item-diario {
-    display: block !important;
-    width: 100% !important; // Obligatorio para que la tarjeta sepa que tiene espacio
-    margin-bottom: 10px;
+    display: block !important; /* Fuerza un comportamiento de caja clásico sobre el componente personalizado */
+    width: 100% !important; /* Obligatorio para expandir la fila y heredar los anclajes horizontales del Flexbox */
+    margin-bottom: 10px; /* Margen de separación de seguridad entre comidas consecutivas */
   }
 }

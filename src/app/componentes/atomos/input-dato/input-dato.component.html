@@ -1,16 +1,25 @@
+<!-- Contenedor principal del input personalizado -->
 <div class="contenedor-input">
+  
+  <!-- Etiqueta superior: Se muestra solo si la variable 'etiqueta' tiene contenido -->
   <ion-label *ngIf="etiqueta" class="etiqueta-personalizada">
     {{ etiqueta }}
   </ion-label>
   
+  <!-- Contenedor del input: Sin línea inferior de Ionic (lines="none") y con estilo redondeado -->
   <ion-item lines="none" class="item-redondeado">
+    
+    <!-- Campo de entrada de datos nativo de Ionic -->
     <ion-input 
-      [type]="tipo" 
-      [placeholder]="placeholder"
-      [(ngModel)]="valor"
-      (ionInput)="alCambiarValor($event)"
-      class="input-custom">
+      [type]="tipo"   
+      [placeholder]="placeholder" 
+      [(ngModel)]="valor" 
+      (ionInput)="alCambiarValor($event)" 
+      class="input-custom"> 
     </ion-input>
+    
+    <!-- Nota al final del input: Ideal para mostrar unidades (ej: "kg", "km") si la variable 'unidad' existe -->
     <ion-note slot="end" *ngIf="unidad">{{ unidad }}</ion-note>
+    
   </ion-item>
 </div>

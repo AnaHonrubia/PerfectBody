@@ -1,23 +1,27 @@
+/* Maquetación del contenedor estructural del formulario */
 .contenedor-input {
-  margin-bottom: 16px;
+  margin-bottom: 16px; /* Separación vertical uniforme entre campos para evitar colisiones visuales */
 
+  /* Estilización de la etiqueta informativa superior */
   .etiqueta-personalizada {
-    display: block;
-    margin-left: 8px;
-    margin-bottom: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--ion-color-medium);
+    display: block; /* Fuerza un salto de línea estricto para posicionarse sobre el input */
+    margin-left: 8px; /* Ligero desfase a la izquierda alineado con la curvatura del cajón */
+    margin-bottom: 6px; /* Espacio de separación con el cuadro de texto */
+    font-size: 0.9rem; /* Escala tipográfica secundaria equilibrada */
+    font-weight: 600; /* Grosor de fuente seminegrita para destacar el título */
+    color: var(--ion-color-medium); /* Color adaptivo de Ionic (Gris medio en claro, Gris claro en oscuro) */
   }
 
+  /* Personalización estricta sobre el contenedor del input de Ionic */
   .item-redondeado {
-    --background: var(--ion-color-light);
-    --border-radius: 12px;
-    --padding-start: 12px;
-    border: 1px solid #e0e0e0;
+    --background: var(--ion-color-light); /* Fondo neutro adaptativo usando paletas del sistema */
+    --border-radius: 12px; /* Radio de curvatura premium unificado en toda la interfaz */
+    --padding-start: 12px; /* Margen interno para que el texto de entrada respire de forma limpia */
+    border: 1px solid #e0e0e0; /* Delimitación sutil exterior para mejorar el contraste en pantallas claras */
     
+    /* Modificación tipográfica interna del control de entrada */
     .input-custom {
-      font-weight: 500;
+      font-weight: 500; /* Peso de texto medio para facilitar la lectura del dato digitalizado */
     }
   }
 }
