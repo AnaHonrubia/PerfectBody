@@ -306,4 +306,46 @@ export class FitAtomic {
       this.guardarEntrenosEnMemoria();
     }
   }
+
+  // =============================================================
+  //     MÉTODOS PARA CONECTAR EL PROGRESO CON LOS DATOS AÑADIDOS
+  // =============================================================
+
+  // Historial de pesos: saca el peso actual del perfil para la gráfica
+  getHistorialPeso(): any[] {
+    const perfil = this.obtenerPerfil();
+    if (perfil && perfil.peso) {
+      // Como de momento guardas un solo peso en el perfil, simulamos el punto actual
+      // (Más adelante, si quieres, podemos hacer un array de pesos en LocalStorage)
+      const hoyStr = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' });
+      return [{ fecha: hoyStr, valor: Number(perfil.peso) }];
+    }
+    return [];
+  }
+
+  // Calorías semanales: calcula los totales de los últimos 7 días reales para las barras
+  getKcalSemanales(): number[] {
+    const kcalDeLaSemana: number[] = [];
+    const hoy = new Date();
+
+    // Recorremos de lunes (0) a domingo (6) de la semana actual
+    for (let i = 0; i < 7; i++) {
+      const fechaCalculada = new Date();
+      // Calculamos el desfase de días respecto a hoy
+      const distancia = i - (hoy.getDay() === 0 ? 6 : hoy.getDay() - 1);
+      fechaCalculada.setDate(hoy.getDate() + distancia);
+      
+      const fechaStr = fechaCalculada.toLocaleDateString();
+      const totalesDia = this.getTotalesPorFecha(fechaStr);
+      
+      kcalDeLaSemana.push(totalesDia.kcal || 0);
+    }
+    return kcalDeLaSemana;
+  }
+
+  // Metabolismo Basal: saca el objetivo de calorías calculado por Harris-Benedict
+  getMetabolismoBasal(): number {
+    const objetivo = this.getObjetivoKcal();
+    return objetivo > 0 ? objetivo : 1800; // Si no hay perfil, 1800 de base
+  }
 }
