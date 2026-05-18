@@ -27,6 +27,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/perfil/perfil.page').then((m) => m.PerfilPage),
       },
       {
+        path: 'recetas',
+        loadComponent: () => import('./pages/recetas/recetas.page').then(m => m.RecetasPage)
+      },
+      {
         path: 'progreso',
         loadComponent: () => import('./pages/progreso/progreso.page').then( m => m.ProgresoPage)
       },
@@ -35,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'historial-semanal',
     loadComponent: () => import('./pages/historial-semanal/historial-semanal.page').then( m => m.HistorialSemanalPage)
+  },
+  {
+    path: 'recetas',
+    loadComponent: () => import('./pages/recetas/recetas.page').then( m => m.RecetasPage)
   },
   
 ];

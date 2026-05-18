@@ -1,0 +1,81 @@
+.recetas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.ejercicio-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--ion-card-background, #ffffff);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover; /* Recorta la foto de comida elegantemente */
+  }
+}
+
+.ejercicio-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  flex-grow: 1;
+  min-height: 240px; /* Espacio controlado para títulos, listas y botones */
+}
+
+.ejercicio-titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ion-text-color, #000000);
+  margin-bottom: 4px;
+}
+
+.ejercicio-musculo {
+  font-size: 0.85rem;
+  color: var(--ion-color-success, #a855f7); /* Tu Violeta como acento de categoría */
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.ingredientes-lista {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: var(--ion-color-step-600, #666666);
+  line-height: 1.4;
+  flex-grow: 1; /* El muelle flex que empuja los macros y el botón abajo */
+}
+
+.macros-badges {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+
+  .badge {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    
+    &.kcal { background: rgba(249, 115, 22, 0.15); color: #f97316; }   /* Naranja */
+    &.protein { background: rgba(168, 85, 247, 0.15); color: #a855f7; }/* Violeta */
+    &.carb { background: rgba(20, 184, 166, 0.15); color: #14b8a6; }   /* Turquesa */
+  }
+}
+
+.btn-configurar {
+  margin-top: auto;
+  width: 100%;
+  --border-radius: 8px;
+  --color: var(--ion-color-success, #a855f7);
+  --border-color: var(--ion-color-success, #a855f7);
+  font-weight: bold;
+}

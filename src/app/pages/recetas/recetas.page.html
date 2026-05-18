@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Explorar Recetas</ion-title>
+    <ion-buttons slot="end">
+      <app-boton-oscuro></app-boton-oscuro>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="recetas-grid">
+    
+    @for (receta of recetas; track receta.id) {
+      <ion-card class="ejercicio-card">
+        <img [src]="receta.imagen" [alt]="receta.nombre" />
+        
+        <div class="ejercicio-card-content">
+          <h1 class="ejercicio-titulo">{{ receta.nombre }}</h1>
+          <h3 class="ejercicio-musculo">{{ receta.momento }}</h3>
+          
+          <ul class="ingredientes-lista">
+            @for (ing of receta.ingredientes; track ing) {
+              <li>{{ ing }}</li>
+            }
+          </ul>
+
+          <div class="macros-badges">
+            <span class="badge kcal">{{ receta.kcal }} kcal</span>
+            <span class="badge protein">P: {{ receta.protes }}g</span>
+            <span class="badge carb">HC: {{ receta.carbos }}g</span>
+          </div>
+
+          <ion-button fill="outline" class="btn-configurar" (click)="agregarAlDiarioHoy(receta)">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            AÑADIR A MI DIARIO
+          </ion-button>
+        </div>
+      </ion-card>
+    }
+
+  </div>
+</ion-content>

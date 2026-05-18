@@ -9,6 +9,7 @@ export class FitAtomic {
   private http = inject(HttpClient);
   private URL_ALIMENTOS = 'https://raw.githubusercontent.com/AnaHonrubia/APIs/refs/heads/main/alimentos.json';
   private URL_EJERCICIOS = 'https://raw.githubusercontent.com/AnaHonrubia/APIs/refs/heads/main/ejercicios.json';
+  private URL_RECETAS = 'https://raw.githubusercontent.com/AnaHonrubia/APIs/refs/heads/main/recetas.json';
 
   private listaAlimentos: any[] = [];
   private historialDiario: { [fecha: string]: any[] } = {}; 
@@ -17,6 +18,7 @@ export class FitAtomic {
   darkMode: boolean = false;
   private listaEjercicios: any[] = [];
   private historialEntrenos: { [fecha: string]: any[] } = {};
+  private listaRecetas: any[] = [];
 
   constructor() {
     this.cargarAlimentosRemote();
@@ -26,6 +28,7 @@ export class FitAtomic {
     this.verificarCierreSemanalAutomatico();
     this.cargarEjerciciosRemote();
     this.cargarEntrenosDesdeMemoria();
+    this.cargarRecetasRemote();
   }
 
   // --- LÓGICA DE TEMA (MODO OSCURO) ---
@@ -347,5 +350,34 @@ export class FitAtomic {
   getMetabolismoBasal(): number {
     const objetivo = this.getObjetivoKcal();
     return objetivo > 0 ? objetivo : 1800; // Si no hay perfil, 1800 de base
+  }
+
+  // =======================================
+  //     MÉTODOS PARA EL MÓDULO DE RECETAS
+  // =======================================
+  async cargarRecetasRemote() {
+    try {
+      this.listaRecetas = await firstValueFrom(this.http.get<any[]>(this.URL_RECETAS));
+      console.log("Recetas cargadas con éxito:", this.listaRecetas.length);
+    } catch (error) {
+      console.error("Error descargando recetas, cargando backup local...", error);
+      // Backup por si falla internet
+      this.listaRecetas = [
+        { id: "r1", nombre: "Tortitas Pro", kcal: 380, protes: 30, carbos: 45, grasas: 6, momento: "Desayuno" },
+        { id: "r2", nombre: "Salmón con Arroz", kcal: 610, protes: 42, carbos: 50, grasas: 22, momento: "Cena" }
+      ];
+    }
+  }
+
+  async getRecetasAsync() {
+    if (this.listaRecetas.length === 0) {
+      await this.cargarRecetasRemote();
+    }
+    return this.listaRecetas;
+  }
+
+  // Permite meter una receta completa directamente al diario con un solo clic
+  añadirRecetaAlDiario(receta: any, fecha: string) {
+    this.agregarAlDiario(receta, fecha);
   }
 }
