@@ -8,8 +8,7 @@ import {
 
 import { addIcons } from 'ionicons';
 import { 
-  sparklesOutline, restaurantOutline, barbellOutline, 
-  analyticsOutline, checkmarkDoneCircleOutline 
+  sparklesOutline, restaurantOutline, barbellOutline, analyticsOutline, checkmarkDoneCircleOutline, medalOutline, compassOutline,
 } from 'ionicons/icons';
 
 import { BotonOscuroComponent } from 'src/app/componentes/atomos/boton-oscuro/boton-oscuro.component';
@@ -29,7 +28,7 @@ import { BotonOscuroComponent } from 'src/app/componentes/atomos/boton-oscuro/bo
 export class IntroPage {
   constructor(private router: Router) {
     addIcons({
-      sparklesOutline, restaurantOutline, barbellOutline, analyticsOutline, checkmarkDoneCircleOutline 
+      sparklesOutline, restaurantOutline, barbellOutline, analyticsOutline, checkmarkDoneCircleOutline, medalOutline, compassOutline,
     })
   }
 
