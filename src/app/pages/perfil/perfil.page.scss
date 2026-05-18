@@ -1,0 +1,60 @@
+.logros-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.logro-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--ion-item-background, rgba(255, 255, 255, 0.4));
+  transition: all 0.3s ease;
+
+  // Efecto visual cuando está bloqueado (un poco más transparente/apagado)
+  &.bloqueado {
+    opacity: 0.6;
+    .logro-titulo { color: var(--ion-color-step-400, #777777); }
+  }
+}
+
+.logro-icono-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}
+
+.logro-texto {
+  flex-grow: 1;
+}
+
+.logro-titulo {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  color: var(--ion-text-color, #000000);
+}
+
+.logro-desc {
+  font-size: 0.8rem;
+  margin: 0;
+  color: var(--ion-color-step-600, #666666);
+}
+
+.badge-estado {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}

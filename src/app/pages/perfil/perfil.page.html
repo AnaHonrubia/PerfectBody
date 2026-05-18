@@ -16,5 +16,33 @@
       <p class="ion-text-center">Estas son las calorías que tu cuerpo quema en reposo absoluto.</p>
     </ion-card-content>
   </ion-card>
+
+  <ion-card class="ejercicio-card">
+    <ion-card-header>
+      <ion-card-title>Mis Logros Átomos</ion-card-title>
+      <ion-card-subtitle>Desbloquea insignias cumpliendo tus objetivos</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div class="logros-container">
+        @for (logro of logros; track logro.id) {
+          <div class="logro-row" [class.bloqueado]="!logro.activo">
+            <div class="logro-icono-wrapper" [style.background-color]="logro.activo ? logro.color + '22' : '#e0e0e022'">
+              <ion-icon [name]="logro.icono" [style.color]="logro.activo ? logro.color : '#999999'"></ion-icon>
+            </div>
+            <div class="logro-texto">
+              <h2 class="logro-titulo">{{ logro.titulo }}</h2>
+              <p class="logro-desc">{{ logro.descripcion }}</p>
+            </div>
+            <div class="logro-estado">
+              <span class="badge-estado" [style.background-color]="logro.activo ? logro.color + '33' : '#33333315'" [style.color]="logro.activo ? logro.color : '#777777'">
+                {{ logro.activo ? 'COMPLETADO' : 'BLOQUEADO' }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </ion-card-content>
+  </ion-card>
   
 </ion-content>

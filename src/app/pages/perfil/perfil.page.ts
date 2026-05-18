@@ -5,6 +5,9 @@ import { CalculadoraMetabolicaComponent } from '../../componentes/organismos/cal
 import { BotonOscuroComponent } from '../../componentes/atomos/boton-oscuro/boton-oscuro.component';
 import { FitAtomic } from 'src/app/services/fit-atomic';
 
+import { addIcons } from 'ionicons';
+import { trophyOutline, flameOutline, shieldCheckmarkOutline, add } from 'ionicons/icons';
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -15,6 +18,7 @@ import { FitAtomic } from 'src/app/services/fit-atomic';
 
 export class PerfilPage {
   resultadoTMB: number | null = null;
+  logros: any[] = [];
 
   constructor(private fitService: FitAtomic) {
     // Ahora fitService ya tiene el método obtenerPerfil()
@@ -22,6 +26,13 @@ export class PerfilPage {
     if (datosGuardados) {
       this.manejarCalculo(datosGuardados);
     }
+    addIcons({
+      trophyOutline, flameOutline, shieldCheckmarkOutline
+    });
+  }
+
+  ngOnInit() {
+    this.cargarLogros();
   }
 
   manejarCalculo(datos: any) {
@@ -37,5 +48,15 @@ export class PerfilPage {
       ...datos,
       tmb: this.resultadoTMB
     });
-}
+  }
+
+  // Se ejecuta cada vez que el usuario entra a la pestaña para comprobar si ha ganado una medalla
+  ionViewWillEnter() {
+    this.cargarLogros();
+  }
+
+  cargarLogros() {
+    this.logros = this.fitService.getLogrosUsuario();
+  }
+
 }

@@ -380,4 +380,42 @@ export class FitAtomic {
   añadirRecetaAlDiario(receta: any, fecha: string) {
     this.agregarAlDiario(receta, fecha);
   }
+
+  // ==========================================
+  //    MÉTODOS DE GAMIFICACIÓN (medallas)
+  // ==========================================
+  
+  getLogrosUsuario(): any[] {
+    const perfil = this.obtenerPerfil();
+    const hoyStr = new Date().toLocaleDateString();
+    const totalesHoy = this.getTotalesPorFecha(hoyStr);
+    const semanas = this.getSemanas();
+
+    return [
+      {
+        id: 'logro_perfil',
+        titulo: 'Primera Piedra',
+        descripcion: 'Configurar tus datos iniciales en el perfil.',
+        icono: 'trophy-outline',
+        color: '#7cf6f6', // Aqua
+        activo: !!(perfil && perfil.peso > 0)
+      },
+      {
+        id: 'logro_nutricion',
+        titulo: 'Carga de Energía',
+        descripcion: 'Superar las 1500 kcal registradas en el día de hoy.',
+        icono: 'flame-outline',
+        color: '#f97316', // Naranja Fuego
+        activo: totalesHoy.kcal >= 1500
+      },
+      {
+        id: 'logro_constancia',
+        titulo: 'Atleta Constante',
+        descripcion: 'Completar tu primer cierre semanal con éxito.',
+        icono: 'shield-checkmark-outline',
+        color: '#a855f7', // Violeta Eléctrico
+        activo: semanas.length > 0
+      }
+    ];
+  }
 }
