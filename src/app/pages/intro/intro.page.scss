@@ -1,68 +1,75 @@
+/* Posicionamiento absoluto del botón de modo oscuro sobre el carrusel de bienvenida */
 .dark-mode-header {
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 100;
+  z-index: 100; /* Asegura que el botón flote por encima de las diapositivas de Swiper sin bloquearse */
 }
 
+/* Configuración de dimensiones del Web Component nativo de Swiper */
 swiper-container {
   width: 100%;
   height: 100%;
-  --swiper-pagination-color: var(--ion-color-success);
+  --swiper-pagination-color: var(--ion-color-success); /* Cambia el color de los puntos del indicador al verde corporativo */
 }
 
+/* Maquetación del layout interno de cada slide del tutorial */
 .slide-content {
   padding: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: flex; /* Flexbox para controlar el centrado de los bloques explicativos */
+  flex-direction: column; /* Alineación de elementos en un eje vertical (Icono -> Título -> Párrafo -> Botón) */
+  align-items: center; /* Centrado horizontal geométrico de los componentes */
+  justify-content: center; /* Centrado vertical simétrico dentro de la pantalla del terminal */
   height: 100%;
-  text-align: center;
+  text-align: center; /* Forzado de alineación de texto centralizado */
 
+  /* Contenedor decorativo circular para la iconografía premium */
   .icon-circle {
     width: 120px;
     height: 120px;
-    border-radius: 35%; /* Un toque más cuadrado/moderno */
-    display: flex;
+    border-radius: 35%; /* Curvatura suavizada moderna (estilo squircle) alejada del círculo perfecto tradicional */
+    display: flex; /* Centrado estricto del icono vectorial interno */
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
-    font-size: 60px;
+    margin-bottom: 30px; /* Separación de seguridad con la cabecera tipográfica */
+    font-size: 60px; /* Escala masiva del icono vectorial */
     
-    // COLORES NO ESTÁNDAR
-    &.success { background: rgba(168, 85, 247, 0.15); color: #a855f7; } // Violeta Eléctrico
-    &.nutrition { background: rgba(249, 115, 22, 0.15); color: #f97316; } // Naranja Fuego
-    &.gym { background: rgba(236, 72, 153, 0.15); color: #ec4899; } // Rosa Intenso
-    &.science { background: rgba(20, 184, 166, 0.15); color: #14b8a6; } // Verde Teal / Turquesa
-    &.final { background: rgba(99, 102, 241, 0.15); color: #6366f1; } // Azul Índigo
+    // GESTIÓN DE COLORES NO ESTÁNDAR (Paleta premium translúcida con opacidades al 15% para contraste óptimo)
+    &.success { background: rgba(168, 85, 247, 0.15); color: #a855f7; } // Bloque inicial: Violeta Eléctrico
+    &.nutrition { background: rgba(249, 115, 22, 0.15); color: #f97316; } // Bloque diario: Naranja Fuego
+    &.gym { background: rgba(236, 72, 153, 0.15); color: #ec4899; } // Bloque entrenamiento: Rosa Intenso
+    &.science { background: rgba(20, 184, 166, 0.15); color: #14b8a6; } // Bloque analítico: Verde Teal / Turquesa
+    &.final { background: rgba(99, 102, 241, 0.15); color: #6366f1; } // Bloque de cierre: Azul Índigo
   }
 
+  /* Aplica tu color acento Violeta a las palabras clave envueltas en etiquetas span dentro de los títulos */
   h1, h2 {
-    span { color: #a855f7; } // El color de énfasis ahora es el Violeta
+    span { color: #a855f7; } 
   }
 
+  /* Personalización estricta del botón de finalización de onboarding */
   .btn-final {
-    --background: #a855f7; // Botón violeta pro
-    --color: white;
+    --background: #a855f7; // Color de fondo Violeta Pro corporativo
+    --color: white; // Texto en contraste blanco absoluto
   }
 
+  /* Formateo de los bloques de texto descriptivo */
   p {
     font-size: 1.1rem;
-    /* Por defecto usa el gris de Ionic para el modo claro */
+    /* Uso de la variable de Ionic para modo claro. Si no existe, aplica un color gris por defecto */
     color: var(--ion-text-color, #666666); 
     margin: 20px 0;
-    max-width: 300px;
-    transition: color 0.3s ease; /* Para que el cambio de color sea suave */
+    max-width: 300px; /* Limita el ancho del párrafo para forzar saltos de línea elegantes en pantallas anchas */
+    transition: color 0.3s ease; /* Suaviza la transición tipográfica en el momento exacto de cambiar de tema */
   }
 
 }
 
-/* ESTO ES LO QUE CAMBIA LAS LETRAS A BLANCO EN MODO OSCURO */
+/* ==========================================================================
+   CONTROL DE CONTRASTE EXTRUCTURAL MODO OSCURO (NATIVO EN NAVEGADOR)
+   ==========================================================================
+*/
 body.dark .slide-content p {
   color: #ffffff !important;
-  opacity: 1; /* Aseguramos que no tenga transparencia */
+  opacity: 1; /* Remueve transparencias que puedan comprometer la lectura con brillos bajos */
 }
-
-
-  

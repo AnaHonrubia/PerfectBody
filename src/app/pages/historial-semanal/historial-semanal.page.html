@@ -1,49 +1,66 @@
+<!-- Cabecera de la pantalla: Define la barra superior -->
 <ion-header>
   <ion-toolbar color="success">
+    <!-- Botón de navegación posicionado al inicio (izquierda) -->
     <ion-buttons slot="start">
+      <!-- Botón de regreso nativo; si no hay historial va a la ruta 'defaultHref' -->
       <ion-back-button defaultHref="/tabs/nutricion"></ion-back-button>
     </ion-buttons>
     <ion-title>Historial Semanal</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenedor del contenido principal con espaciado interno (ion-padding) -->
 <ion-content class="ion-padding">
+  
+  <!-- Pantalla de estado vacío: Solo se muestra si el arreglo 'semanas' no tiene datos -->
   <div *ngIf="semanas.length === 0" class="ion-text-center ion-padding">
     <ion-icon name="archive-outline" style="font-size: 64px; color: gray;"></ion-icon>
     <p>Aún no tienes semanas cerradas.</p>
   </div>
 
+  <!-- Tarjeta contenedora de la gráfica de evolución -->
   <ion-card class="grafica-card">
     <ion-card-header>
       <ion-card-title>Evolución Calórica</ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <!-- Lienzo donde se dibuja la gráfica interactiva (ej: usando Chart.js en TS) -->
       <canvas #barChart></canvas>
     </ion-card-content>
   </ion-card>
 
+  <!-- Bucle Principal: Genera una tarjeta informativa por cada semana cerrada en el historial -->
   <ion-card *ngFor="let semana of semanas">
   
     <ion-card-header>
+      <!-- Muestra la fecha de cierre de la semana actual del bucle -->
       <ion-card-subtitle style="color: #af87ff !important; font-weight: bold;">
         Semana finalizada el {{ semana.fechaCierre }}
       </ion-card-subtitle>
+      <!-- Título de calorías con llamada a función en TS para pintar el texto según el valor -->
       <ion-card-title [style.color]="obtenerColorKcal(semana.kcal)" style="font-weight: bold;">
         {{ semana.kcal }} Total kcal
       </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
+      <!-- Rejilla para distribuir de manera equitativa el desglose de los macronutrientes -->
       <ion-grid>
         <ion-row>
+          <!-- Columna 1: Proteínas (ocupa 4 de 12 espacios) -->
           <ion-col size="4" class="ion-text-center">
             <small>Proteínas</small>
             <div class="dato-macro">{{ semana.protes }}g</div>
           </ion-col>
+          
+          <!-- Columna 2: Grasas (ocupa 4 de 12 espacios) -->
           <ion-col size="4" class="ion-text-center">
             <small>Grasas</small>
             <div class="dato-macro">{{ semana.grasas }}g</div>
           </ion-col>
+          
+          <!-- Columna 3: Carbohidratos (ocupa 4 de 12 espacios) -->
           <ion-col size="4" class="ion-text-center">
             <small>Carbohidratos</small>
             <div class="dato-macro">{{ semana.carbos }}g</div>
@@ -51,5 +68,6 @@
         </ion-row>
       </ion-grid>
     </ion-card-content>
+    
   </ion-card>
 </ion-content>

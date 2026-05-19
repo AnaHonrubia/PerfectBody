@@ -1,21 +1,30 @@
+<!-- Cabecera principal de la pantalla (se mantiene fija en la parte superior) -->
 <ion-header [translucent]="true">
+  <!-- Barra de herramientas con fondo verde de éxito -->
   <ion-toolbar color="success">
     <ion-title>Entrenamiento</ion-title>
+    <!-- Botones del extremo derecho de la barra -->
     <ion-buttons slot="end">
+      <!-- Componente personalizado para activar/desactivar el modo oscuro -->
       <app-boton-oscuro></app-boton-oscuro>
     </ion-buttons>
   </ion-toolbar>
 
+  <!-- Componente buscador: Envía el grupo muscular activo y escucha cuándo cambian los filtros -->
   <app-buscador-ejercicio 
     [grupoActivo]="grupoSeleccionado"
     (onFiltroCambio)="aplicarFiltrosGlobales($event)">
   </app-buscador-ejercicio>
 </ion-header>
 
+<!-- Área de contenido escroleable con márgenes internos por defecto (ion-padding) -->
 <ion-content class="ion-padding">
+  <!-- Sistema de rejilla para organizar las tarjetas de ejercicios -->
   <ion-grid>
     <ion-row>
+      <!-- Renderiza una columna que ocupa un tercio del ancho (size="4") por cada ejercicio filtrado -->
       <ion-col size="4" *ngFor="let ejercicio of ejerciciosFiltrados">
+        <!-- Componente de tarjeta: Al solicitar configurar series, abre el modal -->
         <app-tarjeta-ejercicio 
           [ejercicio]="ejercicio" 
           (configurarSeries)="abrirModalEntreno($event)">
@@ -24,49 +33,65 @@
     </ion-row>
   </ion-grid>
 
+  <!-- Línea divisoria estética -->
   <hr class="divisor">
+  
+  <!-- Componente con el listado de lo que se ha entrenado en el día actual -->
   <app-lista-entrenos-hoy #listaHoy></app-lista-entrenos-hoy>
 </ion-content>
 
+<!-- Ventana emergente (Modal) controlada por la variable booleana 'isModalOpen' -->
 <ion-modal #modal [isOpen]="isModalOpen">
   <ng-template>
+    <!-- Cabecera interna de la ventana modal -->
     <ion-header>
       <ion-toolbar color="success">
+        <!-- Título dinámico con el nombre del ejercicio seleccionado (usa el operador '?' por seguridad si es nulo) -->
         <ion-title>{{ ejercicioSeleccionado?.nombre }}</ion-title>
         <ion-buttons slot="end">
+          <!-- Botón de esquina para cerrar la ventana sin guardar cambios obligatorios aquí -->
           <ion-button (click)="cerrarModal()">CERRAR</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
+    <!-- Contenido del modal -->
     <ion-content class="ion-padding">
       <div class="header-modal">
         <h3>Registro de hoy</h3>
         <p>Anota el peso y las repeticiones logradas.</p>
       </div>
 
+      <!-- Lista sin líneas divisorias que contiene las series creadas actualmente -->
       <ion-list lines="none">
         <ion-item *ngFor="let serie of seriesTemporales; let i = index">
+          <!-- Número indicador de la serie (index + 1 para que empiece en 1 y no en 0) -->
           <ion-label slot="start">{{ i + 1 }}</ion-label>
           
+          <!-- Inputs numéricos con doble vía de datos vinculados a la serie actual del bucle -->
           <ion-input type="number" placeholder="Peso (kg)" [(ngModel)]="serie.peso"></ion-input>
           <ion-input type="number" placeholder="Repes" [(ngModel)]="serie.repeticiones"></ion-input>
           
+          <!-- Botón rojo al final de la fila para borrar esta serie en concreto usando su índice -->
           <ion-button slot="end" fill="clear" color="danger" (click)="quitarSerie(i)">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
         </ion-item>
       </ion-list>
 
+      <!-- Bloque del temporizador para controlar los descansos entre series -->
       <div class="descanso-seccion">
         <p class="ion-text-center">Tiempo de Descanso</p>
         <app-cronometro></app-cronometro>
       </div>
 
+      <!-- Botón delineado para añadir una nueva serie limpia al arreglo provisional -->
       <ion-button expand="block" fill="outline" (click)="agregarSerie()" class="ion-margin-top">
         <ion-icon name="add-outline" slot="start"></ion-icon>
         AÑADIR SERIE
       </ion-button>
+      
+      <!-- Botón sólido verde para finalizar el ejercicio, guardando todos los datos en el historial -->
       <ion-button expand="block" color="success" (click)="guardarEntreno()" class="ion-margin-top">
         FINALIZAR EJERCICIO
       </ion-button>

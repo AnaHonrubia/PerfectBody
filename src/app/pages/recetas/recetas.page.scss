@@ -1,81 +1,91 @@
 .recetas-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 20px; /* Separación geométrica equidistante perimetral entre las tarjetas de platos */
 }
 
+/* Maquetación estructural de la tarjeta contenedora de cada receta gastronómica */
 .ejercicio-card {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  background-color: var(--ion-card-background, #ffffff);
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 0;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  flex-direction: column; /* Apila verticalmente la foto de comida, la información y el botón de acción */
+  height: 100%; /* Obliga a todas las celdas a medir exactamente lo mismo en la misma fila del Grid */
+  background-color: var(--ion-card-background, #ffffff); /* Fondo adaptativo en tiempo real según el tema del sistema */
+  border-radius: 12px; /* Radio curvo unificado con la línea de diseño premium de la aplicación */
+  overflow: hidden; /* Corta los bordes salientes de la fotografía de cabecera */
+  margin: 0; /* Limpia márgenes por defecto para evitar descuadres en la rejilla */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sutil degradado de sombra para dar volumen visual */
 
+  /* Ajuste de la cabecera fotográfica del plato */
   img {
     width: 100%;
-    height: 160px;
-    object-fit: cover; /* Recorta la foto de comida elegantemente */
+    height: 160px; /* Dimensión fija unificada para fijar la línea visual de simetría */
+    object-fit: cover; /* Recorta y escala la foto de comida elegantemente sin deformar sus proporciones */
   }
 }
 
+/* Bloque interno encargado de albergar el contenido textual y controles de interacción */
 .ejercicio-card-content {
   display: flex;
-  flex-direction: column;
-  padding: 16px;
-  flex-grow: 1;
-  min-height: 240px; /* Espacio controlado para títulos, listas y botones */
+  flex-direction: column; /* Organiza verticalmente la metadata del alimento */
+  padding: 16px; /* Espaciado interno perimetral de seguridad */
+  flex-grow: 1; /* Actúa como un muelle flexible para expandir el panel simétricamente */
+  min-height: 240px; /* Espacio controlado y blindado para títulos, listas y botones, evitando colapsos visuales */
 }
 
+/* Formateo tipográfico del título de la receta */
 .ejercicio-titulo {
   font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--ion-text-color, #000000);
+  font-weight: bold; /* Grosor en negrita para marcar jerarquía visual */
+  color: var(--ion-text-color, #000000); /* Reactivo al modo claro/oscuro de Ionic */
   margin-bottom: 4px;
 }
 
+/* Indicador textual de la categoría o tipo de plato (ej: 'Cena') */
 .ejercicio-musculo {
   font-size: 0.85rem;
-  color: var(--ion-color-success, #a855f7); /* Tu Violeta como acento de categoría */
+  color: var(--ion-color-success, #a855f7); /* Tu Violeta Eléctrico brilla como acento de categoría tipográfica */
   margin-bottom: 12px;
-  text-transform: uppercase;
-  font-weight: 600;
+  text-transform: uppercase; /* Fuerza mayúsculas estrictas para impacto estético */
+  font-weight: 600; /* Peso seminegrita */
 }
 
+/* Configuración de la lista de ingredientes del plato */
 .ingredientes-lista {
   margin: 0 0 16px 0;
-  padding-left: 20px;
+  padding-left: 20px; /* Sangría a la izquierda obligatoria para alinear las viñetas HTML */
   font-size: 0.9rem;
-  color: var(--ion-color-step-600, #666666);
-  line-height: 1.4;
-  flex-grow: 1; /* El muelle flex que empuja los macros y el botón abajo */
+  color: var(--ion-color-step-600, #666666); /* Tono de gris intermedio legible reglamentario */
+  line-height: 1.4; /* Interlineado amplio para facilitar la lectura de las porciones culinarias */
+  flex-grow: 1; /* El muelle flex estratégico que se expande para empujar los macros y el botón abajo de forma simétrica */
 }
 
+/* Fila horizontal elástica para las micro-etiquetas nutricionales (Badges) */
 .macros-badges {
   display: flex;
-  gap: 8px;
+  gap: 8px; /* Espaciado de separación horizontal entre píldoras de nutrientes */
   margin-bottom: 16px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite que las píldoras salten de línea si la pantalla del smartphone es muy estrecha */
 
+  /* Estilización base de las píldoras informativas de macros */
   .badge {
-    padding: 4px 8px;
+    padding: 4px 8px; /* Espaciado interno compacto para diseño denso móvil */
     border-radius: 6px;
     font-size: 0.75rem;
     font-weight: bold;
     
-    &.kcal { background: rgba(249, 115, 22, 0.15); color: #f97316; }   /* Naranja */
-    &.protein { background: rgba(168, 85, 247, 0.15); color: #a855f7; }/* Violeta */
-    &.carb { background: rgba(20, 184, 166, 0.15); color: #14b8a6; }   /* Turquesa */
+    // Fondos matizados con un 15% de opacidad para garantizar el contraste de los textos sólidos tanto en claro como en oscuro
+    &.kcal { background: rgba(249, 115, 22, 0.15); color: #f97316; }   // Energía: Naranja Fuego
+    &.protein { background: rgba(168, 85, 247, 0.15); color: #a855f7; }// Proteína: Violeta Eléctrico
+    &.carb { background: rgba(20, 184, 166, 0.15); color: #14b8a6; }   // Carbohidratos: Turquesa Aqua
   }
 }
 
+/* Control del botón táctil para la adición directa del plato */
 .btn-configurar {
-  margin-top: auto;
-  width: 100%;
-  --border-radius: 8px;
-  --color: var(--ion-color-success, #a855f7);
-  --border-color: var(--ion-color-success, #a855f7);
+  margin-top: auto; /* Anclaje mecánico estricto al fondo de la tarjeta mediante propiedades flex */
+  width: 100%; /* Ocupa el ancho completo útil del panel */
+  --border-radius: 8px; /* Redondeado curvo suavizado */
+  --color: var(--ion-color-success, #a855f7); /* Color tipográfico e icono en tu Violeta Eléctrico corporativo */
+  --border-color: var(--ion-color-success, #a855f7); /* Contorno liso a juego con la identidad de marca */
   font-weight: bold;
 }

@@ -1,22 +1,32 @@
+<!-- Cabecera de la sección de perfil con fondo oscuro -->
 <ion-header>
-  <ion-toolbar color="dark"> <ion-title>Mi Perfil</ion-title>
+  <ion-toolbar color="dark"> 
+    <ion-title>Mi Perfil</ion-title>
+    <!-- Contenedor de botones a la derecha -->
     <ion-buttons slot="end">
+      <!-- Componente para activar o desactivar el modo oscuro -->
       <app-boton-oscuro></app-boton-oscuro>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Área de contenido con espaciado interno (padding) -->
 <ion-content class="ion-padding">
+  
+  <!-- Formulario/Calculadora: Escucha el evento de cálculo y ejecuta manejarCalculo() -->
   <app-calculadora-metabolica (onCalcular)="manejarCalculo($event)"></app-calculadora-metabolica>
 
+  <!-- Tarjeta de Resultados: Solo es visible si 'resultadoTMB' tiene un valor asignado -->
   <ion-card *ngIf="resultadoTMB" class="resultado-card">
     <ion-card-content>
       <h2 class="ion-text-center">Tu Metabolismo Basal</h2>
+      <!-- Muestra la cifra final calculada (ej. "1750 kcal") -->
       <h1 class="ion-text-center color-success">{{ resultadoTMB }} kcal</h1>
       <p class="ion-text-center">Estas son las calorías que tu cuerpo quema en reposo absoluto.</p>
     </ion-card-content>
   </ion-card>
 
+  <!-- Tarjeta contenedora del sistema de gamificación e insignias -->
   <ion-card class="ejercicio-card">
     <ion-card-header>
       <ion-card-title>Mis Logros Átomos</ion-card-title>
@@ -25,22 +35,37 @@
     
     <ion-card-content>
       <div class="logros-container">
+        
+        <!-- Bucle moderno de Angular (v17+) para renderizar cada logro de forma eficiente -->
         @for (logro of logros; track logro.id) {
+          
+          <!-- Fila del logro: Aplica la clase 'bloqueado' mediante CSS si no está activo -->
           <div class="logro-row" [class.bloqueado]="!logro.activo">
+            
+            <!-- Contenedor del icono: Calcula un fondo semitransparente usando el color del logro o gris si está bloqueado -->
             <div class="logro-icono-wrapper" [style.background-color]="logro.activo ? logro.color + '22' : '#e0e0e022'">
+              <!-- Icono dinámico de Ionic cuyo nombre y color dependen del estado del logro -->
               <ion-icon [name]="logro.icono" [style.color]="logro.activo ? logro.color : '#999999'"></ion-icon>
             </div>
+            
+            <!-- Bloque de textos con la información del logro -->
             <div class="logro-texto">
               <h2 class="logro-titulo">{{ logro.titulo }}</h2>
               <p class="logro-desc">{{ logro.descripcion }}</p>
             </div>
+            
+            <!-- Etiqueta lateral derecha que indica si el logro está COMPLETADO o BLOQUEADO -->
             <div class="logro-estado">
-              <span class="badge-estado" [style.background-color]="logro.activo ? logro.color + '33' : '#33333315'" [style.color]="logro.activo ? logro.color : '#777777'">
+              <span class="badge-estado" 
+                    [style.background-color]="logro.activo ? logro.color + '33' : '#33333315'" 
+                    [style.color]="logro.activo ? logro.color : '#777777'">
                 {{ logro.activo ? 'COMPLETADO' : 'BLOQUEADO' }}
               </span>
             </div>
+            
           </div>
         }
+        
       </div>
     </ion-card-content>
   </ion-card>

@@ -1,35 +1,48 @@
+<!-- Cabecera de la sección de exploración de recetas -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Explorar Recetas</ion-title>
+    <!-- Zona de botones ubicada en el extremo derecho -->
     <ion-buttons slot="end">
+      <!-- Componente para activar o desactivar el modo oscuro -->
       <app-boton-oscuro></app-boton-oscuro>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Área de contenido con scroll y margen interno por defecto -->
 <ion-content class="ion-padding">
+  <!-- Contenedor general para organizar el diseño de las tarjetas mediante CSS -->
   <div class="recetas-grid">
     
+    <!-- Bucle optimizado de Angular para iterar sobre la lista de recetas disponibles -->
     @for (receta of recetas; track receta.id) {
       <ion-card class="ejercicio-card">
+        <!-- Imagen ilustrativa del plato con texto alternativo para accesibilidad -->
         <img [src]="receta.imagen" [alt]="receta.nombre" />
         
+        <!-- Contenedor interno de los textos y datos de la tarjeta -->
         <div class="ejercicio-card-content">
+          <!-- Título principal (nombre de la receta) y subtítulo (momento ideal: ej. "Almuerzo") -->
           <h1 class="ejercicio-titulo">{{ receta.nombre }}</h1>
           <h3 class="ejercicio-musculo">{{ receta.momento }}</h3>
           
+          <!-- Lista con viñetas de los ingredientes de la receta -->
           <ul class="ingredientes-lista">
+            <!-- Bucle secundario anidado para listar cada ingrediente del arreglo -->
             @for (ing of receta.ingredientes; track ing) {
               <li>{{ ing }}</li>
             }
           </ul>
 
+          <!-- Bloque de etiquetas para los componentes nutricionales y energéticos -->
           <div class="macros-badges">
             <span class="badge kcal">{{ receta.kcal }} kcal</span>
             <span class="badge protein">P: {{ receta.protes }}g</span>
             <span class="badge carb">HC: {{ receta.carbos }}g</span>
           </div>
 
+          <!-- Botón de acción: Llama a la función para registrar este plato en el contador del día -->
           <ion-button fill="outline" class="btn-configurar" (click)="agregarAlDiarioHoy(receta)">
             <ion-icon name="add-circle-outline" slot="start"></ion-icon>
             AÑADIR A MI DIARIO

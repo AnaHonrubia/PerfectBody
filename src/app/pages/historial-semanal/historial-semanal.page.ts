@@ -25,90 +25,90 @@ Chart.register(...registerables);
 
 export class HistorialSemanalPage implements OnInit {
 
-  // Referencia al canvas del HTML
+  // Captura la referencia nativa del elemento canvas `#barChart` declarado en el HTML.
   @ViewChild('barChart') barChart!: ElementRef; 
-  // Aquí definimos la variable que te faltaba
-  semanas: any[] = [];
-  chart: any;
+  
+  // Atributos de estado local de la página
+  semanas: any[] = []; // Matriz donde se almacenan los cierres históricos consolidados traídos del servicio
+  chart: any; // Instancia global del gráfico para poder destruirla y redibujarla de forma limpia sin fugas de memoria
 
   constructor(private fitService: FitAtomic) { }
 
-  ngOnInit() {
+  // Ciclo de inicialización por defecto de Angular
+  ngOnInit() {}
 
-  }
-
-  // Cada vez que entramos a la página, leemos el historial del servicio
   ionViewDidEnter() {
-    this.cargarHistorial();
-    // El setTimeout nos asegura que el HTML esté listo al 100%
+    this.cargarHistorial(); // Sincroniza la matriz local con los datos actualizados del LocalStorage
+
     setTimeout(() => {
       this.createChart(); 
     }, 200);
   }
 
+  // Consume el método público del servicio central para recuperar los históricos semanales del atleta.
   cargarHistorial() {
-    const historialReal = this.fitService.getSemanas()
     this.semanas = this.fitService.getSemanas();
   }
 
+  // Función analítica de semáforo visual. Devuelve un código hexadecimal de color acorde al rango calórico
   obtenerColorKcal(kcal: number): string {
     if (kcal < 16500) {
-      return '#2dd36f'; // Verde (Bien)
+      return '#2dd36f'; // Verde: Indica rango de definición o mantenimiento limpio
     } else if (kcal >= 16500 && kcal <= 18500) {
-      return '#ffca22'; // Naranja (Regular)
+      return '#ffca22'; // Naranja: Rango de aviso o volumen controlado
     } else {
-      return '#eb445a'; // Rojo (Exceso)
+      return '#eb445a'; // Rojo: Exceso calórico estricto respecto a los objetivos semanales
     }
   }
 
+  // Algoritmo de construcción y parametrización de la gráfica de barras de Chart.js.
   createChart() {
+    // CONTROL DE SEGURIDAD EN MEMORIA: Si la variable ya contiene un gráfico previo, lo destruye, para que no haya 2 iguales
     if (this.chart) { 
       this.chart.destroy(); 
     }
 
-    // DETECCIÓN DINÁMICA DE COLOR
-    // Comprobamos si el body tiene la clase del modo oscuro
+    // Lee la lista de clases inyectada en la raíz por el BotonOscuroComponent.
     const isDark = document.body.classList.contains('ion-palette-dark') || document.body.classList.contains('dark');
-    
-    // Si es oscuro, usamos blanco; si no, negro.
-    const contrastColor = isDark ? '#ffffff' : '#000000';
-    // Líneas de cuadrícula: blanco muy transparente o negro muy transparente
-    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    const contrastColor = isDark ? '#ffffff' : '#000000'; // Color de etiquetas tipográficas
+    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'; // Color de las líneas guías de la cuadrícula
 
+    // Clonamos la colección, aislamos los últimos 5 cierres y volteamos el orden (reverse) 
     const datosGrafica = [...this.semanas].slice(0, 5).reverse();
-    const etiquetas = datosGrafica.map(s => s.fechaCierre);
-    const valoresKcal = datosGrafica.map(s => s.kcal);
+    const etiquetas = datosGrafica.map(s => s.fechaCierre); // Eje X: Cadenas de fechas de los lunes de cierre
+    const valoresKcal = datosGrafica.map(s => s.kcal); // Eje Y: Carga calórica de la semana
 
+    // Instanciación del constructor gráfico vinculándolo al canvas del DOM a través de nativeElement
     this.chart = new Chart(this.barChart.nativeElement, {
-    type: 'bar',
-    data: {
-      labels: etiquetas,
-      datasets: [{
-        label: 'Kcal Semanales',
-        data: valoresKcal,
-        backgroundColor: '#7cf6f6', 
-        barThickness: 20,
-        borderRadius: 5
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: { color: contrastColor } // <--- COLOR DE LA LEYENDA
-        }
+      type: 'bar', // Gráfico de barras verticales de alto rendimiento
+      data: {
+        labels: etiquetas,
+        datasets: [{
+          label: 'Kcal Semanales',
+          data: valoresKcal,
+          backgroundColor: '#7cf6f6', // Color acento Aqua premium de la aplicación
+          barThickness: 20, // Grosor fijo de cada barra en píxeles para asegurar simetría en móvil
+          borderRadius: 5 // Suavizado de esquinas en la punta de las barras corporativo
+        }]
       },
-      scales: {
-        y: {
-          ticks: { color: contrastColor }, // <--- COLOR NÚMEROS EJE Y
-          grid: { color: gridColor }       // <--- COLOR LÍNEAS HORIZONTALES
+      options: {
+        responsive: true, // Habilita el redimensionado elástico automático si cambia la orientación del terminal
+        plugins: {
+          legend: {
+            labels: { color: contrastColor } // Sincroniza el texto de la leyenda con el modo activo
+          }
         },
-        x: {
-          ticks: { color: contrastColor }, // <--- COLOR TEXTOS EJE X
-          grid: { display: false }
+        scales: {
+          y: {
+            ticks: { color: contrastColor }, // Sincroniza los números de escala del eje vertical
+            grid: { color: gridColor } // Pinta las rejillas horizontales con transparencias accesibles
+          },
+          x: {
+            ticks: { color: contrastColor }, // Sincroniza las fechas del eje horizontal
+            grid: { display: false } // Remueve las líneas verticales para limpiar el ruido visual en layouts densos
+          }
         }
       }
-    }
-  });
-}
+    });
+  }
 }

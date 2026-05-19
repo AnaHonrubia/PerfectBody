@@ -10,15 +10,16 @@ import { barbellOutline, restaurantOutline, personCircleOutline, analyticsOutlin
   imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRouterOutlet],
 })
 export class TabsPage {
+  
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor() {
     addIcons({ 
-      'restaurant-outline': restaurantOutline, 
-      'barbell-outline': barbellOutline, 
-      'person-circle-outline': personCircleOutline,
-      'analytics-outline': analyticsOutline,
-      'compass-outline': compassOutline
+      'restaurant-outline': restaurantOutline, // Pestaña 1: Diario de Nutrición
+      'barbell-outline': barbellOutline,       // Pestaña 2: Gimnasio y Fuerza
+      'person-circle-outline': personCircleOutline, // Pestaña 5: Perfil y Medallas
+      'analytics-outline': analyticsOutline,   // Pestaña 4: Estadísticas de Progreso
+      'compass-outline': compassOutline        // Pestaña 3: Explorar Recetas Saludables
     });
   }
 }

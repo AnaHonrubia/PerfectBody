@@ -1,33 +1,43 @@
+<!-- Cabecera principal de la sección de progreso -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Mi Progreso</ion-title>
+    <!-- Botones ubicados en la parte superior derecha -->
     <ion-buttons slot="end">
+      <!-- Componente personalizado para cambiar a modo oscuro -->
       <app-boton-oscuro></app-boton-oscuro>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Contenedor del contenido con scroll y espaciado interno (ion-padding) -->
 <ion-content class="ion-padding">
   
+  <!-- TARJETA 1: Gráfica del Historial de Peso -->
   <ion-card class="ejercicio-card">
     <ion-card-header>
       <ion-card-title>Evolución del Peso</ion-card-title>
       <ion-card-subtitle>Historial de tus últimos pesajes</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
+      <!-- Contenedor CSS para asegurar la proporción y respuesta de la gráfica -->
       <div class="chart-container">
+        <!-- Lienzo (Canvas) referenciado en Angular como #chartPeso para renderizar la gráfica -->
         <canvas #chartPeso></canvas>
       </div>
     </ion-card-content>
   </ion-card>
 
+  <!-- TARJETA 2: Gráfica de Balance de Calorías -->
   <ion-card class="ejercicio-card">
     <ion-card-header>
       <ion-card-title>Balance Calórico</ion-card-title>
       <ion-card-subtitle>Kcal consumidas vs Objetivo Diario</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
+      <!-- Contenedor CSS para asegurar la proporción y respuesta de la gráfica -->
       <div class="chart-container">
+        <!-- Lienzo (Canvas) referenciado en Angular como #chartCalorias para renderizar la gráfica -->
         <canvas #chartCalorias></canvas>
       </div>
     </ion-card-content>

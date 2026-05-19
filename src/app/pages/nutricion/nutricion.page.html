@@ -1,23 +1,27 @@
+<!-- Cabecera de la sección de nutrición -->
 <ion-header>
   <ion-toolbar color="success">
     <ion-title>Nutrición</ion-title>
     
+    <!-- Zona de botones ubicada en el extremo derecho -->
     <ion-buttons slot="end">
-      <!-- BOTÓN DEL HISTORIAL -->
+      <!-- Botón que redirige al historial usando el sistema de rutas de Angular -->
       <ion-button routerLink="/historial-semanal">
         <ion-icon slot="icon-only" name="list-outline"></ion-icon>
       </ion-button>
 
-      <!-- BOTÓN DE MODO OSCURO -->
+      <!-- Componente personalizado para activar el tema noche/día -->
       <app-boton-oscuro></app-boton-oscuro>
-
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<!-- Área de contenido principal -->
 <ion-content>
+  <!-- Selector de calendario: Al cambiar de día ejecuta cambiarFecha() -->
   <app-selector-fecha (fechaCambiante)="cambiarFecha($event)"></app-selector-fecha>
 
+  <!-- Tarjeta con gráficos e indicadores de calorías y macronutrientes totales -->
   <app-resumen-nutricional 
     [caloriasConsumidas]="totales.kcal" 
     [objetivoCalorico]="objetivoDiario"
@@ -26,6 +30,7 @@
     [carbohidratos]="totales.carbos">
   </app-resumen-nutricional>
 
+  <!-- Filtro horizontal por segmentos para separar las comidas del día -->
   <div class="momentos-container">
     <ion-segment [value]="momentoActual" (ionChange)="cambiarMomento($event)" #momentoSegment>
       <ion-segment-button value="Desayuno"><ion-label>Desayuno</ion-label></ion-segment-button>
@@ -35,13 +40,14 @@
     </ion-segment>
   </div>
 
+  <!-- Listado que muestra los platos ingeridos en el segmento actual del día -->
   <app-lista-consumo 
     [comidas]="comidasDelDia" 
     [momentoActual]="momentoActual"
     (onEliminar)="eliminarComida($any($event))">
   </app-lista-consumo>
 
-  <!-- Botón de Cierre Semanal -->
+  <!-- Sección del Cierre Semanal: Solo aparece si el método condicional retorna verdadero -->
   <div *ngIf="puedeCerrarSemana()" class="ion-padding">
     <ion-button expand="block" color="tertiary" (click)="cerrarSemanaManual()" mode="ios">
       <ion-icon name="ribbon-outline" slot="start"></ion-icon>
@@ -52,14 +58,17 @@
     </p>
   </div>
 
+  <!-- Bloque interactivo: Solo permite inyectar comidas si el calendario está posicionado en el día de HOY -->
   <div *ngIf="esHoy">
     <ion-list-header>
       <ion-label>Añadir nuevos alimentos</ion-label>
     </ion-list-header>
 
+    <!-- Rejilla que renderiza el catálogo general de alimentos en columnas compactas -->
     <ion-grid>
       <ion-row>
         <ion-col size="2" *ngFor="let alimento of alimentos">
+          <!-- Tarjeta de alimento individual: Al agregar, extrae de forma directa el valor del ion-segment -->
           <app-tarjeta-alimentos 
             [nombre]="alimento.nombre"
             [kcal]="alimento.kcal"
@@ -71,6 +80,7 @@
     </ion-grid>
   </div>
 
+  <!-- Bloque alternativo: Mensaje de lectura si el usuario está visualizando el pasado -->
   <div *ngIf="!esHoy" class="ion-padding ion-text-center">
     <ion-note>No se pueden añadir alimentos a fechas pasadas, pero puedes ver tus registros arriba.</ion-note>
   </div>

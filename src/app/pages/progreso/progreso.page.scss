@@ -1,12 +1,13 @@
+/* Caja contenedor del lienzo gráfico interactivo */
 .chart-container {
-  position: relative;
-  width: 100%;
-  height: 250px; /* Altura fija ideal para pantallas de móvil */
-  margin: 10px 0;
+  position: relative; /* Define un eje de coordenadas local indispensable para el correcto redimensionado de Chart.js */
+  width: 100%; /* Abarca la totalidad del ancho útil de la tarjeta o pantalla */
+  height: 250px; /* Altura estricta controlada optimizada para el renderizado simétrico en pantallas de smartphones móviles */
+  margin: 10px 0; /* Separación vertical uniforme de seguridad entre bloques analíticos consecutivos */
 }
 
-/* Forzar que las tarjetas sigan la estética premium que acabamos de unificar */
+/* Forzado tipográfico y estructural de consistencia premium sobre las tarjetas de Ionic */
 .ejercicio-card {
-  margin-bottom: 20px;
-  border-radius: 16px;
+  margin-bottom: 20px; /* Espaciado inferior para evitar el solapamiento de paneles de control */
+  border-radius: 16px; /* Radio de curvatura alto idéntico al empleado en el resto de módulos atómicos de la v1.12.0 */
 }

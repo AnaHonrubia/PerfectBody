@@ -1,21 +1,21 @@
 // Estilo general para las tarjetas
 ion-card {
-  border-radius: 15px;
+  border-radius: 15px; // Radio curvo 
   border: 1px solid rgba(124, 246, 246, 0.2);
   margin-bottom: 20px;
   background: var(--ion-card-background, #fff);
 }
 
-// Estilo para los títulos (Proteínas, Grasas...)
+// Formateo de las etiquetas superiores de los macronutrientes
 small {
   display: block;
   color: var(--ion-color-medium); // Color automático de Ionic (gris)
-  text-transform: uppercase;
+  text-transform: uppercase; // Forzado de mayusculas
   font-size: 0.7rem;
   letter-spacing: 0.5px;
 }
 
-// Estilo para los números (Macros)
+// Visualización de las marcas numéricas de los macros
 .dato-macro {
   font-size: 1.2rem;
   font-weight: bold;
@@ -24,7 +24,6 @@ small {
 }
 
 // LA MAGIA PARA EL MODO OSCURO:
-// Usamos :host-context para detectar si el padre tiene modo oscuro
 :host-context(.ion-palette-dark) {
   /* Forzamos que los títulos de los macros se vean bien */
   small {

@@ -1,10 +1,15 @@
+<!-- Contenedor principal de Ionic configurado a pantalla completa -->
 <ion-content [fullscreen]="true">
+
+  <!-- Cabecera flotante independiente para el interruptor de modo oscuro -->
   <div class="dark-mode-header">
     <app-boton-oscuro></app-boton-oscuro>
   </div>
 
+  <!-- Contenedor general de Swiper con indicador de puntitos (paginación) activo -->
   <swiper-container [pagination]="true">
     
+    <!-- DESLIZABLE 1: Bienvenida -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle success">
@@ -15,6 +20,7 @@
       </div>
     </swiper-slide>
 
+    <!-- DESLIZABLE 2: Nutrición -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle nutrition">
@@ -25,6 +31,7 @@
       </div>
     </swiper-slide>
 
+    <!-- DESLIZABLE 3: Recetas -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle science">
@@ -35,16 +42,18 @@
       </div>
     </swiper-slide>
 
+    <!-- DESLIZABLE 4: Gimnasio -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle gym">
           <ion-icon name="barbell-outline"></ion-icon>
         </div>
         <h2>Entrenamiento Eficiente</h2>
-        <p>Filtra tus ejercicios por grupo muscular, anota tus series de trabajo y optimiza tus recuperaciones con nuestro <b>Temporizador de Descanso de 60s</b>con avisos sonoros.</p>
+        <p>Filtra tus ejercicios por grupo muscular, anota tus series de trabajo y optimiza tus recuperaciones con nuestro <b>Temporizador de Descanso de 60s</b> con avisos sonoros.</p>
       </div>
     </swiper-slide>
 
+    <!-- DESLIZABLE 5: Logros -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle final">
@@ -55,6 +64,7 @@
       </div>
     </swiper-slide>
 
+    <!-- DESLIZABLE 6: Ciencia y Algoritmo -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle science">
@@ -65,6 +75,7 @@
       </div>
     </swiper-slide>
 
+    <!-- DESLIZABLE 7: Pantalla Final de Registro -->
     <swiper-slide>
       <div class="slide-content">
         <div class="icon-circle final">
@@ -72,6 +83,8 @@
         </div>
         <h2>¿Listo para el cambio?</h2>
         <p>Tu mejor versión está a solo un registro de distancia. Configura tu perfil inicial para activar el motor de la aplicación.</p>
+        
+        <!-- Botón de acción final para disparar la navegación al perfil del usuario -->
         <ion-button expand="block" color="success" (click)="irAPerfil()" class="btn-final">
           EMPEZAR AHORA
         </ion-button>

@@ -17,15 +17,19 @@ import { trophyOutline, flameOutline, shieldCheckmarkOutline, add } from 'ionico
 })
 
 export class PerfilPage {
-  resultadoTMB: number | null = null;
-  logros: any[] = [];
+  // Atributos de estado reactivo local de la sección del atleta
+  resultadoTMB: number | null = null; // Almacena el valor numérico entero final del Metabolismo Basal
+  logros: any[] = []; // Matriz volátil encargada de albergar la lista de insignias de gamificación
 
   constructor(private fitService: FitAtomic) {
-    // Ahora fitService ya tiene el método obtenerPerfil()
+    
     const datosGuardados = this.fitService.obtenerPerfil();
     if (datosGuardados) {
+      // Si la persistencia contiene información previa, fuerza de inmediato el cálculo metabólico
       this.manejarCalculo(datosGuardados);
     }
+    
+    // Registro optimizado de los activos vectoriales de medallas en el diccionario en caché de Ionic
     addIcons({
       trophyOutline, flameOutline, shieldCheckmarkOutline
     });
@@ -35,26 +39,28 @@ export class PerfilPage {
     this.cargarLogros();
   }
 
+  // Método analítico centralizado encargado de procesar la ciencia metabólica.
   manejarCalculo(datos: any) {
+    // Cast manual explícito a tipo Number de seguridad para prevenir concatenaciones de texto accidentales
     const p = Number(datos.peso);
     const a = Number(datos.altura);
     const e = Number(datos.edad);
 
-    // Fórmula de Harris-Benedict corregida
+    // Ecuación Científica de Harris-Benedict (Revisión original)
     this.resultadoTMB = Math.round(88.362 + (13.397 * p) + (4.799 * a) - (5.677 * e));
     
-    // Se pasa el TMB al servicio para que lo use Nutrición
+    // Sincronización Transversal: Almacena en la persistencia global el objeto completo inyectando la nueva clave 'tmb'
     this.fitService.guardarPerfil({
-      ...datos,
-      tmb: this.resultadoTMB
+      ...datos, // Operador de propagación para copiar todas las propiedades de usuario previas
+      tmb: this.resultadoTMB // Inyección del dato energético calculado que leerá la pestaña de Nutrición
     });
   }
-
-  // Se ejecuta cada vez que el usuario entra a la pestaña para comprobar si ha ganado una medalla
+  
   ionViewWillEnter() {
-    this.cargarLogros();
+    this.cargarLogros(); // Refresco inmediato del estado de las insignias en pantalla (Efecto reactivo de recompensa)
   }
 
+  // Consulta al servicio el estado analítico de los logros para refrescar la matriz local.
   cargarLogros() {
     this.logros = this.fitService.getLogrosUsuario();
   }

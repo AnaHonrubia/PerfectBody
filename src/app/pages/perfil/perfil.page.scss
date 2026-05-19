@@ -1,60 +1,73 @@
+/* Contenedor vertical elástico para la pila de insignias y medallas */
 .logros-container {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: column; /* Apila las filas de logros en vertical de forma ordenada */
+  gap: 16px; /* Separación geométrica equidistante entre tarjetas consecutivas */
   margin-top: 8px;
 }
 
+/* Fila estructural para cada medalla individual */
 .logro-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  display: flex; /* Flexbox para alinear el icono, la descripción y la etiqueta en el eje horizontal */
+  align-items: center; /* Centrado vertical geométrico estricto de todos los elementos */
+  gap: 14px; /* Espaciado interno horizontal de seguridad */
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 12px; /* Curvatura suavizada acorde al lenguaje visual premium unificado de la app */
+  
+  /* Fondo translúcido adaptativo basado en variables de Ionic, con fallback del 40% de opacidad blanca */
   background: var(--ion-item-background, rgba(255, 255, 255, 0.4));
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Transición animada suave para interpolar estados visuales al cambiar de tema */
 
-  // Efecto visual cuando está bloqueado (un poco más transparente/apagado)
+  /* CONTROL DE GAMIFICACIÓN BLOQUEADO:
+     Aplica atenuación visual mediante opacidad reducida si el atleta no cumple las condiciones del logro.
+  */
   &.bloqueado {
-    opacity: 0.6;
-    .logro-titulo { color: var(--ion-color-step-400, #777777); }
+    opacity: 0.6; /* Difumina la tarjeta simulando un estado inactivo de videojuego */
+    .logro-titulo { 
+      color: var(--ion-color-step-400, #777777); /* Aplica tono gris de Ionic apagado al título */
+    }
   }
 }
 
+/* Envoltorio circular geométrico para la iconografía del logro */
 .logro-icono-wrapper {
-  display: flex;
+  display: flex; /* Activa Flexbox interno para centrar el vector en el centro exacto de la circunferencia */
   align-items: center;
   justify-content: center;
   width: 46px;
   height: 46px;
-  border-radius: 50%;
+  border-radius: 50%; /* Transforma el bloque cuadrado en un círculo perfecto */
   
   ion-icon {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Ajuste nítido de la escala del vector gráfico */
   }
 }
 
+/* Bloque central expansivo para las descripciones textuales del logro */
 .logro-texto {
-  flex-grow: 1;
+  flex-grow: 1; /* Actúa como muelle elástico empujando la medalla o badge de estado hacia el extremo derecho */
 }
 
+/* Título descriptivo principal de la medalla */
 .logro-titulo {
   font-size: 1rem;
-  font-weight: bold;
-  margin: 0 0 2px 0;
-  color: var(--ion-text-color, #000000);
+  font-weight: bold; /* Grosor en negrita para jerarquía visual marcada */
+  margin: 0 0 2px 0; /* Limpieza estricta de márgenes nativos y separación inferior con la descripción */
+  color: var(--ion-text-color, #000000); /* Color reactivo en tiempo real al conmutador del modo noche */
 }
 
+/* Subtexto detallado de la regla de desbloqueo */
 .logro-desc {
   font-size: 0.8rem;
   margin: 0;
-  color: var(--ion-color-step-600, #666666);
+  color: var(--ion-color-step-600, #666666); /* Tono gris intermedio de alta legibilidad reglada */
 }
 
+/* Etiqueta compacta de estado perimetral derecha */
 .badge-estado {
-  padding: 4px 8px;
+  padding: 4px 8px; /* Margen interno para dar aire al texto del badge */
   border-radius: 6px;
   font-size: 0.7rem;
   font-weight: bold;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.5px; /* Espaciado tipográfico expandido para look moderno */
 }
