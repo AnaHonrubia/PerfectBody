@@ -1,0 +1,32 @@
+name: Publicar PerfectBody
+
+on:
+  push:
+    branches: [desarrollo]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx ng build --configuration production --base-href=/PerfectBody/
+
+      # Para que no dé error 404 al recargar en páginas como /nutricion
+      - run: cp www/index.html www/404.html
+
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: www
